@@ -1,0 +1,444 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Server API
+  description: >-
+    The Red5 Pro Server API is an HTTP-based REST API for gathering server,
+    application, client, and stream statistics from a running Red5 Pro instance.
+    It exposes endpoints for server health checks, application scope statistics,
+    active stream enumeration and control, and log access. The API uses token-based
+    authentication via an accessToken query parameter and is accessible at port 5080
+    on any Red5 Pro server deployment.
+  version: '1.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+externalDocs:
+  description: Red5 Pro Server API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
+servers:
+  - url: http://{host}:5080/api/v1
+    description: Red5 Pro Server
+    variables:
+      host:
+        default: localhost
+        description: Hostname or IP address of the Red5 Pro server
+tags:
+  - name: Server
+    description: Server health, info, and status endpoints
+  - name: Applications
+    description: Application scope statistics and management
+  - name: Streams
+    description: Live stream enumeration, statistics, and control
+  - name: Logs
+    description: Server log access endpoints
+security:
+  - accessToken: []
+paths:
+  /server:
+    get:
+      operationId: getServerInfo
+      summary: Get server information
+      description: >-
+        Returns basic information about the Red5 Pro server including version,
+        uptime, and configuration details.
+      tags:
+        - Server
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Server information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /server/ping:
+    get:
+      operationId: pingServer
+      summary: Ping the server
+      description: >-
+        Performs a health check on the Red5 Pro server. Returns a simple
+        response confirming the server is running and accessible.
+      tags:
+        - Server
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Server is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List applications
+      description: >-
+        Returns a list of all deployed applications (scopes) on the Red5 Pro
+        server along with their statistics including connected client counts
+        and resource usage.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: List of applications returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{appName}:
+    get:
+      operationId: getApplication
+      summary: Get application details
+      description: >-
+        Returns detailed statistics for a specific application scope including
+        connected clients, active streams, and resource consumption metrics.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/appNameParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Application details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/streams:
+    get:
+      operationId: listStreams
+      summary: List streams in an application
+      description: >-
+        Returns all active live streams within the specified application scope
+        including stream names, subscriber counts, and connection statistics.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/appNameParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: List of streams returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Stream'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/streams/{streamName}:
+    get:
+      operationId: getStream
+      summary: Get stream details
+      description: >-
+        Returns detailed statistics for a specific live stream including
+        bitrate, frame rate, subscriber count, and connection duration.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/appNameParam'
+        - $ref: '#/components/parameters/streamNameParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Stream details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/streams/{streamName}/action/startrecord:
+    post:
+      operationId: startStreamRecording
+      summary: Start recording a stream
+      description: >-
+        Initiates recording of the specified live stream to disk. The recording
+        is saved in the configured recording directory on the server.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/appNameParam'
+        - $ref: '#/components/parameters/streamNameParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Recording started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /applications/{appName}/streams/{streamName}/action/stoprecord:
+    post:
+      operationId: stopStreamRecording
+      summary: Stop recording a stream
+      description: >-
+        Stops an active recording session for the specified live stream.
+        The completed recording file is finalized and available on disk.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/appNameParam'
+        - $ref: '#/components/parameters/streamNameParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Recording stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /logs:
+    get:
+      operationId: getServerLogs
+      summary: Get server logs
+      description: >-
+        Retrieves server log entries from the Red5 Pro server. Supports
+        filtering by log level and date range to narrow results.
+      tags:
+        - Logs
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+        - name: level
+          in: query
+          description: Log level filter (INFO, WARN, ERROR, DEBUG)
+          required: false
+          schema:
+            type: string
+            enum:
+              - INFO
+              - WARN
+              - ERROR
+              - DEBUG
+        - name: limit
+          in: query
+          description: Maximum number of log entries to return
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+      responses:
+        '200':
+          description: Log entries returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LogEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating requests to the Red5 Pro Server API
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    appNameParam:
+      name: appName
+      in: path
+      description: Name of the Red5 Pro application scope
+      required: true
+      schema:
+        type: string
+    streamNameParam:
+      name: streamName
+      in: path
+      description: Name of the live stream
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ServerInfo:
+      type: object
+      description: Information about the Red5 Pro server instance
+      properties:
+        version:
+          type: string
+          description: Red5 Pro server version string
+        uptime:
+          type: integer
+          description: Server uptime in milliseconds
+        host:
+          type: string
+          description: Server hostname
+        port:
+          type: integer
+          description: Server port number
+    PingResponse:
+      type: object
+      description: Response from a server ping health check
+      properties:
+        result:
+          type: boolean
+          description: True if the server is alive and responding
+        timestamp:
+          type: integer
+          description: Server timestamp in milliseconds since epoch
+    Application:
+      type: object
+      description: An application scope deployed on the Red5 Pro server
+      properties:
+        name:
+          type: string
+          description: Application scope name
+        clientCount:
+          type: integer
+          description: Number of currently connected clients
+        streamCount:
+          type: integer
+          description: Number of active streams in this application
+        bytesIn:
+          type: integer
+          description: Total bytes received by this application
+        bytesOut:
+          type: integer
+          description: Total bytes sent by this application
+    Stream:
+      type: object
+      description: A live stream active on the Red5 Pro server
+      properties:
+        name:
+          type: string
+          description: Stream name identifier
+        clientId:
+          type: string
+          description: ID of the publishing client connection
+        subscriberCount:
+          type: integer
+          description: Number of active subscribers to this stream
+        bytesIn:
+          type: integer
+          description: Total bytes received for this stream
+        bytesOut:
+          type: integer
+          description: Total bytes sent for this stream
+        duration:
+          type: integer
+          description: Stream duration in milliseconds
+        videoCodec:
+          type: string
+          description: Video codec in use (e.g., H264)
+        audioCodec:
+          type: string
+          description: Audio codec in use (e.g., AAC)
+        width:
+          type: integer
+          description: Video frame width in pixels
+        height:
+          type: integer
+          description: Video frame height in pixels
+        fps:
+          type: number
+          description: Video frames per second
+        videoBitrate:
+          type: integer
+          description: Video bitrate in bits per second
+        audioBitrate:
+          type: integer
+          description: Audio bitrate in bits per second
+    ActionResponse:
+      type: object
+      description: Response from a stream action request
+      properties:
+        result:
+          type: boolean
+          description: True if the action was completed successfully
+        message:
+          type: string
+          description: Human-readable result message
+    LogEntry:
+      type: object
+      description: A single server log entry
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Log entry timestamp
+        level:
+          type: string
+          enum:
+            - INFO
+            - WARN
+            - ERROR
+            - DEBUG
+          description: Log severity level
+        logger:
+          type: string
+          description: Logger class name
+        message:
+          type: string
+          description: Log message text
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message

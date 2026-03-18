@@ -1,0 +1,513 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer API
+  description: >-
+    The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine
+    that enables dynamic composition of multiple live video and audio streams into
+    a single mixed output stream. It supports creating and managing mixers, controlling
+    input sources and layout, and producing composite streams for broadcasting. The API
+    provides both v1 and v2 endpoints for mixer lifecycle management and image overlay
+    control, making it useful for virtual events, live production, and multi-participant
+    streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
+servers:
+  - url: http://{host}:5080
+    description: Red5 Pro Server with Brew Mixer
+    variables:
+      host:
+        default: localhost
+        description: Hostname or IP address of the Red5 Pro server
+tags:
+  - name: Mixers
+    description: Mixer session lifecycle management
+  - name: Inputs
+    description: Input stream management for mixer sessions
+  - name: Images
+    description: Image overlay management for mixer sessions
+security:
+  - accessToken: []
+paths:
+  /brewmixer/2.0/mixers:
+    get:
+      operationId: listMixers
+      summary: List active mixers
+      description: >-
+        Returns a list of all currently active mixer sessions on the Red5 Pro
+        server, including their configuration and current input stream count.
+      tags:
+        - Mixers
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: List of mixers returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Mixer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createMixer
+      summary: Create a mixer
+      description: >-
+        Creates a new mixer session that combines multiple live input streams into
+        a single composite output stream. Specify output dimensions, frame rate,
+        bitrate, and the name of the output stream.
+      tags:
+        - Mixers
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixerCreate'
+      responses:
+        '201':
+          description: Mixer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mixer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /brewmixer/2.0/mixers/{mixerId}:
+    get:
+      operationId: getMixer
+      summary: Get mixer details
+      description: >-
+        Returns configuration and status details for the specified mixer session,
+        including active inputs, output stream name, and rendering parameters.
+      tags:
+        - Mixers
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Mixer details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mixer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteMixer
+      summary: Delete a mixer
+      description: >-
+        Terminates the specified mixer session and stops the composite output stream.
+        All input stream connections are released when the mixer is deleted.
+      tags:
+        - Mixers
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Mixer deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /brewmixer/2.0/mixers/{mixerId}/inputs:
+    get:
+      operationId: listMixerInputs
+      summary: List mixer inputs
+      description: >-
+        Returns all input streams currently connected to the specified mixer session,
+        including their layout positions, dimensions, and z-order in the composite frame.
+      tags:
+        - Inputs
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Input list returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MixerInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addMixerInput
+      summary: Add an input to a mixer
+      description: >-
+        Adds a live stream as an input source to the specified mixer session.
+        Specify the stream name and layout parameters such as position, dimensions,
+        and z-order within the composite output frame.
+      tags:
+        - Inputs
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixerInputCreate'
+      responses:
+        '201':
+          description: Input added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MixerInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /brewmixer/2.0/mixers/{mixerId}/inputs/{inputId}:
+    put:
+      operationId: updateMixerInput
+      summary: Update a mixer input
+      description: >-
+        Updates the layout parameters of an input stream within the mixer session,
+        such as changing its position, size, or z-order in the composite frame.
+      tags:
+        - Inputs
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/inputIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixerInputCreate'
+      responses:
+        '200':
+          description: Input updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MixerInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: removeMixerInput
+      summary: Remove an input from a mixer
+      description: >-
+        Disconnects and removes an input stream from the specified mixer session.
+        The composite output continues with the remaining inputs.
+      tags:
+        - Inputs
+      parameters:
+        - $ref: '#/components/parameters/mixerIdParam'
+        - $ref: '#/components/parameters/inputIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Input removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /brewmixer/2.0/images:
+    post:
+      operationId: addImageOverlay
+      summary: Add an image overlay
+      description: >-
+        Adds an image overlay (logo, watermark, lower-third graphic) to one or more
+        mixer sessions. The image is uploaded and positioned within the composite
+        output frame at the specified coordinates and dimensions.
+      tags:
+        - Images
+      parameters:
+        - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+                - mixerId
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file to use as overlay (PNG or JPEG)
+                mixerId:
+                  type: string
+                  description: ID of the mixer to apply the overlay to
+                x:
+                  type: integer
+                  description: Horizontal position of the overlay in pixels from left
+                y:
+                  type: integer
+                  description: Vertical position of the overlay in pixels from top
+                width:
+                  type: integer
+                  description: Overlay width in pixels
+                height:
+                  type: integer
+                  description: Overlay height in pixels
+                zOrder:
+                  type: integer
+                  description: Z-order layer position (higher values appear on top)
+      responses:
+        '201':
+          description: Image overlay added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageOverlay'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /brewmixer/2.0/images/{imageId}:
+    delete:
+      operationId: removeImageOverlay
+      summary: Remove an image overlay
+      description: >-
+        Removes a previously added image overlay from the mixer session.
+        The composite output is updated immediately without the overlay.
+      tags:
+        - Images
+      parameters:
+        - $ref: '#/components/parameters/imageIdParam'
+        - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Image overlay removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
+    inputIdParam:
+      name: inputId
+      in: path
+      description: Unique identifier for the mixer input
+      required: true
+      schema:
+        type: string
+    imageIdParam:
+      name: imageId
+      in: path
+      description: Unique identifier for the image overlay
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Mixer:
+      type: object
+      description: A mixer session combining multiple input streams into a composite output
+      properties:
+        id:
+          type: string
+          description: Unique mixer session identifier
+        outputStreamName:
+          type: string
+          description: Name of the composite output stream
+        outputWidth:
+          type: integer
+          description: Output frame width in pixels
+        outputHeight:
+          type: integer
+          description: Output frame height in pixels
+        outputFrameRate:
+          type: number
+          description: Output frame rate in frames per second
+        outputBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        inputCount:
+          type: integer
+          description: Number of currently connected input streams
+        status:
+          type: string
+          description: Mixer operational status (active, idle, error)
+    MixerCreate:
+      type: object
+      description: Parameters for creating a new mixer session
+      required:
+        - outputStreamName
+        - outputWidth
+        - outputHeight
+      properties:
+        outputStreamName:
+          type: string
+          description: Name for the composite output stream
+        outputWidth:
+          type: integer
+          description: Output frame width in pixels
+        outputHeight:
+          type: integer
+          description: Output frame height in pixels
+        outputFrameRate:
+          type: number
+          description: Output frame rate in frames per second
+          default: 30
+        outputBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+          default: 2000000
+        backgroundColor:
+          type: string
+          description: Background fill color in hex format (e.g., #000000)
+    MixerInput:
+      type: object
+      description: An input stream source within a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique input identifier within the mixer
+        streamName:
+          type: string
+          description: Name of the input stream
+        x:
+          type: integer
+          description: Horizontal position in pixels from left of output frame
+        y:
+          type: integer
+          description: Vertical position in pixels from top of output frame
+        width:
+          type: integer
+          description: Display width in pixels within output frame
+        height:
+          type: integer
+          description: Display height in pixels within output frame
+        zOrder:
+          type: integer
+          description: Z-order layer (higher values appear on top)
+    MixerInputCreate:
+      type: object
+      description: Parameters for adding or updating a mixer input
+      required:
+        - streamName
+      properties:
+        streamName:
+          type: string
+          description: Name of the stream to use as input
+        x:
+          type: integer
+          description: Horizontal position in pixels from left
+          default: 0
+        y:
+          type: integer
+          description: Vertical position in pixels from top
+          default: 0
+        width:
+          type: integer
+          description: Display width in pixels
+        height:
+          type: integer
+          description: Display height in pixels
+        zOrder:
+          type: integer
+          description: Z-order layer position
+          default: 0
+    ImageOverlay:
+      type: object
+      description: An image overlay applied to a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique image overlay identifier
+        mixerId:
+          type: string
+          description: ID of the mixer this overlay is applied to
+        x:
+          type: integer
+          description: Horizontal position in pixels from left
+        y:
+          type: integer
+          description: Vertical position in pixels from top
+        width:
+          type: integer
+          description: Overlay width in pixels
+        height:
+          type: integer
+          description: Overlay height in pixels
+        zOrder:
+          type: integer
+          description: Z-order layer position
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message

@@ -1,0 +1,266 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "red5": "https://www.red5.net/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Stream": {
+      "@id": "red5:Stream",
+      "@context": {
+        "name": {
+          "@id": "schema:name"
+        },
+        "appName": {
+          "@id": "red5:appName"
+        },
+        "clientId": {
+          "@id": "red5:clientId"
+        },
+        "status": {
+          "@id": "schema:status"
+        },
+        "protocol": {
+          "@id": "red5:protocol"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "subscriberCount": {
+          "@id": "red5:subscriberCount",
+          "@type": "xsd:integer"
+        },
+        "bytesIn": {
+          "@id": "red5:bytesIn",
+          "@type": "xsd:integer"
+        },
+        "bytesOut": {
+          "@id": "red5:bytesOut",
+          "@type": "xsd:integer"
+        },
+        "video": {
+          "@id": "red5:video"
+        },
+        "audio": {
+          "@id": "red5:audio"
+        }
+      }
+    },
+
+    "VideoTrack": {
+      "@id": "red5:VideoTrack",
+      "@context": {
+        "codec": {
+          "@id": "red5:codec"
+        },
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "frameRate": {
+          "@id": "red5:frameRate",
+          "@type": "xsd:decimal"
+        },
+        "bitrate": {
+          "@id": "red5:bitrate",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "AudioTrack": {
+      "@id": "red5:AudioTrack",
+      "@context": {
+        "codec": {
+          "@id": "red5:codec"
+        },
+        "sampleRate": {
+          "@id": "red5:sampleRate",
+          "@type": "xsd:integer"
+        },
+        "channels": {
+          "@id": "red5:channels",
+          "@type": "xsd:integer"
+        },
+        "bitrate": {
+          "@id": "red5:bitrate",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Application": {
+      "@id": "red5:Application",
+      "@context": {
+        "name": {
+          "@id": "schema:name"
+        },
+        "clientCount": {
+          "@id": "red5:clientCount",
+          "@type": "xsd:integer"
+        },
+        "streamCount": {
+          "@id": "red5:streamCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Mixer": {
+      "@id": "red5:Mixer",
+      "@context": {
+        "id": {
+          "@id": "@id"
+        },
+        "outputStreamName": {
+          "@id": "red5:outputStreamName"
+        },
+        "outputWidth": {
+          "@id": "red5:outputWidth",
+          "@type": "xsd:integer"
+        },
+        "outputHeight": {
+          "@id": "red5:outputHeight",
+          "@type": "xsd:integer"
+        },
+        "outputFrameRate": {
+          "@id": "red5:outputFrameRate",
+          "@type": "xsd:decimal"
+        },
+        "outputBitrate": {
+          "@id": "red5:outputBitrate",
+          "@type": "xsd:integer"
+        },
+        "inputCount": {
+          "@id": "red5:inputCount",
+          "@type": "xsd:integer"
+        },
+        "status": {
+          "@id": "schema:status"
+        },
+        "inputs": {
+          "@id": "red5:inputs",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "MixerInput": {
+      "@id": "red5:MixerInput",
+      "@context": {
+        "id": {
+          "@id": "@id"
+        },
+        "streamName": {
+          "@id": "red5:streamName"
+        },
+        "x": {
+          "@id": "red5:xPosition",
+          "@type": "xsd:integer"
+        },
+        "y": {
+          "@id": "red5:yPosition",
+          "@type": "xsd:integer"
+        },
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "zOrder": {
+          "@id": "red5:zOrder",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "RestreamProvision": {
+      "@id": "red5:RestreamProvision",
+      "@context": {
+        "streamName": {
+          "@id": "red5:streamName"
+        },
+        "appName": {
+          "@id": "red5:appName"
+        },
+        "type": {
+          "@id": "red5:restreamType"
+        },
+        "status": {
+          "@id": "schema:status"
+        },
+        "destinations": {
+          "@id": "red5:destinations",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Node": {
+      "@id": "red5:Node",
+      "@context": {
+        "id": {
+          "@id": "@id"
+        },
+        "host": {
+          "@id": "schema:url"
+        },
+        "status": {
+          "@id": "schema:status"
+        },
+        "activeStreams": {
+          "@id": "red5:activeStreams",
+          "@type": "xsd:integer"
+        },
+        "connectedClients": {
+          "@id": "red5:connectedClients",
+          "@type": "xsd:integer"
+        },
+        "cpuLoad": {
+          "@id": "red5:cpuLoad",
+          "@type": "xsd:decimal"
+        }
+      }
+    },
+
+    "NodeGroup": {
+      "@id": "red5:NodeGroup",
+      "@context": {
+        "name": {
+          "@id": "schema:name"
+        },
+        "cloudProvider": {
+          "@id": "red5:cloudProvider"
+        },
+        "region": {
+          "@id": "schema:areaServed"
+        },
+        "minNodes": {
+          "@id": "red5:minNodes",
+          "@type": "xsd:integer"
+        },
+        "maxNodes": {
+          "@id": "red5:maxNodes",
+          "@type": "xsd:integer"
+        },
+        "currentNodes": {
+          "@id": "red5:currentNodes",
+          "@type": "xsd:integer"
+        },
+        "nodes": {
+          "@id": "red5:nodes",
+          "@container": "@set"
+        }
+      }
+    }
+  }
+}

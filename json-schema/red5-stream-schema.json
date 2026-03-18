@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.red5.net/schemas/stream.json",
+  "title": "Red5 Pro Stream",
+  "description": "Schema representing a live stream on a Red5 Pro server, including publishing configuration, subscriber tracking, and media codec details.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique stream name identifier within the application scope",
+      "maxLength": 255
+    },
+    "appName": {
+      "type": "string",
+      "description": "Red5 Pro application scope that contains this stream",
+      "default": "live"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Identifier of the publishing client connection"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current operational status of the stream",
+      "enum": ["publishing", "idle", "error"]
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Streaming protocol used by the publisher",
+      "enum": ["rtmp", "webrtc", "rtsp", "srt"]
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Stream duration in milliseconds since publishing began",
+      "minimum": 0
+    },
+    "subscriberCount": {
+      "type": "integer",
+      "description": "Number of currently active subscribers to this stream",
+      "minimum": 0
+    },
+    "bytesIn": {
+      "type": "integer",
+      "description": "Total bytes received from the publisher",
+      "minimum": 0
+    },
+    "bytesOut": {
+      "type": "integer",
+      "description": "Total bytes sent to all subscribers",
+      "minimum": 0
+    },
+    "video": {
+      "$ref": "#/$defs/VideoTrack"
+    },
+    "audio": {
+      "$ref": "#/$defs/AudioTrack"
+    },
+    "recording": {
+      "$ref": "#/$defs/RecordingConfig"
+    }
+  },
+  "$defs": {
+    "VideoTrack": {
+      "type": "object",
+      "description": "Video track properties for a live stream",
+      "properties": {
+        "codec": {
+          "type": "string",
+          "description": "Video codec identifier (e.g., H264, H265, VP8)",
+          "examples": ["H264", "H265", "VP8", "VP9"]
+        },
+        "width": {
+          "type": "integer",
+          "description": "Video frame width in pixels",
+          "minimum": 1,
+          "maximum": 7680
+        },
+        "height": {
+          "type": "integer",
+          "description": "Video frame height in pixels",
+          "minimum": 1,
+          "maximum": 4320
+        },
+        "frameRate": {
+          "type": "number",
+          "description": "Video frame rate in frames per second",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "bitrate": {
+          "type": "integer",
+          "description": "Video bitrate in bits per second",
+          "minimum": 0
+        },
+        "keyFrameInterval": {
+          "type": "number",
+          "description": "Interval between keyframes in seconds"
+        }
+      }
+    },
+    "AudioTrack": {
+      "type": "object",
+      "description": "Audio track properties for a live stream",
+      "properties": {
+        "codec": {
+          "type": "string",
+          "description": "Audio codec identifier (e.g., AAC, MP3, Opus)",
+          "examples": ["AAC", "MP3", "Opus", "Speex"]
+        },
+        "sampleRate": {
+          "type": "integer",
+          "description": "Audio sample rate in Hz",
+          "enum": [8000, 11025, 16000, 22050, 32000, 44100, 48000]
+        },
+        "channels": {
+          "type": "integer",
+          "description": "Number of audio channels (1 for mono, 2 for stereo)",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "bitrate": {
+          "type": "integer",
+          "description": "Audio bitrate in bits per second",
+          "minimum": 0
+        }
+      }
+    },
+    "RecordingConfig": {
+      "type": "object",
+      "description": "Configuration for stream recording",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether recording is currently active for this stream"
+        },
+        "format": {
+          "type": "string",
+          "description": "Recording file format",
+          "enum": ["mp4", "flv"]
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Server filesystem path where the recording is saved"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when recording started"
+        }
+      }
+    }
+  }
+}

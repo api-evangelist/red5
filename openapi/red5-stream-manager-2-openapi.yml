@@ -1,0 +1,470 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Stream Manager 2.0 API
+  description: >-
+    The Red5 Pro Stream Manager 2.0 API orchestrates autoscaling clusters of Red5 Pro
+    streaming nodes across cloud infrastructure. It provides REST endpoints for managing
+    live stream publishing and playback sessions, provisioning stream configurations,
+    monitoring node metrics, and proxying WHIP and WHEP WebRTC connections. The API
+    supports dynamic scaling of streaming capacity and is the primary integration
+    point for building scalable live streaming platforms on Red5 Pro.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+externalDocs:
+  description: Red5 Pro Stream Manager 2.0 API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+servers:
+  - url: https://{streamManagerDomain}/as/v1
+    description: Red5 Pro Stream Manager 2.0
+    variables:
+      streamManagerDomain:
+        default: streammanager.example.com
+        description: Domain name of the Stream Manager 2.0 instance
+tags:
+  - name: Streams
+    description: Manage live stream publish and subscribe sessions
+  - name: Provision
+    description: Stream provisioning, authentication, and configuration
+  - name: Admin
+    description: Node metrics, system info, and autoscaling management
+  - name: Proxy
+    description: WHIP, WHEP, and WebSocket proxy endpoints
+security:
+  - bearerAuth: []
+paths:
+  /streams/stream/{nodeGroupName}/publish/{streamGuid}:
+    get:
+      operationId: getPublishStreamEndpoint
+      summary: Get publish stream endpoint
+      description: >-
+        Returns the connection details for a publisher to connect to the correct
+        Red5 Pro node for broadcasting a stream. The Stream Manager selects an
+        appropriate node based on load and availability within the specified node group.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Publish endpoint information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEndpoint'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /streams/stream/{nodeGroupName}/subscribe/{streamGuid}:
+    get:
+      operationId: getSubscribeStreamEndpoint
+      summary: Get subscribe stream endpoint
+      description: >-
+        Returns the connection details for a subscriber to connect to the correct
+        Red5 Pro node for consuming a live stream. Routes subscribers to nodes
+        that have the stream available within the specified node group.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Subscribe endpoint information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEndpoint'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /streams/provision/{nodeGroupName}/{streamGuid}:
+    get:
+      operationId: getStreamProvision
+      summary: Get stream provision
+      description: >-
+        Retrieves the provisioning configuration for a specific stream including
+        authentication settings, cloud recording configuration, and transcoding parameters.
+      tags:
+        - Provision
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Stream provision returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProvision'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createStreamProvision
+      summary: Create stream provision
+      description: >-
+        Creates a provisioning configuration for a stream, setting up authentication
+        credentials, cloud storage for recordings, transcoding ladder settings, and
+        other stream-level parameters before publishing begins.
+      tags:
+        - Provision
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProvision'
+      responses:
+        '201':
+          description: Stream provision created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProvision'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteStreamProvision
+      summary: Delete stream provision
+      description: >-
+        Removes the provisioning configuration for a stream, clearing authentication
+        settings, cloud recording configuration, and transcoding parameters.
+      tags:
+        - Provision
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Stream provision deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /admin/nodegroups:
+    get:
+      operationId: listNodeGroups
+      summary: List node groups
+      description: >-
+        Returns all configured node groups in the Stream Manager cluster, including
+        their scaling configuration, cloud provider settings, and current node counts.
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Node groups returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NodeGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /admin/nodegroups/{nodeGroupName}/nodes:
+    get:
+      operationId: listNodes
+      summary: List nodes in a node group
+      description: >-
+        Returns all streaming nodes currently active in the specified node group,
+        including their IP addresses, current load metrics, and operational status.
+      tags:
+        - Admin
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+      responses:
+        '200':
+          description: Node list returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /admin/system:
+    get:
+      operationId: getSystemInfo
+      summary: Get system information
+      description: >-
+        Returns system-level information about the Stream Manager instance including
+        version, Java runtime details, memory usage, and overall cluster health.
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: System information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /proxy/whip/{nodeGroupName}/{streamGuid}:
+    post:
+      operationId: whipPublish
+      summary: WHIP publish endpoint
+      description: >-
+        WebRTC-HTTP Ingestion Protocol (WHIP) endpoint for publishing a WebRTC stream
+        through the Stream Manager proxy. Accepts an SDP offer and returns an SDP
+        answer along with routing information to the selected streaming node.
+      tags:
+        - Proxy
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/sdp:
+            schema:
+              type: string
+              description: SDP offer from the WebRTC publisher
+      responses:
+        '201':
+          description: WHIP session created, SDP answer returned
+          content:
+            application/sdp:
+              schema:
+                type: string
+                description: SDP answer from the streaming server
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /proxy/whep/{nodeGroupName}/{streamGuid}:
+    post:
+      operationId: whepSubscribe
+      summary: WHEP subscribe endpoint
+      description: >-
+        WebRTC-HTTP Egress Protocol (WHEP) endpoint for subscribing to a live stream
+        through the Stream Manager proxy. Accepts an SDP offer and returns an SDP
+        answer routing the subscriber to the node carrying the requested stream.
+      tags:
+        - Proxy
+      parameters:
+        - $ref: '#/components/parameters/nodeGroupNameParam'
+        - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/sdp:
+            schema:
+              type: string
+              description: SDP offer from the WebRTC subscriber
+      responses:
+        '201':
+          description: WHEP session created, SDP answer returned
+          content:
+            application/sdp:
+              schema:
+                type: string
+                description: SDP answer from the streaming server
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT bearer token for authenticating Stream Manager API requests
+  parameters:
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    StreamEndpoint:
+      type: object
+      description: Connection endpoint details for a publisher or subscriber
+      properties:
+        host:
+          type: string
+          description: Hostname or IP address of the Red5 Pro streaming node
+        port:
+          type: integer
+          description: Port number for the streaming connection
+        protocol:
+          type: string
+          description: Streaming protocol to use (rtmp, rtsp, wss)
+        streamGuid:
+          type: string
+          description: Stream GUID
+        app:
+          type: string
+          description: Application scope name on the target node
+    StreamProvision:
+      type: object
+      description: Provisioning configuration for a stream
+      properties:
+        streamGuid:
+          type: string
+          description: Unique identifier for the stream
+        username:
+          type: string
+          description: Publisher authentication username
+        password:
+          type: string
+          description: Publisher authentication password
+        recording:
+          type: boolean
+          description: Whether to enable cloud recording for this stream
+        transcodeEnabled:
+          type: boolean
+          description: Whether to enable adaptive bitrate transcoding
+        transcodeLadder:
+          type: array
+          description: List of transcode output variants
+          items:
+            $ref: '#/components/schemas/TranscodeVariant'
+    TranscodeVariant:
+      type: object
+      description: A single output variant in the transcoding ladder
+      properties:
+        level:
+          type: string
+          description: Variant level name (e.g., low, mid, high)
+        videoWidth:
+          type: integer
+          description: Output video width in pixels
+        videoHeight:
+          type: integer
+          description: Output video height in pixels
+        videoBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        audioBitrate:
+          type: integer
+          description: Output audio bitrate in bits per second
+    NodeGroup:
+      type: object
+      description: A group of Red5 Pro streaming nodes managed by Stream Manager
+      properties:
+        name:
+          type: string
+          description: Node group identifier name
+        cloudProvider:
+          type: string
+          description: Cloud provider (aws, gcp, azure, linode, etc.)
+        region:
+          type: string
+          description: Cloud region where nodes are deployed
+        minNodes:
+          type: integer
+          description: Minimum number of nodes to maintain in the group
+        maxNodes:
+          type: integer
+          description: Maximum number of nodes allowed in the group
+        currentNodes:
+          type: integer
+          description: Current active node count
+        status:
+          type: string
+          description: Operational status of the node group
+    Node:
+      type: object
+      description: A single Red5 Pro streaming node
+      properties:
+        id:
+          type: string
+          description: Node identifier
+        host:
+          type: string
+          description: Node hostname or IP address
+        status:
+          type: string
+          description: Operational status of the node
+        activeStreams:
+          type: integer
+          description: Number of currently active streams on this node
+        connectedClients:
+          type: integer
+          description: Number of currently connected clients
+        cpuLoad:
+          type: number
+          description: Current CPU utilization percentage
+        memoryUsed:
+          type: integer
+          description: Memory currently in use in bytes
+    SystemInfo:
+      type: object
+      description: Stream Manager system information
+      properties:
+        version:
+          type: string
+          description: Stream Manager version string
+        javaVersion:
+          type: string
+          description: Java runtime version
+        uptime:
+          type: integer
+          description: Process uptime in milliseconds
+        totalMemory:
+          type: integer
+          description: Total JVM memory in bytes
+        freeMemory:
+          type: integer
+          description: Free JVM memory in bytes
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message

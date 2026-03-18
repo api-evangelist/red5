@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.red5.net/schemas/restream-provision.json",
+  "title": "Red5 Pro Restream Provision",
+  "description": "Schema representing a restreaming provision that configures the Red5 Pro server to forward a live stream to one or more external RTMP, RTMPS, SRT, or Zixi destinations.",
+  "type": "object",
+  "required": ["streamName", "type"],
+  "properties": {
+    "streamName": {
+      "type": "string",
+      "description": "Name of the source live stream to retransmit",
+      "maxLength": 255
+    },
+    "appName": {
+      "type": "string",
+      "description": "Red5 Pro application scope containing the source stream",
+      "default": "live"
+    },
+    "type": {
+      "type": "string",
+      "description": "Restreaming mode: push sends to external destinations, pull ingests from external sources",
+      "enum": ["push", "pull", "file"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current operational status of this restream provision",
+      "enum": ["active", "stopped", "error", "connecting"]
+    },
+    "destinations": {
+      "type": "array",
+      "description": "External RTMP/RTMPS destinations to push the stream to (used for push type)",
+      "items": {
+        "$ref": "#/$defs/Destination"
+      }
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "fileConfig": {
+      "$ref": "#/$defs/FileConfig"
+    },
+    "reconnect": {
+      "$ref": "#/$defs/ReconnectConfig"
+    }
+  },
+  "$defs": {
+    "Destination": {
+      "type": "object",
+      "description": "An external destination endpoint for RTMP push restreaming",
+      "required": ["url", "streamKey"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "RTMP or RTMPS ingest URL of the destination platform",
+          "pattern": "^rtmps?://",
+          "examples": [
+            "rtmp://a.rtmp.youtube.com/live2",
+            "rtmps://live-api-s.facebook.com:443/rtmp/"
+          ]
+        },
+        "streamKey": {
+          "type": "string",
+          "description": "Stream key provided by the destination platform",
+          "minLength": 1
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Transport protocol for this destination",
+          "enum": ["rtmp", "rtmps"],
+          "default": "rtmp"
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable label for this destination (e.g., YouTube, Facebook)"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this destination is currently active",
+          "default": true
+        }
+      }
+    },
+    "Source": {
+      "type": "object",
+      "description": "External RTMP source configuration for pull restreaming",
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "RTMP URL of the external source to pull from",
+          "pattern": "^rtmps?://"
+        },
+        "streamKey": {
+          "type": "string",
+          "description": "Stream key at the source if required for authentication"
+        }
+      }
+    },
+    "FileConfig": {
+      "type": "object",
+      "description": "Configuration for file-based pseudo-live restreaming",
+      "required": ["filePath"],
+      "properties": {
+        "filePath": {
+          "type": "string",
+          "description": "Server filesystem path to the FLV or MP4 file to restream"
+        },
+        "format": {
+          "type": "string",
+          "description": "File format of the source file",
+          "enum": ["flv", "mp4"]
+        },
+        "loop": {
+          "type": "boolean",
+          "description": "Whether to loop the file when playback reaches the end",
+          "default": false
+        }
+      }
+    },
+    "ReconnectConfig": {
+      "type": "object",
+      "description": "Automatic reconnection settings for a restream provision",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to automatically reconnect if the connection is lost",
+          "default": true
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "description": "Maximum number of reconnection attempts before giving up",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 5
+        },
+        "delayMs": {
+          "type": "integer",
+          "description": "Delay in milliseconds between reconnection attempts",
+          "minimum": 100,
+          "default": 5000
+        }
+      }
+    }
+  }
+}

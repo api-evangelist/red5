@@ -1,0 +1,254 @@
+asyncapi: 2.6.0
+info:
+  title: Red5 Pro WebRTC Streaming Events
+  description: >-
+    AsyncAPI specification for the Red5 Pro WebRTC streaming event system,
+    covering WebSocket signaling messages exchanged during publish and subscribe
+    sessions. Red5 Pro WebRTC uses WebSocket connections for signaling SDP
+    offers, answers, and ICE candidates between clients and the streaming server.
+    This specification documents the message types and payloads used in the
+    WebRTC session lifecycle.
+  version: '1.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+externalDocs:
+  description: Red5 Pro WebRTC SDK Documentation
+  url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
+servers:
+  red5ProServer:
+    url: 'wss://{host}:443/live/{streamName}'
+    protocol: wss
+    description: >-
+      Red5 Pro WebRTC WebSocket signaling endpoint for live streaming.
+      Clients connect per-stream for publish or subscribe sessions.
+    variables:
+      host:
+        description: Hostname or IP of the Red5 Pro server
+        default: localhost
+      streamName:
+        description: Name of the stream to publish or subscribe to
+        default: mystream
+    security:
+      - bearerToken: []
+channels:
+  /publish:
+    description: >-
+      WebSocket channel for a publisher to establish a WebRTC session and
+      broadcast a live stream to the Red5 Pro server. The publisher sends
+      an SDP offer and ICE candidates; the server responds with an SDP answer
+      and its ICE candidates.
+    publish:
+      operationId: publisherSend
+      summary: Publisher sends signaling message to server
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SdpOffer'
+          - $ref: '#/components/messages/IceCandidate'
+          - $ref: '#/components/messages/PublishRequest'
+    subscribe:
+      operationId: publisherReceive
+      summary: Publisher receives signaling message from server
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SdpAnswer'
+          - $ref: '#/components/messages/IceCandidate'
+          - $ref: '#/components/messages/StreamEvent'
+  /subscribe:
+    description: >-
+      WebSocket channel for a subscriber to establish a WebRTC session and
+      receive a live stream from the Red5 Pro server. The subscriber sends
+      an SDP offer and ICE candidates; the server responds with an SDP answer
+      and its ICE candidates.
+    publish:
+      operationId: subscriberSend
+      summary: Subscriber sends signaling message to server
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SdpOffer'
+          - $ref: '#/components/messages/IceCandidate'
+          - $ref: '#/components/messages/SubscribeRequest'
+    subscribe:
+      operationId: subscriberReceive
+      summary: Subscriber receives signaling message from server
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SdpAnswer'
+          - $ref: '#/components/messages/IceCandidate'
+          - $ref: '#/components/messages/StreamEvent'
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: JWT bearer token for authenticating WebSocket connections
+  messages:
+    PublishRequest:
+      name: PublishRequest
+      title: Publish Stream Request
+      summary: Initial request from a publisher to start a streaming session
+      description: >-
+        Sent by a WebRTC publisher to initiate a broadcast session on the server.
+        Contains the stream name and any authentication credentials.
+      payload:
+        $ref: '#/components/schemas/PublishRequestPayload'
+    SubscribeRequest:
+      name: SubscribeRequest
+      title: Subscribe Stream Request
+      summary: Initial request from a subscriber to join a streaming session
+      description: >-
+        Sent by a WebRTC subscriber to initiate playback of a live stream
+        from the server. Contains the stream name to subscribe to.
+      payload:
+        $ref: '#/components/schemas/SubscribeRequestPayload'
+    SdpOffer:
+      name: SdpOffer
+      title: SDP Offer
+      summary: WebRTC SDP offer from a client
+      description: >-
+        Session Description Protocol (SDP) offer sent from a WebRTC client
+        (publisher or subscriber) to the server to negotiate media capabilities
+        and establish the peer connection.
+      payload:
+        $ref: '#/components/schemas/SdpPayload'
+    SdpAnswer:
+      name: SdpAnswer
+      title: SDP Answer
+      summary: WebRTC SDP answer from the server
+      description: >-
+        Session Description Protocol (SDP) answer sent from the Red5 Pro server
+        in response to a client's SDP offer, completing the WebRTC negotiation.
+      payload:
+        $ref: '#/components/schemas/SdpPayload'
+    IceCandidate:
+      name: IceCandidate
+      title: ICE Candidate
+      summary: ICE candidate for WebRTC peer connection establishment
+      description: >-
+        Interactive Connectivity Establishment (ICE) candidate message exchanged
+        between the client and server to discover and negotiate network paths
+        for the WebRTC media connection.
+      payload:
+        $ref: '#/components/schemas/IceCandidatePayload'
+    StreamEvent:
+      name: StreamEvent
+      title: Stream Lifecycle Event
+      summary: Server-sent event about stream state changes
+      description: >-
+        Notification from the Red5 Pro server about changes in stream state,
+        such as stream started, stopped, error conditions, or publisher disconnected.
+      payload:
+        $ref: '#/components/schemas/StreamEventPayload'
+  schemas:
+    PublishRequestPayload:
+      type: object
+      description: Payload for initiating a WebRTC publish session
+      required:
+        - type
+        - streamName
+      properties:
+        type:
+          type: string
+          description: Message type identifier
+          const: publishRequest
+        streamName:
+          type: string
+          description: Name of the stream to publish
+        username:
+          type: string
+          description: Publisher authentication username if required
+        password:
+          type: string
+          description: Publisher authentication password if required
+        record:
+          type: boolean
+          description: Whether to enable server-side recording of this stream
+          default: false
+    SubscribeRequestPayload:
+      type: object
+      description: Payload for initiating a WebRTC subscribe session
+      required:
+        - type
+        - streamName
+      properties:
+        type:
+          type: string
+          description: Message type identifier
+          const: subscribeRequest
+        streamName:
+          type: string
+          description: Name of the stream to subscribe to
+    SdpPayload:
+      type: object
+      description: WebRTC Session Description Protocol message payload
+      required:
+        - type
+        - sdp
+      properties:
+        type:
+          type: string
+          description: SDP message type (offer or answer)
+          enum:
+            - offer
+            - answer
+        sdp:
+          type: string
+          description: SDP body string containing media negotiation details
+    IceCandidatePayload:
+      type: object
+      description: WebRTC ICE candidate message payload
+      required:
+        - type
+        - candidate
+      properties:
+        type:
+          type: string
+          description: Message type identifier
+          const: iceCandidate
+        candidate:
+          type: string
+          description: ICE candidate string in RFC 5245 format
+        sdpMid:
+          type: string
+          description: Media stream identification tag this candidate is associated with
+        sdpMLineIndex:
+          type: integer
+          description: Index of the media description in the SDP for this candidate
+          minimum: 0
+    StreamEventPayload:
+      type: object
+      description: Server-sent stream lifecycle event payload
+      required:
+        - type
+        - code
+      properties:
+        type:
+          type: string
+          description: Message type identifier
+          const: event
+        code:
+          type: string
+          description: Event code identifying the stream state change
+          enum:
+            - NetStream.Play.Start
+            - NetStream.Play.Stop
+            - NetStream.Play.Failed
+            - NetStream.Publish.Start
+            - NetStream.Publish.BadName
+            - NetStream.Unpublish.Success
+            - NetConnection.Connect.Success
+            - NetConnection.Connect.Failed
+            - NetConnection.Connect.Closed
+        level:
+          type: string
+          description: Event severity level
+          enum:
+            - status
+            - warning
+            - error
+        description:
+          type: string
+          description: Human-readable description of the event
+        streamName:
+          type: string
+          description: Name of the stream this event relates to

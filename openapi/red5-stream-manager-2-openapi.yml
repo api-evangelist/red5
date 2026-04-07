@@ -24,14 +24,14 @@ servers:
         default: streammanager.example.com
         description: Domain name of the Stream Manager 2.0 instance
 tags:
-  - name: Streams
-    description: Manage live stream publish and subscribe sessions
-  - name: Provision
-    description: Stream provisioning, authentication, and configuration
   - name: Admin
     description: Node metrics, system info, and autoscaling management
+  - name: Provision
+    description: Stream provisioning, authentication, and configuration
   - name: Proxy
     description: WHIP, WHEP, and WebSocket proxy endpoints
+  - name: Streams
+    description: Manage live stream publish and subscribe sessions
 security:
   - bearerAuth: []
 paths:

@@ -5,27 +5,21 @@ apis:
   - aid: red5:server-api
     name: Red5 Pro Server API
     tags:
-      - Streaming
       - Media
       - Real-Time
       - REST
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Streaming
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: http://localhost:5080/api/v1
-    humanURL: 
-      https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
+    humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
     properties:
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
+      - url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
         type: Documentation
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api/
         type: APIReference
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-applications-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-applications-api/
         type: APIReference
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-streams-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-streams-api/
         type: APIReference
       - url: openapi/red5-server-api-openapi.yml
         type: OpenAPI
@@ -40,33 +34,26 @@ apis:
   - aid: red5:stream-manager-2-api
     name: Red5 Pro Stream Manager 2.0 API
     tags:
-      - Streaming
-      - Media
       - Autoscaling
+      - Media
       - REST
+      - Streaming
       - WebRTC
-      - WHIP
       - WHEP
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - WHIP
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://streammanager.example.com/as/v1
-    humanURL: 
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    humanURL: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
     properties:
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+      - url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
         type: Documentation
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-openapi-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-openapi-api/
         type: OpenAPI
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
         type: APIReference
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
         type: APIReference
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
         type: APIReference
       - url: openapi/red5-stream-manager-2-openapi.yml
         type: OpenAPI
@@ -81,20 +68,17 @@ apis:
   - aid: red5:brew-mixer-api
     name: Red5 Pro Brew Mixer API
     tags:
-      - Streaming
+      - Audio
       - Media
       - Mixing
       - REST
+      - Streaming
       - Video
-      - Audio
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com/brewmixer/2.0
-    humanURL: 
-      https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
+    humanURL: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
     properties:
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
+      - url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
         type: Documentation
       - url: openapi/red5-brew-mixer-api-openapi.yml
         type: OpenAPI
@@ -107,20 +91,18 @@ apis:
   - aid: red5:restreamer-api
     name: Red5 Pro Restreamer API
     tags:
-      - Streaming
       - Media
-      - RTMP
-      - Restreaming
       - REST
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Restreaming
+      - RTMP
+      - Streaming
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://www.red5.net/docs/red5-pro/development/api/restreamer/
     properties:
       - url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
         type: Documentation
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+      - url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
         type: APIReference
       - url: openapi/red5-restreamer-api-openapi.yml
         type: OpenAPI
@@ -135,24 +117,20 @@ apis:
   - aid: red5:webrtc-sdk
     name: Red5 Pro WebRTC SDK
     tags:
-      - Streaming
-      - Media
-      - WebRTC
       - JavaScript
+      - Media
       - SDK
-      - WHIP
+      - Streaming
+      - WebRTC
       - WHEP
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - WHIP
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
-    humanURL: 
-      https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
+    humanURL: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
     properties:
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
+      - url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
         type: Documentation
-      - url: 
-          https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/red5-webrtc-sdk-api-documentation/
+      - url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/red5-webrtc-sdk-api-documentation/
         type: APIReference
       - url: https://github.com/red5pro/red5pro-webrtc-sdk
         type: GitHub
@@ -171,15 +149,14 @@ apis:
   - aid: red5:core-sdk
     name: Red5 Core SDK
     tags:
-      - Streaming
-      - Media
-      - SDK
-      - Native
       - Desktop
       - Linux
+      - Media
+      - Native
+      - SDK
+      - Streaming
       - Windows
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://www.red5.net/docs/red5-pro/development/sdks/red5-core-sdk/
     properties:
@@ -204,8 +181,7 @@ common:
     streams, mixers, restreaming, and cluster orchestration. It is used for live
     events, sports broadcasting, interactive video, gaming, surveillance, and
     enterprise communication applications requiring ultra-low latency streaming.
-  image: 
-    https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
   tags:
     - Streaming
     - Media

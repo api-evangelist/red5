@@ -24,14 +24,14 @@ servers:
         default: localhost
         description: Hostname or IP address of the Red5 Pro server
 tags:
-  - name: Server
-    description: Server health, info, and status endpoints
   - name: Applications
     description: Application scope statistics and management
-  - name: Streams
-    description: Live stream enumeration, statistics, and control
   - name: Logs
     description: Server log access endpoints
+  - name: Server
+    description: Server health, info, and status endpoints
+  - name: Streams
+    description: Live stream enumeration, statistics, and control
 security:
   - accessToken: []
 paths:

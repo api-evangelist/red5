@@ -24,10 +24,10 @@ servers:
         default: localhost
         description: Hostname or IP address of the Red5 Pro server
 tags:
-  - name: RTMP Restreamer
-    description: Configure RTMP and RTMPS push/pull restreaming
   - name: File Restreamer
     description: Restream recorded FLV or MP4 files as pseudo-live streams
+  - name: RTMP Restreamer
+    description: Configure RTMP and RTMPS push/pull restreaming
   - name: Servlet Configuration
     description: Server-level restreamer plugin configuration
 security:

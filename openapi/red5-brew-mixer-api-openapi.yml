@@ -25,12 +25,12 @@ servers:
         default: localhost
         description: Hostname or IP address of the Red5 Pro server
 tags:
-  - name: Mixers
-    description: Mixer session lifecycle management
-  - name: Inputs
-    description: Input stream management for mixer sessions
   - name: Images
     description: Image overlay management for mixer sessions
+  - name: Inputs
+    description: Input stream management for mixer sessions
+  - name: Mixers
+    description: Mixer session lifecycle management
 security:
   - accessToken: []
 paths:

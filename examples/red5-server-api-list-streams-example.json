@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "http://localhost:5080/api/v1/applications/live/streams",
+    "parameters": {
+      "accessToken": "access_token_abc123"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "name": "stream1",
+          "publisherCount": 1,
+          "subscriberCount": 12,
+          "bytesIn": 1245678,
+          "bytesOut": 14948136,
+          "videoCodec": "H264",
+          "audioCodec": "AAC",
+          "videoBitrate": 2500,
+          "audioBitrate": 128,
+          "width": 1920,
+          "height": 1080,
+          "frameRate": 30.0
+        },
+        {
+          "name": "stream2",
+          "publisherCount": 1,
+          "subscriberCount": 5,
+          "bytesIn": 876543,
+          "bytesOut": 4382715,
+          "videoCodec": "H264",
+          "audioCodec": "AAC",
+          "videoBitrate": 1500,
+          "audioBitrate": 96,
+          "width": 1280,
+          "height": 720,
+          "frameRate": 30.0
+        }
+      ]
+    }
+  }
+}

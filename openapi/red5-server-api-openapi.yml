@@ -38,7 +38,7 @@ paths:
   /server:
     get:
       operationId: getServerInfo
-      summary: Get server information
+      summary: Get Server Information
       description: >-
         Returns basic information about the Red5 Pro server including version,
         uptime, and configuration details.
@@ -58,7 +58,7 @@ paths:
   /server/ping:
     get:
       operationId: pingServer
-      summary: Ping the server
+      summary: Ping the Server
       description: >-
         Performs a health check on the Red5 Pro server. Returns a simple
         response confirming the server is running and accessible.
@@ -78,7 +78,7 @@ paths:
   /applications:
     get:
       operationId: listApplications
-      summary: List applications
+      summary: List Applications
       description: >-
         Returns a list of all deployed applications (scopes) on the Red5 Pro
         server along with their statistics including connected client counts
@@ -104,7 +104,7 @@ paths:
   /applications/{appName}:
     get:
       operationId: getApplication
-      summary: Get application details
+      summary: Get Application Details
       description: >-
         Returns detailed statistics for a specific application scope including
         connected clients, active streams, and resource consumption metrics.
@@ -127,7 +127,7 @@ paths:
   /applications/{appName}/streams:
     get:
       operationId: listStreams
-      summary: List streams in an application
+      summary: List Streams in an Application
       description: >-
         Returns all active live streams within the specified application scope
         including stream names, subscriber counts, and connection statistics.
@@ -155,7 +155,7 @@ paths:
   /applications/{appName}/streams/{streamName}:
     get:
       operationId: getStream
-      summary: Get stream details
+      summary: Get Stream Details
       description: >-
         Returns detailed statistics for a specific live stream including
         bitrate, frame rate, subscriber count, and connection duration.
@@ -179,7 +179,7 @@ paths:
   /applications/{appName}/streams/{streamName}/action/startrecord:
     post:
       operationId: startStreamRecording
-      summary: Start recording a stream
+      summary: Start Recording a Stream
       description: >-
         Initiates recording of the specified live stream to disk. The recording
         is saved in the configured recording directory on the server.
@@ -203,7 +203,7 @@ paths:
   /applications/{appName}/streams/{streamName}/action/stoprecord:
     post:
       operationId: stopStreamRecording
-      summary: Stop recording a stream
+      summary: Stop Recording a Stream
       description: >-
         Stops an active recording session for the specified live stream.
         The completed recording file is finalized and available on disk.
@@ -227,7 +227,7 @@ paths:
   /logs:
     get:
       operationId: getServerLogs
-      summary: Get server logs
+      summary: Get Server Logs
       description: >-
         Retrieves server log entries from the Red5 Pro server. Supports
         filtering by log level and date range to narrow results.

@@ -1,0 +1,20 @@
+{
+  "name": "Stream",
+  "description": "Live stream entity structure for Red5 Pro streaming platform",
+  "fields": [
+    { "name": "name", "type": "string", "description": "Stream name identifier" },
+    { "name": "publisherCount", "type": "integer", "description": "Number of active publishers" },
+    { "name": "subscriberCount", "type": "integer", "description": "Number of active subscribers" },
+    { "name": "bytesIn", "type": "integer", "description": "Total bytes received from publishers" },
+    { "name": "bytesOut", "type": "integer", "description": "Total bytes sent to subscribers" },
+    { "name": "videoCodec", "type": "string", "description": "Video codec in use (H264, H265, VP8, VP9)" },
+    { "name": "audioCodec", "type": "string", "description": "Audio codec in use (AAC, Opus)" },
+    { "name": "videoBitrate", "type": "integer", "description": "Video bitrate in kbps" },
+    { "name": "audioBitrate", "type": "integer", "description": "Audio bitrate in kbps" },
+    { "name": "width", "type": "integer", "description": "Video frame width in pixels" },
+    { "name": "height", "type": "integer", "description": "Video frame height in pixels" },
+    { "name": "frameRate", "type": "number", "description": "Video frame rate in fps" },
+    { "name": "duration", "type": "integer", "description": "Stream duration in seconds" },
+    { "name": "isRecording", "type": "boolean", "description": "Whether the stream is being recorded" }
+  ]
+}

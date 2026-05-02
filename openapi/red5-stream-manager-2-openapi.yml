@@ -38,7 +38,7 @@ paths:
   /streams/stream/{nodeGroupName}/publish/{streamGuid}:
     get:
       operationId: getPublishStreamEndpoint
-      summary: Get publish stream endpoint
+      summary: Get Publish Stream Endpoint
       description: >-
         Returns the connection details for a publisher to connect to the correct
         Red5 Pro node for broadcasting a stream. The Stream Manager selects an
@@ -62,7 +62,7 @@ paths:
   /streams/stream/{nodeGroupName}/subscribe/{streamGuid}:
     get:
       operationId: getSubscribeStreamEndpoint
-      summary: Get subscribe stream endpoint
+      summary: Get Subscribe Stream Endpoint
       description: >-
         Returns the connection details for a subscriber to connect to the correct
         Red5 Pro node for consuming a live stream. Routes subscribers to nodes
@@ -86,7 +86,7 @@ paths:
   /streams/provision/{nodeGroupName}/{streamGuid}:
     get:
       operationId: getStreamProvision
-      summary: Get stream provision
+      summary: Get Stream Provision
       description: >-
         Retrieves the provisioning configuration for a specific stream including
         authentication settings, cloud recording configuration, and transcoding parameters.
@@ -108,7 +108,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: createStreamProvision
-      summary: Create stream provision
+      summary: Create Stream Provision
       description: >-
         Creates a provisioning configuration for a stream, setting up authentication
         credentials, cloud storage for recordings, transcoding ladder settings, and
@@ -137,7 +137,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteStreamProvision
-      summary: Delete stream provision
+      summary: Delete Stream Provision
       description: >-
         Removes the provisioning configuration for a stream, clearing authentication
         settings, cloud recording configuration, and transcoding parameters.
@@ -156,7 +156,7 @@ paths:
   /admin/nodegroups:
     get:
       operationId: listNodeGroups
-      summary: List node groups
+      summary: List Node Groups
       description: >-
         Returns all configured node groups in the Stream Manager cluster, including
         their scaling configuration, cloud provider settings, and current node counts.
@@ -179,7 +179,7 @@ paths:
   /admin/nodegroups/{nodeGroupName}/nodes:
     get:
       operationId: listNodes
-      summary: List nodes in a node group
+      summary: List Nodes in a Node Group
       description: >-
         Returns all streaming nodes currently active in the specified node group,
         including their IP addresses, current load metrics, and operational status.
@@ -206,7 +206,7 @@ paths:
   /admin/system:
     get:
       operationId: getSystemInfo
-      summary: Get system information
+      summary: Get System Information
       description: >-
         Returns system-level information about the Stream Manager instance including
         version, Java runtime details, memory usage, and overall cluster health.
@@ -224,7 +224,7 @@ paths:
   /proxy/whip/{nodeGroupName}/{streamGuid}:
     post:
       operationId: whipPublish
-      summary: WHIP publish endpoint
+      summary: Whip Publish Endpoint
       description: >-
         WebRTC-HTTP Ingestion Protocol (WHIP) endpoint for publishing a WebRTC stream
         through the Stream Manager proxy. Accepts an SDP offer and returns an SDP
@@ -256,7 +256,7 @@ paths:
   /proxy/whep/{nodeGroupName}/{streamGuid}:
     post:
       operationId: whepSubscribe
-      summary: WHEP subscribe endpoint
+      summary: Whep Subscribe Endpoint
       description: >-
         WebRTC-HTTP Egress Protocol (WHEP) endpoint for subscribing to a live stream
         through the Stream Manager proxy. Accepts an SDP offer and returns an SDP

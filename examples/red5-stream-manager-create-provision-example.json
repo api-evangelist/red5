@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://streammanager.example.com/as/v1/streams",
+    "headers": {
+      "Authorization": "Bearer sm_token_abc123",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "streamName": "event-broadcast",
+      "region": "us-west-2",
+      "publisherCount": 1,
+      "subscriberLimit": 1000,
+      "transcoderEnabled": true,
+      "transcoderProfiles": ["720p30", "480p30", "360p30"]
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "provision-abc123",
+      "streamName": "event-broadcast",
+      "region": "us-west-2",
+      "status": "provisioning",
+      "originHost": "origin1.red5.example.com",
+      "whipEndpoint": "https://origin1.red5.example.com:443/live/event-broadcast/whip",
+      "createdAt": "2026-05-02T10:00:00Z"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+extends: spectral:oas
+rules:
+  # Red5 API uses accessToken query parameter
+  red5-access-token-parameter:
+    description: >-
+      Red5 Pro Server API endpoints authenticate via an accessToken query
+      parameter. All protected endpoints must define this parameter.
+    severity: error
+    given: $.components.parameters.accessTokenParam
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^accessToken$"
+
+  # Operation IDs required
+  red5-operation-id-required:
+    description: >-
+      All Red5 API operations must include an operationId for SDK generation,
+      tooling integration, and API client code generation.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  # Summary must use Title Case
+  red5-summary-title-case:
+    description: >-
+      Operation summaries must use Title Case formatting to match the
+      Red5 Pro API documentation standards.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 ]+$"
+
+  # Operations need descriptions
+  red5-operation-description:
+    description: >-
+      All Red5 API operations must include descriptions explaining what
+      the endpoint does and the parameters it accepts.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: description
+      function: truthy
+
+  # Tags must be used consistently
+  red5-tags-required:
+    description: >-
+      All operations must include at least one tag to organize them in
+      API documentation and client libraries.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+
+  # 401 response for all authenticated endpoints
+  red5-unauthorized-response:
+    description: >-
+      All Red5 API endpoints that require authentication must define a
+      401 Unauthorized response for invalid or missing access tokens.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].responses
+    then:
+      field: '401'
+      function: truthy
+
+  # 404 response for resource-specific endpoints
+  red5-not-found-response:
+    description: >-
+      Endpoints that access specific resources (with path parameters like
+      appName and streamName) must define a 404 response.
+    severity: warn
+    given: $.paths[*~@contains('{')][get,post,put,delete].responses
+    then:
+      field: '404'
+      function: truthy
+
+  # Server URL must include port 5080
+  red5-server-port:
+    description: >-
+      Red5 Pro Server API is served at port 5080. The server URL must
+      reflect this to ensure clients connect to the correct port.
+    severity: error
+    given: $.servers[?(@.description === 'Red5 Pro Server')]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "5080"
+
+  # Query parameters should have types defined
+  red5-parameter-types:
+    description: >-
+      All parameters must define their data type schema for type validation
+      and documentation generation.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
+    then:
+      field: schema
+      function: truthy
+
+  # Response schemas for 200 responses
+  red5-response-schema:
+    description: >-
+      All 200 responses should reference a defined schema to document
+      the structure of the returned data.
+    severity: warn
+    given: $.paths[*][get].responses[200].content.application/json
+    then:
+      field: schema
+      function: truthy
+
+  # Actions path segments should use lowercase
+  red5-action-paths:
+    description: >-
+      Action path segments (e.g., /action/startrecord) must use lowercase
+      to follow Red5 API naming conventions.
+    severity: warn
+    given: $.paths[*~@contains('/action/')]
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z0-9{}/_-]+$"

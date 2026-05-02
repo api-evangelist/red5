@@ -1,0 +1,133 @@
+name: Red5 Pro Streaming Platform Vocabulary
+description: >-
+  Core vocabulary and terminology for the Red5 Pro live streaming platform
+  including streaming protocols, architecture components, and API concepts.
+created: '2026-05-02'
+modified: '2026-05-02'
+terms:
+  - term: Stream
+    definition: >-
+      A live audio/video feed published to a Red5 Pro server and available for
+      real-time playback by subscribers. Streams are identified by name within an application scope.
+    tags:
+      - Streaming
+      - Media
+
+  - term: Application Scope
+    definition: >-
+      A named context on the Red5 Pro server that groups related streams and clients.
+      Also referred to simply as an application or scope (e.g., "live", "vod").
+    tags:
+      - Server Architecture
+
+  - term: Stream Manager
+    definition: >-
+      The autoscaling orchestration layer in Red5 Pro that manages clusters of
+      origin and edge nodes, routing publishers and subscribers appropriately.
+    tags:
+      - Autoscaling
+      - Infrastructure
+
+  - term: Origin Node
+    definition: >-
+      A Red5 Pro server that receives the live stream ingest from the publisher
+      and distributes it to edge nodes for subscriber playback.
+    tags:
+      - Infrastructure
+      - Architecture
+
+  - term: Edge Node
+    definition: >-
+      A Red5 Pro server that receives streams from origin nodes and delivers
+      them to end-user subscribers, enabling horizontal scaling.
+    tags:
+      - Infrastructure
+      - Scaling
+
+  - term: WHIP
+    definition: >-
+      WebRTC-HTTP Ingestion Protocol. A standardized protocol for publishing
+      WebRTC streams to media servers using HTTP signaling.
+    tags:
+      - Protocol
+      - WebRTC
+
+  - term: WHEP
+    definition: >-
+      WebRTC-HTTP Egress Protocol. A standardized protocol for subscribing
+      to WebRTC streams from media servers using HTTP signaling.
+    tags:
+      - Protocol
+      - WebRTC
+
+  - term: WebRTC
+    definition: >-
+      Web Real-Time Communication. A browser API and protocol suite for
+      peer-to-peer audio/video streaming. Enables sub-second latency streaming.
+    tags:
+      - Protocol
+      - Real-Time
+
+  - term: RTMP
+    definition: >-
+      Real-Time Messaging Protocol. A streaming protocol developed by Adobe for
+      low-latency live video ingest. Widely used by encoders and streaming software.
+    tags:
+      - Protocol
+      - Streaming
+
+  - term: HLS
+    definition: >-
+      HTTP Live Streaming. An adaptive streaming protocol developed by Apple for
+      delivering video over HTTP in chunked segments. Higher latency than WebRTC/RTMP.
+    tags:
+      - Protocol
+      - Streaming
+
+  - term: Brew Mixer
+    definition: >-
+      The Red5 Pro mixing engine (Cauldron Media Engine) that combines multiple
+      input video streams into a single composite output stream.
+    tags:
+      - Mixing
+      - Composition
+
+  - term: Restreamer
+    definition: >-
+      A Red5 Pro service that forwards live streams to external RTMP, RTMPS, SRT,
+      or Zixi destinations including social media platforms.
+    tags:
+      - Restreaming
+      - Distribution
+
+  - term: Provision
+    definition: >-
+      A Stream Manager configuration object that defines stream routing, transcoding
+      profiles, and scaling parameters for a stream name.
+    tags:
+      - Configuration
+      - Stream Manager
+
+  - term: Transcoder
+    definition: >-
+      A Red5 Pro component that converts live streams between different bitrates and
+      resolutions to support adaptive bitrate delivery (ABR).
+    tags:
+      - Media Processing
+      - Quality
+
+  - term: SRT
+    definition: >-
+      Secure Reliable Transport. A low-latency streaming protocol designed for
+      reliable delivery over unpredictable networks, often used for contribution feeds.
+    tags:
+      - Protocol
+      - Streaming
+
+  - term: Access Token
+    definition: >-
+      The authentication credential required for all Red5 Pro Server API calls.
+      Passed as the accessToken query parameter.
+    tags:
+      - Authentication
+      - Security

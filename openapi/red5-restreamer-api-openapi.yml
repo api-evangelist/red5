@@ -36,7 +36,7 @@ paths:
   /restreamer/provision.create:
     post:
       operationId: createRtmpProvision
-      summary: Create RTMP restream provision
+      summary: Create Rtmp Restream Provision
       description: >-
         Creates a provision that configures the Red5 Pro server to push a live
         ingest stream to one or more external RTMP or RTMPS destinations such as
@@ -66,7 +66,7 @@ paths:
   /restreamer/provision.delete:
     post:
       operationId: deleteRtmpProvision
-      summary: Delete RTMP restream provision
+      summary: Delete Rtmp Restream Provision
       description: >-
         Removes an active RTMP restreaming provision, stopping retransmission
         to the configured external destinations for the specified source stream.
@@ -94,7 +94,7 @@ paths:
   /restreamer/provision.pull.create:
     post:
       operationId: createRtmpPullProvision
-      summary: Create RTMP pull restream provision
+      summary: Create Rtmp Pull Restream Provision
       description: >-
         Creates a provision that configures the Red5 Pro server to pull a live stream
         from an external RTMP source and make it available as a local stream for
@@ -123,7 +123,7 @@ paths:
   /filerestreamer/provision.create:
     post:
       operationId: createFileRestreamProvision
-      summary: Create file restream provision
+      summary: Create File Restream Provision
       description: >-
         Creates a provision that restreams a recorded FLV or MP4 file as a
         pseudo-live stream. The file is played back continuously or on loop,
@@ -152,7 +152,7 @@ paths:
   /filerestreamer/provision.delete:
     post:
       operationId: deleteFileRestreamProvision
-      summary: Delete file restream provision
+      summary: Delete File Restream Provision
       description: >-
         Stops and removes an active file restreaming provision, halting
         playback and live distribution of the specified pre-recorded file.
@@ -180,7 +180,7 @@ paths:
   /restreamer/config:
     get:
       operationId: getRestreamConfig
-      summary: Get restreamer servlet configuration
+      summary: Get Restreamer Servlet Configuration
       description: >-
         Returns the current server-level configuration for the Restreamer plugin
         servlet, including connection limits, timeouts, and default settings.

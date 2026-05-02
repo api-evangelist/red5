@@ -37,7 +37,7 @@ paths:
   /brewmixer/2.0/mixers:
     get:
       operationId: listMixers
-      summary: List active mixers
+      summary: List Active Mixers
       description: >-
         Returns a list of all currently active mixer sessions on the Red5 Pro
         server, including their configuration and current input stream count.
@@ -61,7 +61,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createMixer
-      summary: Create a mixer
+      summary: Create a Mixer
       description: >-
         Creates a new mixer session that combines multiple live input streams into
         a single composite output stream. Specify output dimensions, frame rate,
@@ -90,7 +90,7 @@ paths:
   /brewmixer/2.0/mixers/{mixerId}:
     get:
       operationId: getMixer
-      summary: Get mixer details
+      summary: Get Mixer Details
       description: >-
         Returns configuration and status details for the specified mixer session,
         including active inputs, output stream name, and rendering parameters.
@@ -112,7 +112,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteMixer
-      summary: Delete a mixer
+      summary: Delete a Mixer
       description: >-
         Terminates the specified mixer session and stops the composite output stream.
         All input stream connections are released when the mixer is deleted.
@@ -131,7 +131,7 @@ paths:
   /brewmixer/2.0/mixers/{mixerId}/inputs:
     get:
       operationId: listMixerInputs
-      summary: List mixer inputs
+      summary: List Mixer Inputs
       description: >-
         Returns all input streams currently connected to the specified mixer session,
         including their layout positions, dimensions, and z-order in the composite frame.
@@ -158,7 +158,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: addMixerInput
-      summary: Add an input to a mixer
+      summary: Add an Input to a Mixer
       description: >-
         Adds a live stream as an input source to the specified mixer session.
         Specify the stream name and layout parameters such as position, dimensions,
@@ -190,7 +190,7 @@ paths:
   /brewmixer/2.0/mixers/{mixerId}/inputs/{inputId}:
     put:
       operationId: updateMixerInput
-      summary: Update a mixer input
+      summary: Update a Mixer Input
       description: >-
         Updates the layout parameters of an input stream within the mixer session,
         such as changing its position, size, or z-order in the composite frame.
@@ -221,7 +221,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: removeMixerInput
-      summary: Remove an input from a mixer
+      summary: Remove an Input From a Mixer
       description: >-
         Disconnects and removes an input stream from the specified mixer session.
         The composite output continues with the remaining inputs.
@@ -241,7 +241,7 @@ paths:
   /brewmixer/2.0/images:
     post:
       operationId: addImageOverlay
-      summary: Add an image overlay
+      summary: Add an Image Overlay
       description: >-
         Adds an image overlay (logo, watermark, lower-third graphic) to one or more
         mixer sessions. The image is uploaded and positioned within the composite
@@ -296,7 +296,7 @@ paths:
   /brewmixer/2.0/images/{imageId}:
     delete:
       operationId: removeImageOverlay
-      summary: Remove an image overlay
+      summary: Remove an Image Overlay
       description: >-
         Removes a previously added image overlay from the mixer session.
         The composite output is updated immediately without the overlay.

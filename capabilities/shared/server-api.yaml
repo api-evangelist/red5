@@ -1,0 +1,278 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Red5 Pro Server API"
+  description: "HTTP REST API for monitoring and controlling a Red5 Pro streaming server. Provides access to server stats, application scopes, live streams, and recording controls."
+  tags:
+    - Media
+    - Real-Time
+    - Red5
+    - Streaming
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      RED5_ACCESS_TOKEN: RED5_ACCESS_TOKEN
+      RED5_SERVER_HOST: RED5_SERVER_HOST
+
+capability:
+  consumes:
+    - type: http
+      namespace: red5-server
+      baseUri: "http://{{RED5_SERVER_HOST}}:5080/api/v1"
+      description: "Red5 Pro Server REST API for server and stream management"
+      authentication:
+        type: apikey
+        key: accessToken
+        value: "{{RED5_ACCESS_TOKEN}}"
+        placement: query
+      resources:
+        - name: server
+          path: /server
+          description: "Server health and information"
+          operations:
+            - name: get-server-info
+              method: GET
+              description: "Get server version and info"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: ping-server
+              method: GET
+              description: "Ping the server for health check"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: applications
+          path: /applications
+          description: "Application scope management"
+          operations:
+            - name: list-applications
+              method: GET
+              description: "List all deployed applications"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: application
+          path: /applications/{appName}
+          description: "Individual application management"
+          operations:
+            - name: get-application
+              method: GET
+              description: "Get application statistics"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application scope name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: streams
+          path: /applications/{appName}/streams
+          description: "Live stream enumeration"
+          operations:
+            - name: list-streams
+              method: GET
+              description: "List active streams in an application"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application scope name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: stream
+          path: /applications/{appName}/streams/{streamName}
+          description: "Individual stream management"
+          operations:
+            - name: get-stream
+              method: GET
+              description: "Get stream statistics and details"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application scope name"
+                - name: streamName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Stream name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: start-record
+          path: /applications/{appName}/streams/{streamName}/action/startrecord
+          description: "Start stream recording"
+          operations:
+            - name: start-recording
+              method: POST
+              description: "Start recording a live stream"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application scope name"
+                - name: streamName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Stream name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: stop-record
+          path: /applications/{appName}/streams/{streamName}/action/stoprecord
+          description: "Stop stream recording"
+          operations:
+            - name: stop-recording
+              method: POST
+              description: "Stop recording a live stream"
+              inputParameters:
+                - name: appName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application scope name"
+                - name: streamName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Stream name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: red5-server-rest
+      resources:
+        - path: /v1/server
+          name: server
+          description: "Server health and information"
+          operations:
+            - method: GET
+              name: get-server-info
+              description: "Get server information"
+              call: "red5-server.get-server-info"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/applications
+          name: applications
+          description: "Application scope listing"
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List deployed applications"
+              call: "red5-server.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: red5-server-mcp
+      transport: http
+      tools:
+        - name: get-server-info
+          description: "Get Red5 Pro server version, uptime, and configuration"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "red5-server.get-server-info"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: ping-server
+          description: "Check if the Red5 Pro server is alive and reachable"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "red5-server.ping-server"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: "List all deployed streaming applications on the server"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "red5-server.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-streams
+          description: "List active live streams in a streaming application"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "red5-server.list-streams"
+          with:
+            appName: "tools.app_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-stream-stats
+          description: "Get statistics for a specific live stream including bitrate and subscriber count"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "red5-server.get-stream"
+          with:
+            appName: "tools.app_name"
+            streamName: "tools.stream_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: start-stream-recording
+          description: "Start recording a live stream to disk"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "red5-server.start-recording"
+          with:
+            appName: "tools.app_name"
+            streamName: "tools.stream_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: stop-stream-recording
+          description: "Stop recording a live stream and finalize the recording file"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "red5-server.stop-recording"
+          with:
+            appName: "tools.app_name"
+            streamName: "tools.stream_name"
+          outputParameters:
+            - type: object
+              mapping: "$."

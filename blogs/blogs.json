@@ -1,0 +1,13 @@
+{
+  "repo": "red5",
+  "feeds": [
+    {
+      "source": "https://www.red5.net/blog/",
+      "feed_url": "https://www.red5.net/feed/",
+      "saved": 10,
+      "title": "Red5"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:34:59Z"
+}

@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,211 +9,58 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Red5
 providerId: red5
-publisherName: Red5
-serviceCategory: API
+publisherName: Infrared5, Inc.
+serviceCategory: Streaming Media
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Live Streaming
-  - Media
-  - Real-Time
-  - RTMP
   - Streaming
-  - Video
-  - WebRTC
+  - Real-Time Video
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Red5 API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FOCUS-aligned FinOps shape for Red5 Pro. Two cost surfaces — the Red5 Pro license
+  (subscription, contact-sales) and the customer's underlying cloud spend running the media
+  server. Public pricing page was unavailable for automated fetch.
+sources:
+  - https://www.red5.net/red5pro/pricing/
+notes: Red5 site returned 403 to automated fetch; meter list reflects the assumed license +
+  customer-cloud cost shape, not a fetched billing surface.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: Red5
-  ServiceCategory: Developer Tools / API
+  ServiceName: Red5 Pro
+  ServiceCategory: Streaming Media
   ProviderName: Red5
-  PublisherName: Red5
-  InvoiceIssuerName: Red5
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Infrared5, Inc.
+  InvoiceIssuerName: Infrared5, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: license_subscription
+    description: Annual Red5 Pro license (sized by concurrent streams or node count)
+    unit: contract
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Red5 Pro Server API
-    baseURL: http://localhost:5080/api/v1
-    tags:
-      - Media
-      - Real-Time
-      - REST
-      - Server Management
-      - Streaming
-    serviceName: Red5 Pro Server API
-    serviceCategory: API
-  - name: Red5 Pro Stream Manager 2.0 API
-    baseURL: https://streammanager.example.com/as/v1
-    tags:
-      - Autoscaling
-      - Cluster Management
-      - Media
-      - REST
-      - Streaming
-      - WebRTC
-      - WHEP
-      - WHIP
-    serviceName: Red5 Pro Stream Manager 2.0 API
-    serviceCategory: API
-  - name: Red5 Pro Brew Mixer API
-    baseURL: https://api.example.com/brewmixer/2.0
-    tags:
-      - Audio
-      - Composition
-      - Media
-      - Mixing
-      - REST
-      - Streaming
-      - Video
-    serviceName: Red5 Pro Brew Mixer API
-    serviceCategory: API
-  - name: Red5 Pro Restreamer API
-    baseURL: https://api.example.com
-    tags:
-      - Media
-      - REST
-      - Restreaming
-      - RTMP
-      - Social Media
-      - Streaming
-    serviceName: Red5 Pro Restreamer API
-    serviceCategory: API
-  - name: Red5 Pro WebRTC SDK
-    baseURL: https://api.example.com
-    tags:
-      - JavaScript
-      - Media
-      - SDK
-      - Streaming
-      - WebRTC
-      - WHEP
-      - WHIP
-    serviceName: Red5 Pro WebRTC SDK
-    serviceCategory: API
-  - name: Red5 Core SDK
-    baseURL: https://api.example.com
-    tags:
-      - Desktop
-      - Linux
-      - Media
-      - Native
-      - SDK
-      - Streaming
-      - Windows
-    serviceName: Red5 Core SDK
-    serviceCategory: API
-  - name: Red5 Pro iOS Streaming SDK
-    baseURL: https://api.example.com
-    tags:
-      - iOS
-      - Media
-      - Mobile
-      - SDK
-      - Streaming
-      - Swift
-    serviceName: Red5 Pro iOS Streaming SDK
-    serviceCategory: API
-  - name: Red5 Pro Android Streaming SDK
-    baseURL: https://api.example.com
-    tags:
-      - Android
-      - Java
-      - Media
-      - Mobile
-      - SDK
-      - Streaming
-    serviceName: Red5 Pro Android Streaming SDK
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - edition
+      - concurrent_streams
+      - support_level
+principles:
+  - name: Visibility
+    description: Red5 Pro Stream Manager exposes per-stream and per-node telemetry; combine
+      with the underlying cloud bill (AWS / Azure / GCP) to see total cost-of-streaming.
+  - name: Allocation
+    description: Tag streams and nodes by application/tenant in Stream Manager so the licensed
+      capacity and the cloud spend can be attributed to consuming products.
+  - name: Optimization
+    description: Right-size autoscaling pools, use spot/preemptible instances for non-critical
+      edges, and renegotiate Red5 license tier at renewal based on observed peak concurrency.
+  - name: Accountability
+    description: Streaming platform team owns Red5 license + cluster cost; consuming product
+      teams own their concurrency profile.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

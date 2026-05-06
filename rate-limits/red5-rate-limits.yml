@@ -4,123 +4,37 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Red5
 providerId: red5
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Live Streaming
-  - Media
-  - Real-Time
-  - RTMP
   - Streaming
-  - Video
-  - WebRTC
+  - Real-Time Video
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Red5 API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Red5 Pro is a customer-deployed media server (self-hosted or via Stream Manager
+  on the customer's cloud account). Concurrency and throughput are bounded by the customer's
+  deployed node count rather than by a Red5-published rate ceiling. The Red5 site was unavailable
+  for automated fetch.
+sources:
+  - https://www.red5.net/red5pro/pricing/
+notes: Red5 pricing/docs pages returned 403; no platform-wide rate limit is published. Capacity
+  is governed by customer deployment topology and the licensed concurrent-stream count.
+responseCodes: {}
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Red5 Pro Server API
-      - Red5 Pro Stream Manager 2.0 API
-      - Red5 Pro Brew Mixer API
-      - Red5 Pro Restreamer API
-      - Red5 Pro WebRTC SDK
-      - Red5 Core SDK
-      - Red5 Pro iOS Streaming SDK
-      - Red5 Pro Android Streaming SDK
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Red5 Pro Server API
-      - Red5 Pro Stream Manager 2.0 API
-      - Red5 Pro Brew Mixer API
-      - Red5 Pro Restreamer API
-      - Red5 Pro WebRTC SDK
-      - Red5 Core SDK
-      - Red5 Pro iOS Streaming SDK
-      - Red5 Pro Android Streaming SDK
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Red5 Pro Server API
-      - Red5 Pro Stream Manager 2.0 API
-      - Red5 Pro Brew Mixer API
-      - Red5 Pro Restreamer API
-      - Red5 Pro WebRTC SDK
-      - Red5 Core SDK
-      - Red5 Pro iOS Streaming SDK
-      - Red5 Pro Android Streaming SDK
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Red5 Pro Server API
-      - Red5 Pro Stream Manager 2.0 API
-      - Red5 Pro Brew Mixer API
-      - Red5 Pro Restreamer API
-      - Red5 Pro WebRTC SDK
-      - Red5 Core SDK
-      - Red5 Pro iOS Streaming SDK
-      - Red5 Pro Android Streaming SDK
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Red5 Pro Server API
-      - Red5 Pro Stream Manager 2.0 API
-      - Red5 Pro Brew Mixer API
-      - Red5 Pro Restreamer API
-      - Red5 Pro WebRTC SDK
-      - Red5 Core SDK
-      - Red5 Pro iOS Streaming SDK
-      - Red5 Pro Android Streaming SDK
+  - name: License-based concurrency
+    scope: deployment
+    metric: varies
+    limit: 'concurrent streams capped by purchased Red5 Pro license tier'
+  - name: Self-hosted capacity
+    scope: deployment
+    metric: varies
+    limit: 'bounded by node sizing / autoscaling configuration in Stream Manager'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: License-Bound Concurrency
+    description: The number of concurrent streams supported is governed by the customer's Red5
+      Pro license rather than a per-second request limit.
+  - name: Customer-Operated Scaling
+    description: Stream Manager autoscaling and topology are operated by the customer on their
+      own cloud account; Red5 does not enforce a request rate centrally.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

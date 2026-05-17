@@ -250,9 +250,9 @@ common:
     url: https://www.red5.net/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/red5pro
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/Red5
   - type: SDKs
     url: https://www.red5.net/live-streaming-sdks/

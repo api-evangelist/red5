@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red5 Pro Restreamer API — Servlet Configuration
+  description: 'Red5 Pro Restreamer API — Servlet Configuration. 1 operations. Lead operation: Get Restreamer Servlet Configuration.
+    Self-contained Naftiko capability covering one Red5 business surface.'
+  tags:
+  - Red5
+  - Servlet Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED5_API_KEY: RED5_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: restreamer-servlet-configuration
+    baseUri: http://{host}:5080
+    description: Red5 Pro Restreamer API — Servlet Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: restreamer-config
+      path: /restreamer/config
+      operations:
+      - name: getrestreamconfig
+        method: GET
+        description: Get Restreamer Servlet Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: accessToken
+      value: '{{env.RED5_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: restreamer-servlet-configuration-rest
+    port: 8080
+    description: REST adapter for Red5 Pro Restreamer API — Servlet Configuration. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/restreamer/config
+      name: restreamer-config
+      description: REST surface for restreamer-config.
+      operations:
+      - method: GET
+        name: getrestreamconfig
+        description: Get Restreamer Servlet Configuration
+        call: restreamer-servlet-configuration.getrestreamconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: restreamer-servlet-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red5 Pro Restreamer API — Servlet Configuration. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-restreamer-servlet-configuration
+      description: Get Restreamer Servlet Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: restreamer-servlet-configuration.getrestreamconfig
+      outputParameters:
+      - type: object
+        mapping: $.

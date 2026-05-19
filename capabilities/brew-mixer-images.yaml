@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red5 Pro Brew Mixer API — Images
+  description: 'Red5 Pro Brew Mixer API — Images. 2 operations. Lead operation: Add an Image Overlay. Self-contained Naftiko
+    capability covering one Red5 business surface.'
+  tags:
+  - Red5
+  - Images
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED5_API_KEY: RED5_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: brew-mixer-images
+    baseUri: http://{host}:5080
+    description: Red5 Pro Brew Mixer API — Images business capability. Self-contained, no shared references.
+    resources:
+    - name: brewmixer-2.0-images
+      path: /brewmixer/2.0/images
+      operations:
+      - name: addimageoverlay
+        method: POST
+        description: Add an Image Overlay
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: brewmixer-2.0-images-imageId
+      path: /brewmixer/2.0/images/{imageId}
+      operations:
+      - name: removeimageoverlay
+        method: DELETE
+        description: Remove an Image Overlay
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: accessToken
+      value: '{{env.RED5_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: brew-mixer-images-rest
+    port: 8080
+    description: REST adapter for Red5 Pro Brew Mixer API — Images. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/brewmixer/2-0/images
+      name: brewmixer-2-0-images
+      description: REST surface for brewmixer-2.0-images.
+      operations:
+      - method: POST
+        name: addimageoverlay
+        description: Add an Image Overlay
+        call: brew-mixer-images.addimageoverlay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/brewmixer/2-0/images/{imageid}
+      name: brewmixer-2-0-images-imageid
+      description: REST surface for brewmixer-2.0-images-imageId.
+      operations:
+      - method: DELETE
+        name: removeimageoverlay
+        description: Remove an Image Overlay
+        call: brew-mixer-images.removeimageoverlay
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: brew-mixer-images-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red5 Pro Brew Mixer API — Images. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: add-image-overlay
+      description: Add an Image Overlay
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: brew-mixer-images.addimageoverlay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-image-overlay
+      description: Remove an Image Overlay
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: brew-mixer-images.removeimageoverlay
+      outputParameters:
+      - type: object
+        mapping: $.

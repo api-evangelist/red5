@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red5 Pro Restreamer API — RTMP Restreamer
+  description: 'Red5 Pro Restreamer API — RTMP Restreamer. 3 operations. Lead operation: Create Rtmp Restream Provision. Self-contained
+    Naftiko capability covering one Red5 business surface.'
+  tags:
+  - Red5
+  - RTMP Restreamer
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED5_API_KEY: RED5_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: restreamer-rtmp-restreamer
+    baseUri: http://{host}:5080
+    description: Red5 Pro Restreamer API — RTMP Restreamer business capability. Self-contained, no shared references.
+    resources:
+    - name: restreamer-provision.create
+      path: /restreamer/provision.create
+      operations:
+      - name: creatertmpprovision
+        method: POST
+        description: Create Rtmp Restream Provision
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: restreamer-provision.delete
+      path: /restreamer/provision.delete
+      operations:
+      - name: deletertmpprovision
+        method: POST
+        description: Delete Rtmp Restream Provision
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: restreamer-provision.pull.create
+      path: /restreamer/provision.pull.create
+      operations:
+      - name: creatertmppullprovision
+        method: POST
+        description: Create Rtmp Pull Restream Provision
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: accessToken
+      value: '{{env.RED5_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: restreamer-rtmp-restreamer-rest
+    port: 8080
+    description: REST adapter for Red5 Pro Restreamer API — RTMP Restreamer. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/restreamer/provision-create
+      name: restreamer-provision-create
+      description: REST surface for restreamer-provision.create.
+      operations:
+      - method: POST
+        name: creatertmpprovision
+        description: Create Rtmp Restream Provision
+        call: restreamer-rtmp-restreamer.creatertmpprovision
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restreamer/provision-delete
+      name: restreamer-provision-delete
+      description: REST surface for restreamer-provision.delete.
+      operations:
+      - method: POST
+        name: deletertmpprovision
+        description: Delete Rtmp Restream Provision
+        call: restreamer-rtmp-restreamer.deletertmpprovision
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restreamer/provision-pull-create
+      name: restreamer-provision-pull-create
+      description: REST surface for restreamer-provision.pull.create.
+      operations:
+      - method: POST
+        name: creatertmppullprovision
+        description: Create Rtmp Pull Restream Provision
+        call: restreamer-rtmp-restreamer.creatertmppullprovision
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: restreamer-rtmp-restreamer-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red5 Pro Restreamer API — RTMP Restreamer. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-rtmp-restream-provision
+      description: Create Rtmp Restream Provision
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: restreamer-rtmp-restreamer.creatertmpprovision
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-rtmp-restream-provision
+      description: Delete Rtmp Restream Provision
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: restreamer-rtmp-restreamer.deletertmpprovision
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-rtmp-pull-restream-provision
+      description: Create Rtmp Pull Restream Provision
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: restreamer-rtmp-restreamer.creatertmppullprovision
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

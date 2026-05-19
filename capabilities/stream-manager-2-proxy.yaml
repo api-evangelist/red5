@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red5 Pro Stream Manager 2.0 API — Proxy
+  description: 'Red5 Pro Stream Manager 2.0 API — Proxy. 2 operations. Lead operation: Whep Subscribe Endpoint. Self-contained
+    Naftiko capability covering one Red5 business surface.'
+  tags:
+  - Red5
+  - Proxy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED5_API_KEY: RED5_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stream-manager-2-proxy
+    baseUri: https://{streamManagerDomain}/as/v1
+    description: Red5 Pro Stream Manager 2.0 API — Proxy business capability. Self-contained, no shared references.
+    resources:
+    - name: proxy-whep-nodeGroupName-streamGuid
+      path: /proxy/whep/{nodeGroupName}/{streamGuid}
+      operations:
+      - name: whepsubscribe
+        method: POST
+        description: Whep Subscribe Endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: proxy-whip-nodeGroupName-streamGuid
+      path: /proxy/whip/{nodeGroupName}/{streamGuid}
+      operations:
+      - name: whippublish
+        method: POST
+        description: Whip Publish Endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.RED5_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: stream-manager-2-proxy-rest
+    port: 8080
+    description: REST adapter for Red5 Pro Stream Manager 2.0 API — Proxy. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/proxy/whep/{nodegroupname}/{streamguid}
+      name: proxy-whep-nodegroupname-streamguid
+      description: REST surface for proxy-whep-nodeGroupName-streamGuid.
+      operations:
+      - method: POST
+        name: whepsubscribe
+        description: Whep Subscribe Endpoint
+        call: stream-manager-2-proxy.whepsubscribe
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/proxy/whip/{nodegroupname}/{streamguid}
+      name: proxy-whip-nodegroupname-streamguid
+      description: REST surface for proxy-whip-nodeGroupName-streamGuid.
+      operations:
+      - method: POST
+        name: whippublish
+        description: Whip Publish Endpoint
+        call: stream-manager-2-proxy.whippublish
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stream-manager-2-proxy-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red5 Pro Stream Manager 2.0 API — Proxy. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: whep-subscribe-endpoint
+      description: Whep Subscribe Endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stream-manager-2-proxy.whepsubscribe
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: whip-publish-endpoint
+      description: Whip Publish Endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stream-manager-2-proxy.whippublish
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

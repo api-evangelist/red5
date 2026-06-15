@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Stream Manager 2.0 API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Publish Stream Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/streams/stream/:nodeGroupName/publish/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Returns the connection details for a publisher to connect to the correct Red5 Pro node for broadcasting a stream. The Stream Manager selects an appropriate node based on load and availability within the specified node group."
+        },
+        {
+          "info": {
+            "name": "Get Subscribe Stream Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/streams/stream/:nodeGroupName/subscribe/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Returns the connection details for a subscriber to connect to the correct Red5 Pro node for consuming a live stream. Routes subscribers to nodes that have the stream available within the specified node group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Provision",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Retrieves the provisioning configuration for a specific stream including authentication settings, cloud recording configuration, and transcoding parameters."
+        },
+        {
+          "info": {
+            "name": "Create Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{streamManagerDomain}/as/v1/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a provisioning configuration for a stream, setting up authentication credentials, cloud storage for recordings, transcoding ladder settings, and other stream-level parameters before publishing begins."
+        },
+        {
+          "info": {
+            "name": "Delete Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{streamManagerDomain}/as/v1/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Removes the provisioning configuration for a stream, clearing authentication settings, cloud recording configuration, and transcoding parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Node Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/admin/nodegroups"
+          },
+          "docs": "Returns all configured node groups in the Stream Manager cluster, including their scaling configuration, cloud provider settings, and current node counts."
+        },
+        {
+          "info": {
+            "name": "List Nodes in a Node Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/admin/nodegroups/:nodeGroupName/nodes",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              }
+            ]
+          },
+          "docs": "Returns all streaming nodes currently active in the specified node group, including their IP addresses, current load metrics, and operational status."
+        },
+        {
+          "info": {
+            "name": "Get System Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{streamManagerDomain}/as/v1/admin/system"
+          },
+          "docs": "Returns system-level information about the Stream Manager instance including version, Java runtime details, memory usage, and overall cluster health."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Whip Publish Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{streamManagerDomain}/as/v1/proxy/whip/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "WebRTC-HTTP Ingestion Protocol (WHIP) endpoint for publishing a WebRTC stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer along with routing information to the selected streaming node."
+        },
+        {
+          "info": {
+            "name": "Whep Subscribe Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{streamManagerDomain}/as/v1/proxy/whep/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "WebRTC-HTTP Egress Protocol (WHEP) endpoint for subscribing to a live stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer routing the subscriber to the node carrying the requested stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

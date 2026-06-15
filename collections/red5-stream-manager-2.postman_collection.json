@@ -1,0 +1,2500 @@
+{
+  "item": [
+    {
+      "id": "68f95d30-bdb0-4d83-98be-fd9fa2956381",
+      "name": "Admin",
+      "description": {
+        "content": "Node metrics, system info, and autoscaling management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1f06be6-10e5-4f2a-bfd6-dd64e4397ed0",
+          "name": "List Node Groups",
+          "request": {
+            "name": "List Node Groups",
+            "description": {
+              "content": "Returns all configured node groups in the Stream Manager cluster, including their scaling configuration, cloud provider settings, and current node counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "nodegroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "904dfcb7-8fa6-45da-b42f-4edb16bf78f7",
+              "name": "Node groups returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"cloudProvider\": \"string\",\n      \"region\": \"string\",\n      \"minNodes\": 2234,\n      \"maxNodes\": 1372,\n      \"currentNodes\": 4597,\n      \"status\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"cloudProvider\": \"string\",\n      \"region\": \"string\",\n      \"minNodes\": 9362,\n      \"maxNodes\": 790,\n      \"currentNodes\": 9296,\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd4ee74c-74f4-4a4b-92c1-9b15fb836497",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e59cb5d2-ee1f-4a90-8066-d8c057295242",
+          "name": "List Nodes in a Node Group",
+          "request": {
+            "name": "List Nodes in a Node Group",
+            "description": {
+              "content": "Returns all streaming nodes currently active in the specified node group, including their IP addresses, current load metrics, and operational status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "nodegroups",
+                ":nodeGroupName",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5348adb-e205-4fcf-b0ea-8932a9c7edf4",
+              "name": "Node list returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"status\": \"string\",\n      \"activeStreams\": 9066,\n      \"connectedClients\": 595,\n      \"cpuLoad\": 3300.5410377823964,\n      \"memoryUsed\": 2706\n    },\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"status\": \"string\",\n      \"activeStreams\": 9630,\n      \"connectedClients\": 4307,\n      \"cpuLoad\": 2937.1288399225605,\n      \"memoryUsed\": 8753\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c36c5184-b2ff-43d0-9c4b-4bfe91786b5c",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16df92c2-c284-4e66-bbc0-2dcac004ea80",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "897176c9-3c9d-41d3-8c41-e1cc06c3aeb9",
+          "name": "Get System Information",
+          "request": {
+            "name": "Get System Information",
+            "description": {
+              "content": "Returns system-level information about the Stream Manager instance including version, Java runtime details, memory usage, and overall cluster health.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "system"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e227cb4-91e9-4d2c-b018-82470ad7e267",
+              "name": "System information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "system"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"javaVersion\": \"string\",\n  \"uptime\": 6757,\n  \"totalMemory\": 7170,\n  \"freeMemory\": 8716\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cd16351-aaae-4cf8-8e94-19296c5a5dc1",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "system"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "866a2f90-57f8-4c11-a0d3-7643d8d31825",
+      "name": "Provision",
+      "description": {
+        "content": "Stream provisioning, authentication, and configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c207aa9-aca1-421e-9ffc-1dec276d89c0",
+          "name": "Get Stream Provision",
+          "request": {
+            "name": "Get Stream Provision",
+            "description": {
+              "content": "Retrieves the provisioning configuration for a specific stream including authentication settings, cloud recording configuration, and transcoding parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16073e19-94a4-4fb7-bde9-c6620f9ae635",
+              "name": "Stream provision returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"streamGuid\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"recording\": true,\n  \"transcodeEnabled\": false,\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9580,\n      \"videoHeight\": 6442,\n      \"videoBitrate\": 5746,\n      \"audioBitrate\": 2708\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9042,\n      \"videoHeight\": 2623,\n      \"videoBitrate\": 512,\n      \"audioBitrate\": 7939\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d67c591b-4fe1-4956-81b8-c2bb0513bad2",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f759546-7b15-4c4f-a0d0-f5acccde124a",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5beb118-1ded-4999-834c-4db4b79591bb",
+          "name": "Create Stream Provision",
+          "request": {
+            "name": "Create Stream Provision",
+            "description": {
+              "content": "Creates a provisioning configuration for a stream, setting up authentication credentials, cloud storage for recordings, transcoding ladder settings, and other stream-level parameters before publishing begins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"<string>\",\n      \"videoWidth\": \"<integer>\",\n      \"videoHeight\": \"<integer>\",\n      \"videoBitrate\": \"<integer>\",\n      \"audioBitrate\": \"<integer>\"\n    },\n    {\n      \"level\": \"<string>\",\n      \"videoWidth\": \"<integer>\",\n      \"videoHeight\": \"<integer>\",\n      \"videoBitrate\": \"<integer>\",\n      \"audioBitrate\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b631825-4f4f-426d-ad0c-64783c681bc4",
+              "name": "Stream provision created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9017,\n      \"videoHeight\": 3181,\n      \"videoBitrate\": 8573,\n      \"audioBitrate\": 8349\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 1448,\n      \"videoHeight\": 6036,\n      \"videoBitrate\": 4777,\n      \"audioBitrate\": 2666\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"streamGuid\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"recording\": true,\n  \"transcodeEnabled\": false,\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9580,\n      \"videoHeight\": 6442,\n      \"videoBitrate\": 5746,\n      \"audioBitrate\": 2708\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9042,\n      \"videoHeight\": 2623,\n      \"videoBitrate\": 512,\n      \"audioBitrate\": 7939\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "735039f0-868d-4acf-aaa2-3f6621ca8832",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9017,\n      \"videoHeight\": 3181,\n      \"videoBitrate\": 8573,\n      \"audioBitrate\": 8349\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 1448,\n      \"videoHeight\": 6036,\n      \"videoBitrate\": 4777,\n      \"audioBitrate\": 2666\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ae65c42-5d5b-48f8-a5e2-5323c08df8d7",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9017,\n      \"videoHeight\": 3181,\n      \"videoBitrate\": 8573,\n      \"audioBitrate\": 8349\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 1448,\n      \"videoHeight\": 6036,\n      \"videoBitrate\": 4777,\n      \"audioBitrate\": 2666\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "948fc758-882a-45aa-a86d-14ce456ec453",
+          "name": "Delete Stream Provision",
+          "request": {
+            "name": "Delete Stream Provision",
+            "description": {
+              "content": "Removes the provisioning configuration for a stream, clearing authentication settings, cloud recording configuration, and transcoding parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e147b1a-e070-464a-8554-d8b23d15550b",
+              "name": "Stream provision deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5048d5da-b76c-4d01-8796-9d5c0bbb5e4d",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5898726-77b1-4bc4-81bb-81642c8b759b",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "68cb8219-f739-4980-a7b1-b53ca94618bd",
+      "name": "Proxy",
+      "description": {
+        "content": "WHIP, WHEP, and WebSocket proxy endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e9bd952-88cb-4937-a77a-bc75520c4095",
+          "name": "Whip Publish Endpoint",
+          "request": {
+            "name": "Whip Publish Endpoint",
+            "description": {
+              "content": "WebRTC-HTTP Ingestion Protocol (WHIP) endpoint for publishing a WebRTC stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer along with routing information to the selected streaming node.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "whip",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sdp"
+              },
+              {
+                "key": "Accept",
+                "value": "application/sdp"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "ad4364c4-ce77-4340-8319-249068c2854f",
+              "name": "WHIP session created, SDP answer returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whip",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/sdp"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sdp"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42fbeaa3-08c9-458d-81ab-14c14c8441e5",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whip",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "745ff3cc-e196-4749-ae66-20f4dbe768ec",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whip",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b29f7283-5148-4e80-8f06-c896ee30ba6d",
+          "name": "Whep Subscribe Endpoint",
+          "request": {
+            "name": "Whep Subscribe Endpoint",
+            "description": {
+              "content": "WebRTC-HTTP Egress Protocol (WHEP) endpoint for subscribing to a live stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer routing the subscriber to the node carrying the requested stream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "whep",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sdp"
+              },
+              {
+                "key": "Accept",
+                "value": "application/sdp"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "517752fa-25b1-47d3-bc39-71af1013e77e",
+              "name": "WHEP session created, SDP answer returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whep",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/sdp"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sdp"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "390d6ac7-73cf-417c-9232-42c78fc3ff9c",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whep",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c596208-cc54-4623-9950-5fec9475aea5",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "whep",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6eb7c566-6866-427f-a8e9-d9df3d4b4092",
+      "name": "Streams",
+      "description": {
+        "content": "Manage live stream publish and subscribe sessions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3de3eb7b-3735-4d37-b4f0-9050a94171e2",
+          "name": "Get Publish Stream Endpoint",
+          "request": {
+            "name": "Get Publish Stream Endpoint",
+            "description": {
+              "content": "Returns the connection details for a publisher to connect to the correct Red5 Pro node for broadcasting a stream. The Stream Manager selects an appropriate node based on load and availability within the specified node group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "stream",
+                ":nodeGroupName",
+                "publish",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34924d8f-9b21-454e-8768-ab1430f3c710",
+              "name": "Publish endpoint information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "publish",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"host\": \"string\",\n  \"port\": 70,\n  \"protocol\": \"string\",\n  \"streamGuid\": \"string\",\n  \"app\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37543abe-0d49-48eb-a511-ca1be2bdcd44",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "publish",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "437f8820-d1bd-4cb3-a6fc-42ac17274053",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "publish",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7c1881d-58fe-4995-8c72-5b5a1b5fb9db",
+          "name": "Get Subscribe Stream Endpoint",
+          "request": {
+            "name": "Get Subscribe Stream Endpoint",
+            "description": {
+              "content": "Returns the connection details for a subscriber to connect to the correct Red5 Pro node for consuming a live stream. Routes subscribers to nodes that have the stream available within the specified node group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "stream",
+                ":nodeGroupName",
+                "subscribe",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Domain name of the Stream Manager 2.0 instance",
+                  "type": "any",
+                  "value": "{{streamManagerDomain}}",
+                  "key": "streamManagerDomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b78d015-fb00-4533-9b08-2b25940c6d52",
+              "name": "Subscribe endpoint information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "subscribe",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"host\": \"string\",\n  \"port\": 70,\n  \"protocol\": \"string\",\n  \"streamGuid\": \"string\",\n  \"app\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "806d30c3-70ee-4c29-b9b8-0b4bcaccd062",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "subscribe",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2ccf7ec-59fa-4414-b1b0-9027b2bd8cb7",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "stream",
+                    ":nodeGroupName",
+                    "subscribe",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Domain name of the Stream Manager 2.0 instance",
+                      "type": "any",
+                      "value": "{{streamManagerDomain}}",
+                      "key": "streamManagerDomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6665,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Domain name of the Stream Manager 2.0 instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "streammanager.example.com",
+      "key": "streamManagerDomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{streamManagerDomain}}/as/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ef1b494e-c2bf-41d0-b122-6d60914e36d7",
+    "name": "Red5 Pro Stream Manager 2.0 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Red5 Pro Stream Manager 2.0 API orchestrates autoscaling clusters of Red5 Pro streaming nodes across cloud infrastructure. It provides REST endpoints for managing live stream publishing and playback sessions, provisioning stream configurations, monitoring node metrics, and proxying WHIP and WHEP WebRTC connections. The API supports dynamic scaling of streaming capacity and is the primary integration point for building scalable live streaming platforms on Red5 Pro.\n\nContact Support:\n Name: Red5 Support",
+      "type": "text/plain"
+    }
+  }
+}

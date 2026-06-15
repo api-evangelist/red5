@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Restreamer API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RTMP Restreamer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Rtmp Restream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/restreamer/provision.create",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a provision that configures the Red5 Pro server to push a live ingest stream to one or more external RTMP or RTMPS destinations such as Facebook Live, YouTube Live, or any RTMP-compatible CDN endpoint. Each destination is specified with a stream URL and stream key."
+        },
+        {
+          "info": {
+            "name": "Delete Rtmp Restream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/restreamer/provision.delete",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes an active RTMP restreaming provision, stopping retransmission to the configured external destinations for the specified source stream."
+        },
+        {
+          "info": {
+            "name": "Create Rtmp Pull Restream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/restreamer/provision.pull.create",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a provision that configures the Red5 Pro server to pull a live stream from an external RTMP source and make it available as a local stream for subscribers. Useful for ingesting streams from external encoders or sources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Restreamer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create File Restream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/filerestreamer/provision.create",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a provision that restreams a recorded FLV or MP4 file as a pseudo-live stream. The file is played back continuously or on loop, allowing pre-recorded content to be distributed as a live stream."
+        },
+        {
+          "info": {
+            "name": "Delete File Restream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/filerestreamer/provision.delete",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops and removes an active file restreaming provision, halting playback and live distribution of the specified pre-recorded file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Servlet Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restreamer Servlet Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/restreamer/config",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns the current server-level configuration for the Restreamer plugin servlet, including connection limits, timeouts, and default settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

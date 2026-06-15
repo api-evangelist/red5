@@ -1,0 +1,338 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Brew Mixer API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mixers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Active Mixers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns a list of all currently active mixer sessions on the Red5 Pro server, including their configuration and current input stream count."
+        },
+        {
+          "info": {
+            "name": "Create a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new mixer session that combines multiple live input streams into a single composite output stream. Specify output dimensions, frame rate, bitrate, and the name of the output stream."
+        },
+        {
+          "info": {
+            "name": "Get Mixer Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns configuration and status details for the specified mixer session, including active inputs, output stream name, and rendering parameters."
+        },
+        {
+          "info": {
+            "name": "Delete a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Terminates the specified mixer session and stops the composite output stream. All input stream connections are released when the mixer is deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inputs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Mixer Inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns all input streams currently connected to the specified mixer session, including their layout positions, dimensions, and z-order in the composite frame."
+        },
+        {
+          "info": {
+            "name": "Add an Input to a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a live stream as an input source to the specified mixer session. Specify the stream name and layout parameters such as position, dimensions, and z-order within the composite output frame."
+        },
+        {
+          "info": {
+            "name": "Update a Mixer Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs/:inputId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "inputId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer input"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the layout parameters of an input stream within the mixer session, such as changing its position, size, or z-order in the composite frame."
+        },
+        {
+          "info": {
+            "name": "Remove an Input From a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs/:inputId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "inputId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer input"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Disconnects and removes an input stream from the specified mixer session. The composite output continues with the remaining inputs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add an Image Overlay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/brewmixer/2.0/images",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "image",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "mixerId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "x",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "y",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "width",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "height",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "zOrder",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Adds an image overlay (logo, watermark, lower-third graphic) to one or more mixer sessions. The image is uploaded and positioned within the composite output frame at the specified coordinates and dimensions."
+        },
+        {
+          "info": {
+            "name": "Remove an Image Overlay",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/brewmixer/2.0/images/:imageId",
+            "params": [
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the image overlay"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Removes a previously added image overlay from the mixer session. The composite output is updated immediately without the overlay."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

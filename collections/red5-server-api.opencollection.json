@@ -1,0 +1,281 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Server API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/server",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns basic information about the Red5 Pro server including version, uptime, and configuration details."
+        },
+        {
+          "info": {
+            "name": "Ping the Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/server/ping",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Performs a health check on the Red5 Pro server. Returns a simple response confirming the server is running and accessible."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/applications",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns a list of all deployed applications (scopes) on the Red5 Pro server along with their statistics including connected client counts and resource usage."
+        },
+        {
+          "info": {
+            "name": "Get Application Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/applications/:appName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns detailed statistics for a specific application scope including connected clients, active streams, and resource consumption metrics."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Streams in an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/applications/:appName/streams",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns all active live streams within the specified application scope including stream names, subscriber counts, and connection statistics."
+        },
+        {
+          "info": {
+            "name": "Get Stream Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/applications/:appName/streams/:streamName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns detailed statistics for a specific live stream including bitrate, frame rate, subscriber count, and connection duration."
+        },
+        {
+          "info": {
+            "name": "Start Recording a Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/api/v1/applications/:appName/streams/:streamName/action/startrecord",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Initiates recording of the specified live stream to disk. The recording is saved in the configured recording directory on the server."
+        },
+        {
+          "info": {
+            "name": "Stop Recording a Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/api/v1/applications/:appName/streams/:streamName/action/stoprecord",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Stops an active recording session for the specified live stream. The completed recording file is finalized and available on disk."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/api/v1/logs",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Log level filter (INFO, WARN, ERROR, DEBUG)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log entries to return"
+              }
+            ]
+          },
+          "docs": "Retrieves server log entries from the Red5 Pro server. Supports filtering by log level and date range to narrow results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

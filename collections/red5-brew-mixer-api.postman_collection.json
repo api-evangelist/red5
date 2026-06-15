@@ -1,0 +1,2923 @@
+{
+  "item": [
+    {
+      "id": "95cee00e-f0c0-40d3-a5ec-6a4b81b23b37",
+      "name": "Images",
+      "description": {
+        "content": "Image overlay management for mixer sessions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93a26d9f-84b8-4afe-81f1-e743dc71a064",
+          "name": "Add an Image Overlay",
+          "request": {
+            "name": "Add an Image Overlay",
+            "description": {
+              "content": "Adds an image overlay (logo, watermark, lower-third graphic) to one or more mixer sessions. The image is uploaded and positioned within the composite output frame at the specified coordinates and dimensions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "description": "(Required) Image file to use as overlay (PNG or JPEG)"
+                },
+                {
+                  "key": "mixerId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the mixer to apply the overlay to"
+                },
+                {
+                  "key": "x",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Horizontal position of the overlay in pixels from left"
+                },
+                {
+                  "key": "y",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Vertical position of the overlay in pixels from top"
+                },
+                {
+                  "key": "width",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Overlay width in pixels"
+                },
+                {
+                  "key": "height",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Overlay height in pixels"
+                },
+                {
+                  "key": "zOrder",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Z-order layer position (higher values appear on top)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd9ce12d-192f-4c08-9609-ffb97a677c5d",
+              "name": "Image overlay added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to use as overlay (PNG or JPEG)",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the mixer to apply the overlay to",
+                        "type": "text/plain"
+                      },
+                      "key": "mixerId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Horizontal position of the overlay in pixels from left",
+                        "type": "text/plain"
+                      },
+                      "key": "x",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Vertical position of the overlay in pixels from top",
+                        "type": "text/plain"
+                      },
+                      "key": "y",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay width in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay height in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Z-order layer position (higher values appear on top)",
+                        "type": "text/plain"
+                      },
+                      "key": "zOrder",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"mixerId\": \"string\",\n  \"x\": 8358,\n  \"y\": 6766,\n  \"width\": 8074,\n  \"height\": 7193,\n  \"zOrder\": 1741\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64bbef38-b53e-4671-891f-e9b836640ac0",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to use as overlay (PNG or JPEG)",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the mixer to apply the overlay to",
+                        "type": "text/plain"
+                      },
+                      "key": "mixerId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Horizontal position of the overlay in pixels from left",
+                        "type": "text/plain"
+                      },
+                      "key": "x",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Vertical position of the overlay in pixels from top",
+                        "type": "text/plain"
+                      },
+                      "key": "y",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay width in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay height in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Z-order layer position (higher values appear on top)",
+                        "type": "text/plain"
+                      },
+                      "key": "zOrder",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec2e5b19-5dec-4e0c-807d-6c1afbd82207",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to use as overlay (PNG or JPEG)",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the mixer to apply the overlay to",
+                        "type": "text/plain"
+                      },
+                      "key": "mixerId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Horizontal position of the overlay in pixels from left",
+                        "type": "text/plain"
+                      },
+                      "key": "x",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Vertical position of the overlay in pixels from top",
+                        "type": "text/plain"
+                      },
+                      "key": "y",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay width in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overlay height in pixels",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Z-order layer position (higher values appear on top)",
+                        "type": "text/plain"
+                      },
+                      "key": "zOrder",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "504e36a8-1721-4587-94ae-6ef5103c55ee",
+          "name": "Remove an Image Overlay",
+          "request": {
+            "name": "Remove an Image Overlay",
+            "description": {
+              "content": "Removes a previously added image overlay from the mixer session. The composite output is updated immediately without the overlay.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "images",
+                ":imageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "imageId",
+                  "description": "(Required) Unique identifier for the image overlay"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d878eff-e295-49a2-8cb9-02bb26c0c81b",
+              "name": "Image overlay removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) Unique identifier for the image overlay"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e1a6a88-1d2a-405a-a4b4-d7f621d3b682",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) Unique identifier for the image overlay"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cbfe844-9368-483c-98d6-e29da7da1aab",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) Unique identifier for the image overlay"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c6269cdd-d1e7-49fc-ba86-c6fd20f6510c",
+      "name": "Inputs",
+      "description": {
+        "content": "Input stream management for mixer sessions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff66dbf2-5a87-4839-bb36-f3dd5ac3a094",
+          "name": "List Mixer Inputs",
+          "request": {
+            "name": "List Mixer Inputs",
+            "description": {
+              "content": "Returns all input streams currently connected to the specified mixer session, including their layout positions, dimensions, and z-order in the composite frame.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId",
+                "inputs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c21268dd-e369-4a14-8477-be5c0f24a05e",
+              "name": "Input list returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"streamName\": \"string\",\n      \"x\": 6434,\n      \"y\": 8815,\n      \"width\": 3787,\n      \"height\": 7994,\n      \"zOrder\": 2121\n    },\n    {\n      \"id\": \"string\",\n      \"streamName\": \"string\",\n      \"x\": 2632,\n      \"y\": 5537,\n      \"width\": 711,\n      \"height\": 5846,\n      \"zOrder\": 420\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a0b7481-9b82-49cf-afb4-ec78abcaa5b5",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72d892cf-9b43-49e4-8ce1-a135434288d9",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54eb1de3-4842-449b-bf2d-02b6ea4dacbb",
+          "name": "Add an Input to a Mixer",
+          "request": {
+            "name": "Add an Input to a Mixer",
+            "description": {
+              "content": "Adds a live stream as an input source to the specified mixer session. Specify the stream name and layout parameters such as position, dimensions, and z-order within the composite output frame.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId",
+                "inputs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e78ab86e-5d02-49ca-ab80-a4d84f9a0395",
+              "name": "Input added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"streamName\": \"string\",\n  \"x\": 5156,\n  \"y\": 5920,\n  \"width\": 8196,\n  \"height\": 9424,\n  \"zOrder\": 8451\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e46b6b0c-58bf-4c0f-a2d7-a1c0a23cd450",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df36a60d-99fd-4e22-b5cb-7df55ac143bb",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e758adee-9cea-4683-b055-eae9b9bb24a8",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e30bb7b9-a546-4a62-babf-11889e1c6a5b",
+          "name": "Update a Mixer Input",
+          "request": {
+            "name": "Update a Mixer Input",
+            "description": {
+              "content": "Updates the layout parameters of an input stream within the mixer session, such as changing its position, size, or z-order in the composite frame.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId",
+                "inputs",
+                ":inputId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inputId",
+                  "description": "(Required) Unique identifier for the mixer input"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4308af5-4a5b-4849-8891-eef08dcfc424",
+              "name": "Input updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"streamName\": \"string\",\n  \"x\": 5156,\n  \"y\": 5920,\n  \"width\": 8196,\n  \"height\": 9424,\n  \"zOrder\": 8451\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "395adcbd-ce01-4ad6-9f60-bd4ff927080e",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfa852ee-3e05-48a4-9692-8cb2cd2b1031",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad3ef81-6fa2-4221-9d66-160f077f1d57",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"x\": 0,\n  \"y\": 0,\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"zOrder\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "232a7ec4-4503-4d4c-bcb2-f069ad492956",
+          "name": "Remove an Input From a Mixer",
+          "request": {
+            "name": "Remove an Input From a Mixer",
+            "description": {
+              "content": "Disconnects and removes an input stream from the specified mixer session. The composite output continues with the remaining inputs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId",
+                "inputs",
+                ":inputId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inputId",
+                  "description": "(Required) Unique identifier for the mixer input"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0865755-3cda-4526-ad77-db666538cf24",
+              "name": "Input removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba4b8268-4342-4beb-b671-371621e2003c",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daab2be3-cc36-40d6-a1e1-6554e2252fbf",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId",
+                    "inputs",
+                    ":inputId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inputId",
+                      "description": "(Required) Unique identifier for the mixer input"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c7858f9f-02ff-4eb8-9303-7689c9e25c52",
+      "name": "Mixers",
+      "description": {
+        "content": "Mixer session lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4cec6e1-5def-4c08-97be-8053ab090382",
+          "name": "List Active Mixers",
+          "request": {
+            "name": "List Active Mixers",
+            "description": {
+              "content": "Returns a list of all currently active mixer sessions on the Red5 Pro server, including their configuration and current input stream count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58aea9c1-fb75-4e84-8647-61d101db1622",
+              "name": "List of mixers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"outputStreamName\": \"string\",\n      \"outputWidth\": 2623,\n      \"outputHeight\": 3018,\n      \"outputFrameRate\": 2854.9465578494637,\n      \"outputBitrate\": 6874,\n      \"inputCount\": 2906,\n      \"status\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"outputStreamName\": \"string\",\n      \"outputWidth\": 9117,\n      \"outputHeight\": 3385,\n      \"outputFrameRate\": 6457.683295406956,\n      \"outputBitrate\": 6732,\n      \"inputCount\": 8172,\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae93d85c-ffa6-4bac-b10a-58b9c146d35e",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2850a49e-6105-4355-9ead-8bd330d7b1c8",
+          "name": "Create a Mixer",
+          "request": {
+            "name": "Create a Mixer",
+            "description": {
+              "content": "Creates a new mixer session that combines multiple live input streams into a single composite output stream. Specify output dimensions, frame rate, bitrate, and the name of the output stream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outputStreamName\": \"<string>\",\n  \"outputWidth\": \"<integer>\",\n  \"outputHeight\": \"<integer>\",\n  \"outputFrameRate\": 30,\n  \"outputBitrate\": 2000000,\n  \"backgroundColor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3e56fb3-4296-4a13-8868-870430fb8f03",
+              "name": "Mixer created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"outputStreamName\": \"<string>\",\n  \"outputWidth\": \"<integer>\",\n  \"outputHeight\": \"<integer>\",\n  \"outputFrameRate\": 30,\n  \"outputBitrate\": 2000000,\n  \"backgroundColor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"outputStreamName\": \"string\",\n  \"outputWidth\": 1971,\n  \"outputHeight\": 6164,\n  \"outputFrameRate\": 4139.691258786145,\n  \"outputBitrate\": 5595,\n  \"inputCount\": 8711,\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "009cc2f8-7e58-4fcc-83b1-d4ff3ccf0ee2",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"outputStreamName\": \"<string>\",\n  \"outputWidth\": \"<integer>\",\n  \"outputHeight\": \"<integer>\",\n  \"outputFrameRate\": 30,\n  \"outputBitrate\": 2000000,\n  \"backgroundColor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a00737c-ba05-43f9-a323-5e1ebc471e36",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"outputStreamName\": \"<string>\",\n  \"outputWidth\": \"<integer>\",\n  \"outputHeight\": \"<integer>\",\n  \"outputFrameRate\": 30,\n  \"outputBitrate\": 2000000,\n  \"backgroundColor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b58c5b75-a000-48dc-ba02-10efeb5c6a13",
+          "name": "Get Mixer Details",
+          "request": {
+            "name": "Get Mixer Details",
+            "description": {
+              "content": "Returns configuration and status details for the specified mixer session, including active inputs, output stream name, and rendering parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b740118e-b46e-445e-99e1-27745ab68923",
+              "name": "Mixer details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"outputStreamName\": \"string\",\n  \"outputWidth\": 1971,\n  \"outputHeight\": 6164,\n  \"outputFrameRate\": 4139.691258786145,\n  \"outputBitrate\": 5595,\n  \"inputCount\": 8711,\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d314cc3-dd5b-468a-ab29-5b5e5372d06c",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ded0680-c636-406e-b940-e3fc019556d3",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "028806c4-3100-45c8-b5dc-9891ab415db6",
+          "name": "Delete a Mixer",
+          "request": {
+            "name": "Delete a Mixer",
+            "description": {
+              "content": "Terminates the specified mixer session and stops the composite output stream. All input stream connections are released when the mixer is deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brewmixer",
+                "2.0",
+                "mixers",
+                ":mixerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mixerId",
+                  "description": "(Required) Unique identifier for the mixer session"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e4f5a48-0364-4499-82f8-b5dd7c045a81",
+              "name": "Mixer deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13699037-f8ef-4d8e-9d24-844fe309aa3d",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33957a87-d97a-4cca-956e-fcdf013be317",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brewmixer",
+                    "2.0",
+                    "mixers",
+                    ":mixerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mixerId",
+                      "description": "(Required) Unique identifier for the mixer session"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 240,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Red5 Pro server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "97871c92-60ed-4c8c-962b-00811979ff48",
+    "name": "Red5 Pro Brew Mixer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",
+      "type": "text/plain"
+    }
+  }
+}

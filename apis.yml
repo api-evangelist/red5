@@ -219,6 +219,10 @@ apis:
       - type: GitHub
         url: https://github.com/red5pro/streaming-android
 common:
+  - type: DomainSecurity
+    url: security/red5-domain-security.yml
+  - type: Authentication
+    url: authentication/red5-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/red5pro
   - type: Website

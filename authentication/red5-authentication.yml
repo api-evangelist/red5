@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/red5-brew-mixer-api-openapi.yml, openapi/red5-restreamer-api-openapi.yml, openapi/red5-server-api-openapi.yml,
+  openapi/red5-stream-manager-2-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: accessToken
+  type: apiKey
+  in: query
+  parameter: accessToken
+  description: API access token for authenticating Brew Mixer API requests
+  sources:
+  - openapi/red5-brew-mixer-api-openapi.yml
+  - openapi/red5-restreamer-api-openapi.yml
+  - openapi/red5-server-api-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: JWT bearer token for authenticating Stream Manager API requests
+  sources:
+  - openapi/red5-stream-manager-2-openapi.yml

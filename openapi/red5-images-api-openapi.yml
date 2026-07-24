@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer Admin Images API
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+servers:
+- url: http://{host}:5080
+  description: Red5 Pro Server with Brew Mixer
+  variables:
+    host:
+      default: localhost
+      description: Hostname or IP address of the Red5 Pro server
+security:
+- accessToken: []
+tags:
+- name: Images
+  description: Image overlay management for mixer sessions
+paths:
+  /brewmixer/2.0/images:
+    post:
+      operationId: addImageOverlay
+      summary: Add an Image Overlay
+      description: Adds an image overlay (logo, watermark, lower-third graphic) to one or more mixer sessions. The image is uploaded and positioned within the composite output frame at the specified coordinates and dimensions.
+      tags:
+      - Images
+      parameters:
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - image
+              - mixerId
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file to use as overlay (PNG or JPEG)
+                mixerId:
+                  type: string
+                  description: ID of the mixer to apply the overlay to
+                x:
+                  type: integer
+                  description: Horizontal position of the overlay in pixels from left
+                y:
+                  type: integer
+                  description: Vertical position of the overlay in pixels from top
+                width:
+                  type: integer
+                  description: Overlay width in pixels
+                height:
+                  type: integer
+                  description: Overlay height in pixels
+                zOrder:
+                  type: integer
+                  description: Z-order layer position (higher values appear on top)
+      responses:
+        '201':
+          description: Image overlay added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageOverlay'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /brewmixer/2.0/images/{imageId}:
+    delete:
+      operationId: removeImageOverlay
+      summary: Remove an Image Overlay
+      description: Removes a previously added image overlay from the mixer session. The composite output is updated immediately without the overlay.
+      tags:
+      - Images
+      parameters:
+      - $ref: '#/components/parameters/imageIdParam'
+      - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Image overlay removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ImageOverlay:
+      type: object
+      description: An image overlay applied to a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique image overlay identifier
+        mixerId:
+          type: string
+          description: ID of the mixer this overlay is applied to
+        x:
+          type: integer
+          description: Horizontal position in pixels from left
+        y:
+          type: integer
+          description: Vertical position in pixels from top
+        width:
+          type: integer
+          description: Overlay width in pixels
+        height:
+          type: integer
+          description: Overlay height in pixels
+        zOrder:
+          type: integer
+          description: Z-order layer position
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    imageIdParam:
+      name: imageId
+      in: path
+      description: Unique identifier for the image overlay
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/

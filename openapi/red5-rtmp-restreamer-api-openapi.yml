@@ -1,0 +1,228 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer Admin RTMP Restreamer API
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+servers:
+- url: http://{host}:5080
+  description: Red5 Pro Server with Brew Mixer
+  variables:
+    host:
+      default: localhost
+      description: Hostname or IP address of the Red5 Pro server
+security:
+- accessToken: []
+tags:
+- name: RTMP Restreamer
+  description: Configure RTMP and RTMPS push/pull restreaming
+paths:
+  /restreamer/provision.create:
+    post:
+      operationId: createRtmpProvision
+      summary: Create Rtmp Restream Provision
+      description: Creates a provision that configures the Red5 Pro server to push a live ingest stream to one or more external RTMP or RTMPS destinations such as Facebook Live, YouTube Live, or any RTMP-compatible CDN endpoint. Each destination is specified with a stream URL and stream key.
+      tags:
+      - RTMP Restreamer
+      parameters:
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RtmpProvision'
+      responses:
+        '200':
+          description: RTMP restream provision created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /restreamer/provision.delete:
+    post:
+      operationId: deleteRtmpProvision
+      summary: Delete Rtmp Restream Provision
+      description: Removes an active RTMP restreaming provision, stopping retransmission to the configured external destinations for the specified source stream.
+      tags:
+      - RTMP Restreamer
+      parameters:
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionDelete'
+      responses:
+        '200':
+          description: RTMP restream provision deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /restreamer/provision.pull.create:
+    post:
+      operationId: createRtmpPullProvision
+      summary: Create Rtmp Pull Restream Provision
+      description: Creates a provision that configures the Red5 Pro server to pull a live stream from an external RTMP source and make it available as a local stream for subscribers. Useful for ingesting streams from external encoders or sources.
+      tags:
+      - RTMP Restreamer
+      parameters:
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RtmpPullProvision'
+      responses:
+        '200':
+          description: RTMP pull restream provision created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    RtmpPullProvision:
+      type: object
+      description: Configuration for pulling a stream from an external RTMP source
+      required:
+      - sourceUrl
+      - streamName
+      properties:
+        sourceUrl:
+          type: string
+          description: RTMP URL of the external source to pull from
+        streamKey:
+          type: string
+          description: Stream key at the source if required
+        streamName:
+          type: string
+          description: Name to assign to the pulled stream on the local server
+        appName:
+          type: string
+          description: Red5 Pro application scope to publish the pulled stream into
+          default: live
+    RtmpProvision:
+      type: object
+      description: Configuration for an RTMP push restreaming provision
+      required:
+      - streamName
+      - destinations
+      properties:
+        streamName:
+          type: string
+          description: Name of the source live stream to retransmit
+        appName:
+          type: string
+          description: Red5 Pro application scope containing the source stream
+          default: live
+        destinations:
+          type: array
+          description: List of RTMP destination endpoints
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/RtmpDestination'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+    ProvisionResponse:
+      type: object
+      description: Response from a provision create or delete operation
+      properties:
+        result:
+          type: boolean
+          description: True if the operation completed successfully
+        message:
+          type: string
+          description: Human-readable result message
+        streamName:
+          type: string
+          description: Name of the stream affected by the operation
+    ProvisionDelete:
+      type: object
+      description: Parameters to identify the provision to delete
+      required:
+      - streamName
+      properties:
+        streamName:
+          type: string
+          description: Name of the stream whose provision should be removed
+        appName:
+          type: string
+          description: Red5 Pro application scope containing the stream
+          default: live
+    RtmpDestination:
+      type: object
+      description: An external RTMP destination for stream retransmission
+      required:
+      - url
+      - streamKey
+      properties:
+        url:
+          type: string
+          description: RTMP or RTMPS ingest URL of the destination (e.g., rtmp://a.rtmp.youtube.com/live2)
+        streamKey:
+          type: string
+          description: Stream key for the destination platform
+        protocol:
+          type: string
+          enum:
+          - rtmp
+          - rtmps
+          description: Transport protocol to use for this destination
+          default: rtmp
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/

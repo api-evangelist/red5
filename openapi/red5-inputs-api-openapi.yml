@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer Admin Inputs API
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+servers:
+- url: http://{host}:5080
+  description: Red5 Pro Server with Brew Mixer
+  variables:
+    host:
+      default: localhost
+      description: Hostname or IP address of the Red5 Pro server
+security:
+- accessToken: []
+tags:
+- name: Inputs
+  description: Input stream management for mixer sessions
+paths:
+  /brewmixer/2.0/mixers/{mixerId}/inputs:
+    get:
+      operationId: listMixerInputs
+      summary: List Mixer Inputs
+      description: Returns all input streams currently connected to the specified mixer session, including their layout positions, dimensions, and z-order in the composite frame.
+      tags:
+      - Inputs
+      parameters:
+      - $ref: '#/components/parameters/mixerIdParam'
+      - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Input list returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MixerInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addMixerInput
+      summary: Add an Input to a Mixer
+      description: Adds a live stream as an input source to the specified mixer session. Specify the stream name and layout parameters such as position, dimensions, and z-order within the composite output frame.
+      tags:
+      - Inputs
+      parameters:
+      - $ref: '#/components/parameters/mixerIdParam'
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixerInputCreate'
+      responses:
+        '201':
+          description: Input added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MixerInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /brewmixer/2.0/mixers/{mixerId}/inputs/{inputId}:
+    put:
+      operationId: updateMixerInput
+      summary: Update a Mixer Input
+      description: Updates the layout parameters of an input stream within the mixer session, such as changing its position, size, or z-order in the composite frame.
+      tags:
+      - Inputs
+      parameters:
+      - $ref: '#/components/parameters/mixerIdParam'
+      - $ref: '#/components/parameters/inputIdParam'
+      - $ref: '#/components/parameters/accessTokenParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MixerInputCreate'
+      responses:
+        '200':
+          description: Input updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MixerInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: removeMixerInput
+      summary: Remove an Input From a Mixer
+      description: Disconnects and removes an input stream from the specified mixer session. The composite output continues with the remaining inputs.
+      tags:
+      - Inputs
+      parameters:
+      - $ref: '#/components/parameters/mixerIdParam'
+      - $ref: '#/components/parameters/inputIdParam'
+      - $ref: '#/components/parameters/accessTokenParam'
+      responses:
+        '200':
+          description: Input removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    MixerInputCreate:
+      type: object
+      description: Parameters for adding or updating a mixer input
+      required:
+      - streamName
+      properties:
+        streamName:
+          type: string
+          description: Name of the stream to use as input
+        x:
+          type: integer
+          description: Horizontal position in pixels from left
+          default: 0
+        y:
+          type: integer
+          description: Vertical position in pixels from top
+          default: 0
+        width:
+          type: integer
+          description: Display width in pixels
+        height:
+          type: integer
+          description: Display height in pixels
+        zOrder:
+          type: integer
+          description: Z-order layer position
+          default: 0
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+    MixerInput:
+      type: object
+      description: An input stream source within a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique input identifier within the mixer
+        streamName:
+          type: string
+          description: Name of the input stream
+        x:
+          type: integer
+          description: Horizontal position in pixels from left of output frame
+        y:
+          type: integer
+          description: Vertical position in pixels from top of output frame
+        width:
+          type: integer
+          description: Display width in pixels within output frame
+        height:
+          type: integer
+          description: Display height in pixels within output frame
+        zOrder:
+          type: integer
+          description: Z-order layer (higher values appear on top)
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    inputIdParam:
+      name: inputId
+      in: path
+      description: Unique identifier for the mixer input
+      required: true
+      schema:
+        type: string
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/

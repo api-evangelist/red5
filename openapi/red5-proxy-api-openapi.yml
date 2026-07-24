@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer Admin Proxy API
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+servers:
+- url: http://{host}:5080
+  description: Red5 Pro Server with Brew Mixer
+  variables:
+    host:
+      default: localhost
+      description: Hostname or IP address of the Red5 Pro server
+security:
+- accessToken: []
+tags:
+- name: Proxy
+  description: WHIP, WHEP, and WebSocket proxy endpoints
+paths:
+  /proxy/whip/{nodeGroupName}/{streamGuid}:
+    post:
+      operationId: whipPublish
+      summary: Whip Publish Endpoint
+      description: WebRTC-HTTP Ingestion Protocol (WHIP) endpoint for publishing a WebRTC stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer along with routing information to the selected streaming node.
+      tags:
+      - Proxy
+      parameters:
+      - $ref: '#/components/parameters/nodeGroupNameParam'
+      - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/sdp:
+            schema:
+              type: string
+              description: SDP offer from the WebRTC publisher
+      responses:
+        '201':
+          description: WHIP session created, SDP answer returned
+          content:
+            application/sdp:
+              schema:
+                type: string
+                description: SDP answer from the streaming server
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /proxy/whep/{nodeGroupName}/{streamGuid}:
+    post:
+      operationId: whepSubscribe
+      summary: Whep Subscribe Endpoint
+      description: WebRTC-HTTP Egress Protocol (WHEP) endpoint for subscribing to a live stream through the Stream Manager proxy. Accepts an SDP offer and returns an SDP answer routing the subscriber to the node carrying the requested stream.
+      tags:
+      - Proxy
+      parameters:
+      - $ref: '#/components/parameters/nodeGroupNameParam'
+      - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/sdp:
+            schema:
+              type: string
+              description: SDP offer from the WebRTC subscriber
+      responses:
+        '201':
+          description: WHEP session created, SDP answer returned
+          content:
+            application/sdp:
+              schema:
+                type: string
+                description: SDP answer from the streaming server
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/

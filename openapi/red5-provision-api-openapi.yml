@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Red5 Pro Brew Mixer Admin Provision API
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  version: '2.0'
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  termsOfService: https://www.red5.net/terms/
+servers:
+- url: http://{host}:5080
+  description: Red5 Pro Server with Brew Mixer
+  variables:
+    host:
+      default: localhost
+      description: Hostname or IP address of the Red5 Pro server
+security:
+- accessToken: []
+tags:
+- name: Provision
+  description: Stream provisioning, authentication, and configuration
+paths:
+  /streams/provision/{nodeGroupName}/{streamGuid}:
+    get:
+      operationId: getStreamProvision
+      summary: Get Stream Provision
+      description: Retrieves the provisioning configuration for a specific stream including authentication settings, cloud recording configuration, and transcoding parameters.
+      tags:
+      - Provision
+      parameters:
+      - $ref: '#/components/parameters/nodeGroupNameParam'
+      - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Stream provision returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProvision'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createStreamProvision
+      summary: Create Stream Provision
+      description: Creates a provisioning configuration for a stream, setting up authentication credentials, cloud storage for recordings, transcoding ladder settings, and other stream-level parameters before publishing begins.
+      tags:
+      - Provision
+      parameters:
+      - $ref: '#/components/parameters/nodeGroupNameParam'
+      - $ref: '#/components/parameters/streamGuidParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProvision'
+      responses:
+        '201':
+          description: Stream provision created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProvision'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteStreamProvision
+      summary: Delete Stream Provision
+      description: Removes the provisioning configuration for a stream, clearing authentication settings, cloud recording configuration, and transcoding parameters.
+      tags:
+      - Provision
+      parameters:
+      - $ref: '#/components/parameters/nodeGroupNameParam'
+      - $ref: '#/components/parameters/streamGuidParam'
+      responses:
+        '200':
+          description: Stream provision deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    StreamProvision:
+      type: object
+      description: Provisioning configuration for a stream
+      properties:
+        streamGuid:
+          type: string
+          description: Unique identifier for the stream
+        username:
+          type: string
+          description: Publisher authentication username
+        password:
+          type: string
+          description: Publisher authentication password
+        recording:
+          type: boolean
+          description: Whether to enable cloud recording for this stream
+        transcodeEnabled:
+          type: boolean
+          description: Whether to enable adaptive bitrate transcoding
+        transcodeLadder:
+          type: array
+          description: List of transcode output variants
+          items:
+            $ref: '#/components/schemas/TranscodeVariant'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+    TranscodeVariant:
+      type: object
+      description: A single output variant in the transcoding ladder
+      properties:
+        level:
+          type: string
+          description: Variant level name (e.g., low, mid, high)
+        videoWidth:
+          type: integer
+          description: Output video width in pixels
+        videoHeight:
+          type: integer
+          description: Output video height in pixels
+        videoBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        audioBitrate:
+          type: integer
+          description: Output audio bitrate in bits per second
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: apiKey
+      in: query
+      name: accessToken
+      description: API access token for authenticating Brew Mixer API requests
+externalDocs:
+  description: Red5 Pro Brew Mixer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Red5 Pro Brew Mixer Admin Server API
+  title: Red5 Pro Brew Mixer Admin Logs API
   description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
   version: '2.0'
   contact:
@@ -17,73 +17,54 @@ servers:
 security:
 - accessToken: []
 tags:
-- name: Server
-  description: Server health, info, and status endpoints
+- name: Logs
+  description: Server log access endpoints
 paths:
-  /server:
+  /logs:
     get:
-      operationId: getServerInfo
-      summary: Get Server Information
-      description: Returns basic information about the Red5 Pro server including version, uptime, and configuration details.
+      operationId: getServerLogs
+      summary: Get Server Logs
+      description: Retrieves server log entries from the Red5 Pro server. Supports filtering by log level and date range to narrow results.
       tags:
-      - Server
+      - Logs
       parameters:
       - $ref: '#/components/parameters/accessTokenParam'
+      - name: level
+        in: query
+        description: Log level filter (INFO, WARN, ERROR, DEBUG)
+        required: false
+        schema:
+          type: string
+          enum:
+          - INFO
+          - WARN
+          - ERROR
+          - DEBUG
+      - name: limit
+        in: query
+        description: Maximum number of log entries to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
       responses:
         '200':
-          description: Server information returned successfully
+          description: Log entries returned successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerInfo'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /server/ping:
-    get:
-      operationId: pingServer
-      summary: Ping the Server
-      description: Performs a health check on the Red5 Pro server. Returns a simple response confirming the server is running and accessible.
-      tags:
-      - Server
-      parameters:
-      - $ref: '#/components/parameters/accessTokenParam'
-      responses:
-        '200':
-          description: Server is alive
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PingResponse'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LogEntry'
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    PingResponse:
-      type: object
-      description: Response from a server ping health check
-      properties:
-        result:
-          type: boolean
-          description: True if the server is alive and responding
-        timestamp:
-          type: integer
-          description: Server timestamp in milliseconds since epoch
-    ServerInfo:
-      type: object
-      description: Information about the Red5 Pro server instance
-      properties:
-        version:
-          type: string
-          description: Red5 Pro server version string
-        uptime:
-          type: integer
-          description: Server uptime in milliseconds
-        host:
-          type: string
-          description: Server hostname
-        port:
-          type: integer
-          description: Server port number
     Error:
       type: object
       description: Error response
@@ -94,6 +75,28 @@ components:
         message:
           type: string
           description: Human-readable error message
+    LogEntry:
+      type: object
+      description: A single server log entry
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Log entry timestamp
+        level:
+          type: string
+          enum:
+          - INFO
+          - WARN
+          - ERROR
+          - DEBUG
+          description: Log severity level
+        logger:
+          type: string
+          description: Logger class name
+        message:
+          type: string
+          description: Log message text
   responses:
     Unauthorized:
       description: Authentication failed or access token is missing or invalid

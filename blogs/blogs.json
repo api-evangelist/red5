@@ -10,9 +10,12 @@
     },
     {
       "source": "https://www.red5.net/pricing/",
-      "error": "HTTPError"
+      "feed_url": "https://www.red5.net/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 29,
-  "fetched": "2026-08-01T15:49:00Z"
+  "post_count": 30,
+  "fetched": "2026-08-06T14:08:46Z"
 }

@@ -529,11 +529,11 @@ common:
   - type: OpenAPI
     url: openapi/red5-server-api-openapi.yml
   - type: OpenAPI
-    url: openapi/red5-stream-manager-2-openapi.yml
+    url: openapi/_original/red5-stream-manager-2-openapi.yml
   - type: OpenAPI
-    url: openapi/red5-brew-mixer-api-openapi.yml
+    url: openapi/_original/red5-brew-mixer-api-openapi.yml
   - type: OpenAPI
-    url: openapi/red5-restreamer-api-openapi.yml
+    url: openapi/_original/red5-restreamer-api-openapi.yml
   - type: AsyncAPI
     url: asyncapi/red5-webrtc-streaming-asyncapi.yml
   - type: JSONStructure

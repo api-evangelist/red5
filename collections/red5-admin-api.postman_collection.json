@@ -1,0 +1,559 @@
+{
+  "item": [
+    {
+      "id": "c87d4c0a-55c7-4d2b-b785-5176fbb3012a",
+      "name": "Admin",
+      "description": {
+        "content": "Node metrics, system info, and autoscaling management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "472b1fe0-28a1-4a8f-a39d-267aaca30030",
+          "name": "List Node Groups",
+          "request": {
+            "name": "List Node Groups",
+            "description": {
+              "content": "Returns all configured node groups in the Stream Manager cluster, including their scaling configuration, cloud provider settings, and current node counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "nodegroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75644c95-5df9-4f44-a1fc-cff060de484a",
+              "name": "Node groups returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"cloudProvider\": \"string\",\n      \"region\": \"string\",\n      \"minNodes\": 6742,\n      \"maxNodes\": 720,\n      \"currentNodes\": 6283,\n      \"status\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"cloudProvider\": \"string\",\n      \"region\": \"string\",\n      \"minNodes\": 2667,\n      \"maxNodes\": 6507,\n      \"currentNodes\": 4041,\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee3aa1e1-184a-4584-8122-a96b386db9f1",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3266,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b514a817-be5d-4991-b654-9516f4b77683",
+          "name": "List Nodes in a Node Group",
+          "request": {
+            "name": "List Nodes in a Node Group",
+            "description": {
+              "content": "Returns all streaming nodes currently active in the specified node group, including their IP addresses, current load metrics, and operational status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "nodegroups",
+                ":nodeGroupName",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae3c8859-8e58-4bdf-877c-1d9ff031fb85",
+              "name": "Node list returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"status\": \"string\",\n      \"activeStreams\": 5452,\n      \"connectedClients\": 426,\n      \"cpuLoad\": 9247.086665350596,\n      \"memoryUsed\": 7869\n    },\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"status\": \"string\",\n      \"activeStreams\": 1736,\n      \"connectedClients\": 3068,\n      \"cpuLoad\": 530.4151417851843,\n      \"memoryUsed\": 8703\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6344b213-bba7-4806-b6ab-74bbfc2146e4",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3266,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62690603-ccc9-4ce2-8bae-dc679b7868f6",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "nodegroups",
+                    ":nodeGroupName",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3266,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56f2ce88-72f1-465b-b7b6-983c2d06ab8d",
+          "name": "Get System Information",
+          "request": {
+            "name": "Get System Information",
+            "description": {
+              "content": "Returns system-level information about the Stream Manager instance including version, Java runtime details, memory usage, and overall cluster health.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "system"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc323ff3-bb81-4b79-bda1-95798ea62507",
+              "name": "System information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "system"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"javaVersion\": \"string\",\n  \"uptime\": 7503,\n  \"totalMemory\": 1655,\n  \"freeMemory\": 8099\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eaee660-b648-447f-912b-82c1e5d875e6",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "system"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3266,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Red5 Pro server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb566119-0eb7-4c90-a90f-a41bf869310a",
+    "name": "Red5 Pro Brew Mixer Admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",
+      "type": "text/plain"
+    }
+  }
+}

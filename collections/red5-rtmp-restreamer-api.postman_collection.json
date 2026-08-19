@@ -1,0 +1,787 @@
+{
+  "item": [
+    {
+      "id": "fafe44da-bddf-4edb-afa3-aa55181bc794",
+      "name": "RTMP Restreamer",
+      "description": {
+        "content": "Configure RTMP and RTMPS push/pull restreaming",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "541ed383-141d-4255-91db-42a19ab1a075",
+          "name": "Create Rtmp Restream Provision",
+          "request": {
+            "name": "Create Rtmp Restream Provision",
+            "description": {
+              "content": "Creates a provision that configures the Red5 Pro server to push a live ingest stream to one or more external RTMP or RTMPS destinations such as Facebook Live, YouTube Live, or any RTMP-compatible CDN endpoint. Each destination is specified with a stream URL and stream key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "restreamer",
+                "provision.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamName\": \"<string>\",\n  \"destinations\": [\n    {\n      \"url\": \"<string>\",\n      \"streamKey\": \"<string>\",\n      \"protocol\": \"rtmp\"\n    }\n  ],\n  \"appName\": \"live\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45584441-b4a9-4fd7-9eab-f31171eb6367",
+              "name": "RTMP restream provision created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"destinations\": [\n    {\n      \"url\": \"string\",\n      \"streamKey\": \"string\",\n      \"protocol\": \"rtmp\"\n    }\n  ],\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": true,\n  \"message\": \"string\",\n  \"streamName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b0db501-157b-4398-bc25-5f2f2e24b265",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"destinations\": [\n    {\n      \"url\": \"string\",\n      \"streamKey\": \"string\",\n      \"protocol\": \"rtmp\"\n    }\n  ],\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b283fda9-60e8-4bc7-adef-e729b8dfb8d3",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"destinations\": [\n    {\n      \"url\": \"string\",\n      \"streamKey\": \"string\",\n      \"protocol\": \"rtmp\"\n    }\n  ],\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d0718f8-d0a0-4a70-aacb-969527b8482f",
+          "name": "Delete Rtmp Restream Provision",
+          "request": {
+            "name": "Delete Rtmp Restream Provision",
+            "description": {
+              "content": "Removes an active RTMP restreaming provision, stopping retransmission to the configured external destinations for the specified source stream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "restreamer",
+                "provision.delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87bbd13f-f44f-44d4-96c0-2fdd61842990",
+              "name": "RTMP restream provision deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": true,\n  \"message\": \"string\",\n  \"streamName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41df54f3-c982-4a51-aac3-82a87b009a85",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28542487-0dfc-4326-bf1c-471c05a471ed",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6019d00c-35de-4dce-bb22-6cd639a1b181",
+          "name": "Create Rtmp Pull Restream Provision",
+          "request": {
+            "name": "Create Rtmp Pull Restream Provision",
+            "description": {
+              "content": "Creates a provision that configures the Red5 Pro server to pull a live stream from an external RTMP source and make it available as a local stream for subscribers. Useful for ingesting streams from external encoders or sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "restreamer",
+                "provision.pull.create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accessToken",
+                  "value": "<string>",
+                  "description": "(Required) API access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sourceUrl\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"streamKey\": \"<string>\",\n  \"appName\": \"live\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ce1ea7d-8d96-4d49-ae84-507cccdb819c",
+              "name": "RTMP pull restream provision created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.pull.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceUrl\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"streamKey\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": true,\n  \"message\": \"string\",\n  \"streamName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aedbe352-8c28-4256-b99a-6e0b892f7582",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.pull.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceUrl\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"streamKey\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df71ee2-17c5-4720-ab9c-36694c66d00b",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restreamer",
+                    "provision.pull.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceUrl\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"streamKey\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 927,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Red5 Pro server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e393e1d4-f26e-493d-8ac5-0fad0fe762ee",
+    "name": "Red5 Pro Brew Mixer Admin RTMP Restreamer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",
+      "type": "text/plain"
+    }
+  }
+}

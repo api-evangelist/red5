@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Brew Mixer Admin Inputs API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inputs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Mixer Inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns all input streams currently connected to the specified mixer session, including their layout positions, dimensions, and z-order in the composite frame."
+        },
+        {
+          "info": {
+            "name": "Add an Input to a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a live stream as an input source to the specified mixer session. Specify the stream name and layout parameters such as position, dimensions, and z-order within the composite output frame."
+        },
+        {
+          "info": {
+            "name": "Update a Mixer Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs/:inputId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "inputId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer input"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the layout parameters of an input stream within the mixer session, such as changing its position, size, or z-order in the composite frame."
+        },
+        {
+          "info": {
+            "name": "Remove an Input From a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId/inputs/:inputId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "inputId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer input"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Disconnects and removes an input stream from the specified mixer session. The composite output continues with the remaining inputs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

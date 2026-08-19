@@ -1,0 +1,842 @@
+{
+  "item": [
+    {
+      "id": "3ded9fa5-3983-4417-81ce-05fdfb10abac",
+      "name": "Provision",
+      "description": {
+        "content": "Stream provisioning, authentication, and configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "673336d8-5ec6-46ee-8398-222d34503072",
+          "name": "Get Stream Provision",
+          "request": {
+            "name": "Get Stream Provision",
+            "description": {
+              "content": "Retrieves the provisioning configuration for a specific stream including authentication settings, cloud recording configuration, and transcoding parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "935f287d-34e8-4ce9-b62e-174f3f142dbc",
+              "name": "Stream provision returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"streamGuid\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"recording\": false,\n  \"transcodeEnabled\": false,\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9139,\n      \"videoHeight\": 3170,\n      \"videoBitrate\": 7984,\n      \"audioBitrate\": 6464\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 1465,\n      \"videoHeight\": 6008,\n      \"videoBitrate\": 7279,\n      \"audioBitrate\": 2548\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94478a4b-5b37-41eb-b0ec-921993ea815e",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32de24d6-0b1f-423a-8230-421d228e42bc",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc923d7d-80f9-4bee-812f-43b7184d8ae1",
+          "name": "Create Stream Provision",
+          "request": {
+            "name": "Create Stream Provision",
+            "description": {
+              "content": "Creates a provisioning configuration for a stream, setting up authentication credentials, cloud storage for recordings, transcoding ladder settings, and other stream-level parameters before publishing begins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"<string>\",\n      \"videoWidth\": \"<integer>\",\n      \"videoHeight\": \"<integer>\",\n      \"videoBitrate\": \"<integer>\",\n      \"audioBitrate\": \"<integer>\"\n    },\n    {\n      \"level\": \"<string>\",\n      \"videoWidth\": \"<integer>\",\n      \"videoHeight\": \"<integer>\",\n      \"videoBitrate\": \"<integer>\",\n      \"audioBitrate\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6268f4d-3fdc-4b9f-a1c1-8ca64b426f49",
+              "name": "Stream provision created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 8489,\n      \"videoHeight\": 1289,\n      \"videoBitrate\": 2883,\n      \"audioBitrate\": 2978\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 4960,\n      \"videoHeight\": 3866,\n      \"videoBitrate\": 3818,\n      \"audioBitrate\": 8979\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"streamGuid\": \"string\",\n  \"username\": \"string\",\n  \"password\": \"string\",\n  \"recording\": false,\n  \"transcodeEnabled\": false,\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 9139,\n      \"videoHeight\": 3170,\n      \"videoBitrate\": 7984,\n      \"audioBitrate\": 6464\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 1465,\n      \"videoHeight\": 6008,\n      \"videoBitrate\": 7279,\n      \"audioBitrate\": 2548\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd7fe0f1-b956-492a-86ac-fd59d611e7cc",
+              "name": "Request body or parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 8489,\n      \"videoHeight\": 1289,\n      \"videoBitrate\": 2883,\n      \"audioBitrate\": 2978\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 4960,\n      \"videoHeight\": 3866,\n      \"videoBitrate\": 3818,\n      \"audioBitrate\": 8979\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecaee1f9-0bff-4393-a570-e8a59313002d",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamGuid\": \"<string>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"recording\": \"<boolean>\",\n  \"transcodeEnabled\": \"<boolean>\",\n  \"transcodeLadder\": [\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 8489,\n      \"videoHeight\": 1289,\n      \"videoBitrate\": 2883,\n      \"audioBitrate\": 2978\n    },\n    {\n      \"level\": \"string\",\n      \"videoWidth\": 4960,\n      \"videoHeight\": 3866,\n      \"videoBitrate\": 3818,\n      \"audioBitrate\": 8979\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb468188-7521-44e7-b657-ab96aa0fe560",
+          "name": "Delete Stream Provision",
+          "request": {
+            "name": "Delete Stream Provision",
+            "description": {
+              "content": "Removes the provisioning configuration for a stream, clearing authentication settings, cloud recording configuration, and transcoding parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "streams",
+                "provision",
+                ":nodeGroupName",
+                ":streamGuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeGroupName",
+                  "description": "(Required) Name of the node group (cluster) to target"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "streamGuid",
+                  "description": "(Required) Unique identifier (GUID) for the stream"
+                },
+                {
+                  "description": "Hostname or IP address of the Red5 Pro server",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89b9ec8b-f311-4996-975f-76f5df52597b",
+              "name": "Stream provision deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7fe08d7-cc66-4f33-93c2-82ee2f3992c9",
+              "name": "Authentication failed or bearer token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c06ee86c-5cb7-4eef-b965-c4920a0a976d",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    "provision",
+                    ":nodeGroupName",
+                    ":streamGuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeGroupName",
+                      "description": "(Required) Name of the node group (cluster) to target"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "streamGuid",
+                      "description": "(Required) Unique identifier (GUID) for the stream"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3521,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Red5 Pro server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "http://{{host}}:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cb076403-c139-44c7-93ae-1b02c3c07d25",
+    "name": "Red5 Pro Brew Mixer Admin Provision API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",
+      "type": "text/plain"
+    }
+  }
+}

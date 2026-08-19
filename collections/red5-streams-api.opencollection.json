@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Brew Mixer Admin Streams API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Streams in an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/applications/:appName/streams",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns all active live streams within the specified application scope including stream names, subscriber counts, and connection statistics."
+        },
+        {
+          "info": {
+            "name": "Get Stream Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/applications/:appName/streams/:streamName",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns detailed statistics for a specific live stream including bitrate, frame rate, subscriber count, and connection duration."
+        },
+        {
+          "info": {
+            "name": "Start Recording a Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/applications/:appName/streams/:streamName/action/startrecord",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Initiates recording of the specified live stream to disk. The recording is saved in the configured recording directory on the server."
+        },
+        {
+          "info": {
+            "name": "Stop Recording a Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/applications/:appName/streams/:streamName/action/stoprecord",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the Red5 Pro application scope"
+              },
+              {
+                "name": "streamName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the live stream"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Stops an active recording session for the specified live stream. The completed recording file is finalized and available on disk."
+        },
+        {
+          "info": {
+            "name": "Get Publish Stream Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/streams/stream/:nodeGroupName/publish/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Returns the connection details for a publisher to connect to the correct Red5 Pro node for broadcasting a stream. The Stream Manager selects an appropriate node based on load and availability within the specified node group."
+        },
+        {
+          "info": {
+            "name": "Get Subscribe Stream Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/streams/stream/:nodeGroupName/subscribe/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Returns the connection details for a subscriber to connect to the correct Red5 Pro node for consuming a live stream. Routes subscribers to nodes that have the stream available within the specified node group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

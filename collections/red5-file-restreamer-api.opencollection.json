@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Red5 Pro Brew Mixer Admin Server API",
+    "name": "Red5 Pro Brew Mixer Admin File Restreamer API",
     "version": "2.0"
   },
   "request": {
@@ -15,18 +15,18 @@
   "items": [
     {
       "info": {
-        "name": "Server",
+        "name": "File Restreamer",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Get Server Information",
+            "name": "Create File Restream Provision",
             "type": "http"
           },
           "http": {
-            "method": "GET",
-            "url": "http://{host}:5080/server",
+            "method": "POST",
+            "url": "http://{host}:5080/filerestreamer/provision.create",
             "params": [
               {
                 "name": "accessToken",
@@ -34,18 +34,22 @@
                 "type": "query",
                 "description": "API access token for authentication"
               }
-            ]
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
           },
-          "docs": "Returns basic information about the Red5 Pro server including version, uptime, and configuration details."
+          "docs": "Creates a provision that restreams a recorded FLV or MP4 file as a pseudo-live stream. The file is played back continuously or on loop, allowing pre-recorded content to be distributed as a live stream."
         },
         {
           "info": {
-            "name": "Ping the Server",
+            "name": "Delete File Restream Provision",
             "type": "http"
           },
           "http": {
-            "method": "GET",
-            "url": "http://{host}:5080/server/ping",
+            "method": "POST",
+            "url": "http://{host}:5080/filerestreamer/provision.delete",
             "params": [
               {
                 "name": "accessToken",
@@ -53,9 +57,13 @@
                 "type": "query",
                 "description": "API access token for authentication"
               }
-            ]
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
           },
-          "docs": "Performs a health check on the Red5 Pro server. Returns a simple response confirming the server is running and accessible."
+          "docs": "Stops and removes an active file restreaming provision, halting playback and live distribution of the specified pre-recorded file."
         }
       ]
     }

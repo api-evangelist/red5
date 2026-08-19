@@ -1,25 +1,26 @@
 {
   "item": [
     {
-      "id": "04d5fed8-86c5-474c-a3eb-c0d8be90abca",
-      "name": "Server",
+      "id": "fc2a649f-d313-4802-945e-90e49af2aee4",
+      "name": "File Restreamer",
       "description": {
-        "content": "Server health, info, and status endpoints",
+        "content": "Restream recorded FLV or MP4 files as pseudo-live streams",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "86de394f-1f3b-4468-a9ec-6c3bb9d39a45",
-          "name": "Get Server Information",
+          "id": "451d092f-844a-49bf-92f1-e4076aeb6811",
+          "name": "Create File Restream Provision",
           "request": {
-            "name": "Get Server Information",
+            "name": "Create File Restream Provision",
             "description": {
-              "content": "Returns basic information about the Red5 Pro server including version, uptime, and configuration details.",
+              "content": "Creates a provision that restreams a recorded FLV or MP4 file as a pseudo-live stream. The file is played back continuously or on loop, allowing pre-recorded content to be distributed as a live stream.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "server"
+                "filerestreamer",
+                "provision.create"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -43,21 +44,35 @@
             },
             "header": [
               {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filePath\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\",\n  \"loop\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           },
           "response": [
             {
-              "id": "e2959427-17a7-4f21-b619-40b2eba56488",
-              "name": "Server information returned successfully",
+              "id": "bc1bf8b3-7898-43ad-8ba4-0da30ed63671",
+              "name": "File restream provision created successfully",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server"
+                    "filerestreamer",
+                    "provision.create"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -87,8 +102,16 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filePath\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\",\n  \"loop\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
               "status": "OK",
               "code": 200,
@@ -98,17 +121,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"version\": \"string\",\n  \"uptime\": 8813,\n  \"host\": \"string\",\n  \"port\": 1287\n}",
+              "body": "{\n  \"result\": true,\n  \"message\": \"string\",\n  \"streamName\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "48304bf2-31f2-4c1e-b316-63c7e426ba13",
-              "name": "Authentication failed or access token is missing or invalid",
+              "id": "a411e623-00f5-470a-978c-2ed5164e62f9",
+              "name": "Request body or parameters are invalid",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server"
+                    "filerestreamer",
+                    "provision.create"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -138,8 +162,76 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filePath\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\",\n  \"loop\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2504,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f73df73-c508-4211-93bf-5a4315d7be90",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filerestreamer",
+                    "provision.create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filePath\": \"<string>\",\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\",\n  \"loop\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
               "status": "Unauthorized",
               "code": 401,
@@ -149,7 +241,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 6607,\n  \"message\": \"string\"\n}",
+              "body": "{\n  \"code\": 2504,\n  \"message\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -160,18 +252,18 @@
           }
         },
         {
-          "id": "0081d70a-1e16-4d7b-a156-3da003b3de23",
-          "name": "Ping the Server",
+          "id": "bc24c107-bcf9-4ea4-a8a8-e0da8b361110",
+          "name": "Delete File Restream Provision",
           "request": {
-            "name": "Ping the Server",
+            "name": "Delete File Restream Provision",
             "description": {
-              "content": "Performs a health check on the Red5 Pro server. Returns a simple response confirming the server is running and accessible.",
+              "content": "Stops and removes an active file restreaming provision, halting playback and live distribution of the specified pre-recorded file.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "server",
-                "ping"
+                "filerestreamer",
+                "provision.delete"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -195,22 +287,35 @@
             },
             "header": [
               {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           },
           "response": [
             {
-              "id": "08b4d509-f05d-4b9d-966b-766529bf71e7",
-              "name": "Server is alive",
+              "id": "b97e2a5b-e38a-4d72-b228-a71a85a9e7ff",
+              "name": "File restream provision deleted successfully",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server",
-                    "ping"
+                    "filerestreamer",
+                    "provision.delete"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -240,8 +345,16 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
               "status": "OK",
               "code": 200,
@@ -251,18 +364,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"result\": true,\n  \"timestamp\": 2886\n}",
+              "body": "{\n  \"result\": true,\n  \"message\": \"string\",\n  \"streamName\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "61ad1420-253d-437b-94ab-e316d46b83d8",
-              "name": "Authentication failed or access token is missing or invalid",
+              "id": "bacc9c6f-6a27-4260-b516-3f0faa347cd6",
+              "name": "Request body or parameters are invalid",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server",
-                    "ping"
+                    "filerestreamer",
+                    "provision.delete"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -292,8 +405,76 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2504,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8156c96e-e7f7-4a7e-978b-9ec25514a75c",
+              "name": "Authentication failed or access token is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "filerestreamer",
+                    "provision.delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"streamName\": \"<string>\",\n  \"appName\": \"live\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
               },
               "status": "Unauthorized",
               "code": 401,
@@ -303,7 +484,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 6607,\n  \"message\": \"string\"\n}",
+              "body": "{\n  \"code\": 2504,\n  \"message\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -352,8 +533,8 @@
     ]
   },
   "info": {
-    "_postman_id": "53ac9e48-660f-411f-966a-7616693e50cb",
-    "name": "Red5 Pro Brew Mixer Admin Server API",
+    "_postman_id": "581f2784-1b75-4ae9-af23-8c714e779bdb",
+    "name": "Red5 Pro Brew Mixer Admin File Restreamer API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",

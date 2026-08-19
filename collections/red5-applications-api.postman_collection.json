@@ -1,25 +1,25 @@
 {
   "item": [
     {
-      "id": "04d5fed8-86c5-474c-a3eb-c0d8be90abca",
-      "name": "Server",
+      "id": "5044398c-e055-4c76-b582-53a94902a102",
+      "name": "Applications",
       "description": {
-        "content": "Server health, info, and status endpoints",
+        "content": "Application scope statistics and management",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "86de394f-1f3b-4468-a9ec-6c3bb9d39a45",
-          "name": "Get Server Information",
+          "id": "7488de0f-297d-43e3-8e5c-cb9f262b5f9d",
+          "name": "List Applications",
           "request": {
-            "name": "Get Server Information",
+            "name": "List Applications",
             "description": {
-              "content": "Returns basic information about the Red5 Pro server including version, uptime, and configuration details.",
+              "content": "Returns a list of all deployed applications (scopes) on the Red5 Pro server along with their statistics including connected client counts and resource usage.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "server"
+                "applications"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -52,12 +52,12 @@
           },
           "response": [
             {
-              "id": "e2959427-17a7-4f21-b619-40b2eba56488",
-              "name": "Server information returned successfully",
+              "id": "e0767bee-e23f-44cb-8f05-16e0b90236d5",
+              "name": "List of applications returned successfully",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server"
+                    "applications"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -98,17 +98,17 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"version\": \"string\",\n  \"uptime\": 8813,\n  \"host\": \"string\",\n  \"port\": 1287\n}",
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"clientCount\": 4239,\n      \"streamCount\": 4358,\n      \"bytesIn\": 8664,\n      \"bytesOut\": 3071\n    },\n    {\n      \"name\": \"string\",\n      \"clientCount\": 4224,\n      \"streamCount\": 8846,\n      \"bytesIn\": 2294,\n      \"bytesOut\": 7418\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "48304bf2-31f2-4c1e-b316-63c7e426ba13",
+              "id": "ab0f0f89-8977-4c50-9d96-05cd8695f0e8",
               "name": "Authentication failed or access token is missing or invalid",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server"
+                    "applications"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -149,7 +149,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 6607,\n  \"message\": \"string\"\n}",
+              "body": "{\n  \"code\": 9182,\n  \"message\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -160,18 +160,18 @@
           }
         },
         {
-          "id": "0081d70a-1e16-4d7b-a156-3da003b3de23",
-          "name": "Ping the Server",
+          "id": "be4081b2-a066-4c69-8f77-c47441f8353f",
+          "name": "Get Application Details",
           "request": {
-            "name": "Ping the Server",
+            "name": "Get Application Details",
             "description": {
-              "content": "Performs a health check on the Red5 Pro server. Returns a simple response confirming the server is running and accessible.",
+              "content": "Returns detailed statistics for a specific application scope including connected clients, active streams, and resource consumption metrics.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "server",
-                "ping"
+                "applications",
+                ":appName"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -185,6 +185,13 @@
                 }
               ],
               "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "appName",
+                  "description": "(Required) Name of the Red5 Pro application scope"
+                },
                 {
                   "description": "Hostname or IP address of the Red5 Pro server",
                   "type": "any",
@@ -204,13 +211,13 @@
           },
           "response": [
             {
-              "id": "08b4d509-f05d-4b9d-966b-766529bf71e7",
-              "name": "Server is alive",
+              "id": "68eb2b03-4ad6-4f71-9168-226a11d22320",
+              "name": "Application details returned successfully",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server",
-                    "ping"
+                    "applications",
+                    ":appName"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -226,6 +233,13 @@
                     }
                   ],
                   "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appName",
+                      "description": "(Required) Name of the Red5 Pro application scope"
+                    },
                     {
                       "description": "Hostname or IP address of the Red5 Pro server",
                       "type": "any",
@@ -251,18 +265,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"result\": true,\n  \"timestamp\": 2886\n}",
+              "body": "{\n  \"name\": \"string\",\n  \"clientCount\": 4727,\n  \"streamCount\": 9829,\n  \"bytesIn\": 2809,\n  \"bytesOut\": 8634\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "61ad1420-253d-437b-94ab-e316d46b83d8",
+              "id": "c2878389-a94c-498d-a41f-209ebd7df857",
               "name": "Authentication failed or access token is missing or invalid",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "server",
-                    "ping"
+                    "applications",
+                    ":appName"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -278,6 +292,13 @@
                     }
                   ],
                   "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appName",
+                      "description": "(Required) Name of the Red5 Pro application scope"
+                    },
                     {
                       "description": "Hostname or IP address of the Red5 Pro server",
                       "type": "any",
@@ -303,7 +324,66 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 6607,\n  \"message\": \"string\"\n}",
+              "body": "{\n  \"code\": 9182,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ece1fe99-e82b-49cb-b7fc-04ae212848bb",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":appName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "appName",
+                      "description": "(Required) Name of the Red5 Pro application scope"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Red5 Pro server",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9182,\n  \"message\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -352,8 +432,8 @@
     ]
   },
   "info": {
-    "_postman_id": "53ac9e48-660f-411f-966a-7616693e50cb",
-    "name": "Red5 Pro Brew Mixer Admin Server API",
+    "_postman_id": "9b74a69a-5664-4c6b-b1aa-e4d92916f799",
+    "name": "Red5 Pro Brew Mixer Admin Applications API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.\n\nContact Support:\n Name: Red5 Support",

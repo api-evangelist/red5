@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Brew Mixer Admin Mixers API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mixers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Active Mixers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns a list of all currently active mixer sessions on the Red5 Pro server, including their configuration and current input stream count."
+        },
+        {
+          "info": {
+            "name": "Create a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers",
+            "params": [
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new mixer session that combines multiple live input streams into a single composite output stream. Specify output dimensions, frame rate, bitrate, and the name of the output stream."
+        },
+        {
+          "info": {
+            "name": "Get Mixer Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Returns configuration and status details for the specified mixer session, including active inputs, output stream name, and rendering parameters."
+        },
+        {
+          "info": {
+            "name": "Delete a Mixer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/brewmixer/2.0/mixers/:mixerId",
+            "params": [
+              {
+                "name": "mixerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the mixer session"
+              },
+              {
+                "name": "accessToken",
+                "value": "",
+                "type": "query",
+                "description": "API access token for authentication"
+              }
+            ]
+          },
+          "docs": "Terminates the specified mixer session and stops the composite output stream. All input stream connections are released when the mixer is deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red5 Pro Brew Mixer Admin Provision API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provision",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{host}:5080/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Retrieves the provisioning configuration for a specific stream including authentication settings, cloud recording configuration, and transcoding parameters."
+        },
+        {
+          "info": {
+            "name": "Create Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{host}:5080/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a provisioning configuration for a stream, setting up authentication credentials, cloud storage for recordings, transcoding ladder settings, and other stream-level parameters before publishing begins."
+        },
+        {
+          "info": {
+            "name": "Delete Stream Provision",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://{host}:5080/streams/provision/:nodeGroupName/:streamGuid",
+            "params": [
+              {
+                "name": "nodeGroupName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node group (cluster) to target"
+              },
+              {
+                "name": "streamGuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) for the stream"
+              }
+            ]
+          },
+          "docs": "Removes the provisioning configuration for a stream, clearing authentication settings, cloud recording configuration, and transcoding parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -193,6 +193,8 @@ apis:
   humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
   baseURL: http://localhost:5080/api/v1
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -249,6 +251,8 @@ apis:
   humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
   baseURL: http://localhost:5080/api/v1
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI

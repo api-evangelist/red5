@@ -8,6 +8,18 @@ description: >-
   orchestration, and node monitoring. Use cases include live events, sports broadcasting, interactive video, gaming,
   surveillance, and enterprise communications requiring ultra-low latency streaming.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -37,35 +49,6 @@ created: '2026-03-01'
 modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
-- aid: red5:server-api
-  name: Red5 Pro Server API
-  description: >-
-    The Red5 Pro Server API is an HTTP-based REST API for gathering server, application, client, and stream
-    statistics from a running Red5 Pro instance. It exposes endpoints for server health checks, application
-    scope statistics, active stream enumeration and control, connection management, and log access. The
-    API uses token-based authentication via the accessToken parameter and is accessible at port 5080 on
-    any Red5 Pro server deployment. Developers can use it to monitor and manage live streaming infrastructure
-    programmatically.
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
-  tags:
-  - Media
-  - Real-Time
-  - REST
-  - Server Management
-  - Streaming
-  properties:
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  - type: APIReference
-    url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-applications-api/
-  - type: APIReference
-    url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-streams-api/
-  - type: OpenAPI
-    url: openapi/red5-server-api-openapi.yml
 - aid: red5:webrtc-sdk
   name: Red5 Pro WebRTC SDK
   description: >-
@@ -189,36 +172,6 @@ apis:
   - type: APIReference
     url: >-
       https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
-- aid: red5:red5-applications-api
-  name: Red5 Applications API
-  description: Application scope statistics and management
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
-  tags:
-  - Application
-  tags_raw:
-  - Applications
-  properties:
-  - type: OpenAPI
-    url: openapi/red5-applications-api-openapi.yml
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-file-restreamer-api
   name: Red5 File Restreamer API
   description: Restream recorded FLV or MP4 files as pseudo-live streams
@@ -287,34 +240,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/red5-inputs-api-openapi.yml
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
-  - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
-  - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
-- aid: red5:red5-logs-api
-  name: Red5 Logs API
-  description: Server log access endpoints
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
-  tags:
-  - Logs
-  properties:
-  - type: OpenAPI
-    url: openapi/red5-logs-api-openapi.yml
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
   - type: APIReference

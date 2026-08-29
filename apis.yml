@@ -427,6 +427,9 @@ apis:
     url: >-
       https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 common:
+  - type: CapabilityMap
+    url: capabilities/red5-capability-edges.yml
+    name: Red5 Business Capability Map
   - type: AgenticAccess
     url: agentic-access/red5-agentic-access.yml
   - type: DomainSecurity

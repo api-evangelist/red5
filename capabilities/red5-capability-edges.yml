@@ -1,0 +1,62 @@
+slug: red5
+provider: Red5
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: File Restreamer
+  spec_file: red5-file-restreamer-api-openapi.yml
+  capability_id: BC-3740
+  capability_id_l1: BC-3740
+  capability_name: Content Distribution & Delivery Management
+  confidence: 0.75
+  evidence: POST /filerestreamer/provision.create "Create File Restream Provision"; "controls live stream
+    retransmission to external RTMP, RTMPS, SRT, and Zixi destinations including social media platforms
+    like Facebook and YouTube"
+  reason: Provisioning retransmission of streams (including file-based pseudo-live) to external RTMP/SRT
+    destinations and third-party platforms is content distribution and delivery. L1 is clear; the split
+    between OTT/streaming delivery and syndication to third-party platforms is genuinely ambiguous, so
+    no L2 is asserted.
+- tag: Mixers
+  spec_file: red5-mixers-api-openapi.yml
+  capability_id: BC-3700.40
+  capability_id_l1: BC-3700
+  capability_name: Live Event & News Production Management
+  confidence: 0.72
+  evidence: '"Create a Mixer", "List Active Mixers"; "controlling input sources and layout, and producing
+    composite streams for broadcasting"'
+  reason: Mixer lifecycle for composing live streams into a broadcast output is live production tooling
+    (real-time multi-source mixing and overlay/graphics control).
+- tag: Images
+  spec_file: red5-images-api-openapi.yml
+  capability_id: BC-3700.40
+  capability_id_l1: BC-3700
+  capability_name: Live Event & News Production Management
+  confidence: 0.7
+  evidence: POST /brewmixer/2.0/images addImageOverlay "Add an Image Overlay"; "dynamic composition of
+    multiple live video and audio streams into a single mixed output stream ... useful for virtual events,
+    live production"
+  reason: Adding and removing image overlays on a live mixed output is live graphics control within real-time
+    multi-source live production, matching Live Event & News Production Management. Confidence tempered
+    because the tag itself is only two overlay endpoints of a broader mixer API.
+- tag: Inputs
+  spec_file: red5-inputs-api-openapi.yml
+  capability_id: BC-3700.40
+  capability_id_l1: BC-3700
+  capability_name: Live Event & News Production Management
+  confidence: 0.7
+  evidence: '"Add an Input to a Mixer"; API "enables dynamic composition of multiple live video and audio
+    streams into a single mixed output stream ... useful for virtual events, live production, and multi-participant
+    streaming scenarios"'
+  reason: Operations add/update/remove live source inputs on a real-time mixer used for composite live
+    production, which is real-time live event production (multi-source direction/mixing) rather than post-production
+    or delivery.

@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red5 Pro Brew Mixer Admin File Restreamer API
-  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
-  version: '2.0'
+  title: Red5 Pro Restreamer File Restreamer API
+  description: The Red5 Pro Restreamer API controls live stream retransmission to external RTMP, RTMPS, SRT, and Zixi destinations including social media platforms like Facebook and YouTube. It accepts JSON-based provisions via POST requests to configure push and pull restreaming sessions from a Red5 Pro server. The API supports file-based pseudo-live restreaming of FLV and MP4 files, as well as real-time forwarding of live ingest streams to multiple destinations simultaneously.
+  version: '1.0'
   contact:
     name: Red5 Support
     url: https://www.red5.net/contact/
   termsOfService: https://www.red5.net/terms/
 servers:
 - url: http://{host}:5080
-  description: Red5 Pro Server with Brew Mixer
+  description: Red5 Pro Server with Restreamer plugin
   variables:
     host:
       default: localhost
@@ -73,19 +73,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -152,12 +139,25 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey
       in: query
       name: accessToken
-      description: API access token for authenticating Brew Mixer API requests
+      description: API access token for authenticating Restreamer API requests
 externalDocs:
-  description: Red5 Pro Brew Mixer API Documentation
-  url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
+  description: Red5 Pro Restreamer API Documentation
+  url: https://www.red5.net/docs/red5-pro/development/api/restreamer/

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red5 Pro Brew Mixer Admin Inputs API
+  title: Red5 Pro Brew Mixer Inputs API
   description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
   version: '2.0'
   contact:
@@ -123,6 +123,41 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    MixerInput:
+      type: object
+      description: An input stream source within a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique input identifier within the mixer
+        streamName:
+          type: string
+          description: Name of the input stream
+        x:
+          type: integer
+          description: Horizontal position in pixels from left of output frame
+        y:
+          type: integer
+          description: Vertical position in pixels from top of output frame
+        width:
+          type: integer
+          description: Display width in pixels within output frame
+        height:
+          type: integer
+          description: Display height in pixels within output frame
+        zOrder:
+          type: integer
+          description: Z-order layer (higher values appear on top)
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     MixerInputCreate:
       type: object
       description: Parameters for adding or updating a mixer input
@@ -150,61 +185,14 @@ components:
           type: integer
           description: Z-order layer position
           default: 0
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-    MixerInput:
-      type: object
-      description: An input stream source within a mixer session
-      properties:
-        id:
-          type: string
-          description: Unique input identifier within the mixer
-        streamName:
-          type: string
-          description: Name of the input stream
-        x:
-          type: integer
-          description: Horizontal position in pixels from left of output frame
-        y:
-          type: integer
-          description: Vertical position in pixels from top of output frame
-        width:
-          type: integer
-          description: Display width in pixels within output frame
-        height:
-          type: integer
-          description: Display height in pixels within output frame
-        zOrder:
-          type: integer
-          description: Z-order layer (higher values appear on top)
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
     inputIdParam:
       name: inputId
       in: path
@@ -219,13 +207,25 @@ components:
       required: true
       schema:
         type: string
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red5 Pro Brew Mixer Admin Mixers API
+  title: Red5 Pro Brew Mixer Mixers API
   description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
   version: '2.0'
   contact:
@@ -107,6 +107,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     Mixer:
       type: object
       description: A mixer session combining multiple input streams into a composite output
@@ -163,25 +173,24 @@ components:
         backgroundColor:
           type: string
           description: Background fill color in hex format (e.g.,
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
   responses:
     NotFound:
       description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
       content:
         application/json:
           schema:
@@ -192,21 +201,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    mixerIdParam:
-      name: mixerId
-      in: path
-      description: Unique identifier for the mixer session
-      required: true
-      schema:
-        type: string
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey

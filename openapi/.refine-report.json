@@ -1,38 +1,44 @@
 {
   "provider": "red5",
   "sources": [
-    "red5-admin-api-openapi.yml",
-    "red5-applications-api-openapi.yml",
-    "red5-file-restreamer-api-openapi.yml",
-    "red5-images-api-openapi.yml",
-    "red5-inputs-api-openapi.yml",
-    "red5-logs-api-openapi.yml",
-    "red5-mixers-api-openapi.yml",
-    "red5-provision-api-openapi.yml",
-    "red5-proxy-api-openapi.yml",
-    "red5-rtmp-restreamer-api-openapi.yml",
-    "red5-server-api-openapi.yml",
-    "red5-servlet-configuration-api-openapi.yml",
-    "red5-streams-api-openapi.yml"
+    "_original/red5-brew-mixer-api-openapi.yml",
+    "_original/red5-restreamer-api-openapi.yml",
+    "_original/red5-stream-manager-2-openapi.yml"
   ],
   "outputs": [
-    "red5-admin-api-openapi.yml",
-    "red5-applications-api-openapi.yml",
-    "red5-file-restreamer-api-openapi.yml",
     "red5-images-api-openapi.yml",
     "red5-inputs-api-openapi.yml",
-    "red5-logs-api-openapi.yml",
     "red5-mixers-api-openapi.yml",
+    "red5-file-restreamer-api-openapi.yml",
+    "red5-rtmp-restreamer-api-openapi.yml",
+    "red5-servlet-configuration-api-openapi.yml",
+    "red5-admin-api-openapi.yml",
     "red5-provision-api-openapi.yml",
     "red5-proxy-api-openapi.yml",
-    "red5-rtmp-restreamer-api-openapi.yml",
-    "red5-server-api-openapi.yml",
-    "red5-servlet-configuration-api-openapi.yml",
     "red5-streams-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "red5-brew-mixer-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "red5-restreamer-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "red5-stream-manager-2-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "red5-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-file-restreamer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-inputs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-mixers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-provision-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-proxy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-rtmp-restreamer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-server-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-servlet-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red5-streams-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

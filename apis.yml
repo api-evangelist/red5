@@ -1,12 +1,6 @@
 aid: red5
 name: Red5
-description: >-
-  Red5 provides real-time streaming infrastructure for live video and audio delivery at scale. The Red5 Pro platform
-  includes a media server, Stream Manager 2.0 for autoscaling cloud deployments, the Brew Mixer for composite stream
-  production, a Restreamer for pushing live streams to social media and RTMP destinations, and WebRTC and native SDKs
-  for browser and mobile integration. Red5 APIs enable programmatic management of streams, mixers, restreaming, cluster
-  orchestration, and node monitoring. Use cases include live events, sports broadcasting, interactive video, gaming,
-  surveillance, and enterprise communications requiring ultra-low latency streaming.
+description: Red5 provides real-time streaming infrastructure for live video and audio delivery at scale. The Red5 Pro platform includes a media server, Stream Manager 2.0 for autoscaling cloud deployments, the Brew Mixer for composite stream production, a Restreamer for pushing live streams to social media and RTMP destinations, and WebRTC and native SDKs for browser and mobile integration. Red5 APIs enable programmatic management of streams, mixers, restreaming, cluster orchestration, and node monitoring. Use cases include live events, sports broadcasting, interactive video, gaming, surveillance, and enterprise communications requiring ultra-low latency streaming.
 type: Index
 deliveryModel:
   model: saas
@@ -37,28 +31,23 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red5.png
 tags:
-  - Live Streaming
-  - Media
-  - Real-Time
-  - RTMP
-  - Streaming
-  - Video
-  - WebRTC
+- Live Streaming
+- Media
+- Real-Time
+- RTMP
+- Streaming
+- Video
+- WebRTC
 url: https://raw.githubusercontent.com/api-evangelist/red5/refs/heads/main/apis.yml
 created: '2026-03-01'
-modified: '2026-05-19'
+modified: '2026-09-04'
 specificationVersion: '0.23'
 apis:
 - aid: red5:webrtc-sdk
   name: Red5 Pro WebRTC SDK
-  description: >-
-    The Red5 Pro WebRTC SDK is a JavaScript library for integrating low-latency live streaming publish
-    and subscribe capabilities into web applications. It supports WHIP for WebRTC publishing and WHEP
-    for WebRTC playback, enabling sub-second latency streaming directly in the browser without plugins.
-    The SDK provides APIs for managing stream sessions, configuring media constraints, handling connection
-    lifecycle events, and interacting with Stream Manager for scalable deployments.
+  description: The Red5 Pro WebRTC SDK is a JavaScript library for integrating low-latency live streaming publish and subscribe capabilities into web applications. It supports WHIP for WebRTC publishing and WHEP for WebRTC playback, enabling sub-second latency streaming directly in the browser without plugins. The SDK provides APIs for managing stream sessions, configuring media constraints, handling connection lifecycle events, and interacting with Stream Manager for scalable deployments.
   humanURL: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
-  baseURL: https://api.example.com
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - JavaScript
   - Media
@@ -71,8 +60,7 @@ apis:
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/red5-webrtc-sdk-api-documentation/
+    url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/red5-webrtc-sdk-api-documentation/
   - type: GitHub
     url: https://github.com/red5pro/red5pro-webrtc-sdk
   - type: NPM
@@ -81,14 +69,9 @@ apis:
     url: asyncapi/red5-webrtc-streaming-asyncapi.yml
 - aid: red5:core-sdk
   name: Red5 Core SDK
-  description: >-
-    The Red5 Core SDK is a native client library for building real-time streaming applications on Linux,
-    Windows, and macOS desktop platforms. It offers interfaces for server connection management, media
-    capture and processing, audio and video source configuration, renderer control, and integration with
-    Stream Manager for autoscaled deployments. Bindings are available for C++, Python, and other native
-    environments.
+  description: The Red5 Core SDK is a native client library for building real-time streaming applications on Linux, Windows, and macOS desktop platforms. It offers interfaces for server connection management, media capture and processing, audio and video source configuration, renderer control, and integration with Stream Manager for autoscaled deployments. Bindings are available for C++, Python, and other native environments.
   humanURL: https://www.red5.net/docs/red5-pro/development/sdks/red5-core-sdk/
-  baseURL: https://api.example.com
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Desktop
   - Linux
@@ -104,13 +87,9 @@ apis:
     url: https://www.red5.net/live-streaming-sdks/
 - aid: red5:ios-sdk
   name: Red5 Pro iOS Streaming SDK
-  description: >-
-    The Red5 Pro iOS Streaming SDK is a native iOS library for integrating real-time live streaming publish
-    and subscribe capabilities into iOS applications. It supports H.264 video and AAC/Opus audio encoding,
-    WebRTC-based streaming with WHIP/WHEP, and integration with Stream Manager for cluster-aware streaming
-    deployments. Example code and testbeds are available on GitHub.
+  description: The Red5 Pro iOS Streaming SDK is a native iOS library for integrating real-time live streaming publish and subscribe capabilities into iOS applications. It supports H.264 video and AAC/Opus audio encoding, WebRTC-based streaming with WHIP/WHEP, and integration with Stream Manager for cluster-aware streaming deployments. Example code and testbeds are available on GitHub.
   humanURL: https://www.red5.net/docs/red5-pro/development/sdks/
-  baseURL: https://api.example.com
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - iOS
   - Media
@@ -125,13 +104,9 @@ apis:
     url: https://github.com/red5pro/streaming-ios
 - aid: red5:android-sdk
   name: Red5 Pro Android Streaming SDK
-  description: >-
-    The Red5 Pro Android Streaming SDK is a native Android library for integrating real-time live streaming
-    publish and subscribe capabilities into Android applications. It supports H.264/H.265 video encoding,
-    AAC audio, WebRTC-based streaming, and adaptive bitrate control. SDK examples and testbeds are available
-    on GitHub for common streaming use cases.
+  description: The Red5 Pro Android Streaming SDK is a native Android library for integrating real-time live streaming publish and subscribe capabilities into Android applications. It supports H.264/H.265 video encoding, AAC audio, WebRTC-based streaming, and adaptive bitrate control. SDK examples and testbeds are available on GitHub for common streaming use cases.
   humanURL: https://www.red5.net/docs/red5-pro/development/sdks/
-  baseURL: https://api.example.com
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Android
   - Java
@@ -147,64 +122,60 @@ apis:
 - aid: red5:red5-admin-api
   name: Red5 Admin API
   description: Node metrics, system info, and autoscaling management
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Admin
   properties:
   - type: OpenAPI
     url: openapi/red5-admin-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-admin-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-file-restreamer-api
   name: Red5 File Restreamer API
   description: Restream recorded FLV or MP4 files as pseudo-live streams
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - File Restreamer
   properties:
   - type: OpenAPI
     url: openapi/red5-file-restreamer-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-file-restreamer-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-images-api
   name: Red5 Images API
   description: Image overlay management for mixer sessions
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - Image
   tags_raw:
@@ -212,270 +183,443 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/red5-images-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-images-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-inputs-api
   name: Red5 Inputs API
   description: Input stream management for mixer sessions
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - Inputs
   properties:
   - type: OpenAPI
     url: openapi/red5-inputs-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-inputs-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-mixers-api
   name: Red5 Mixers API
   description: Mixer session lifecycle management
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - Mixers
   properties:
   - type: OpenAPI
     url: openapi/red5-mixers-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-mixers-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-provision-api
   name: Red5 Provision API
   description: Stream provisioning, authentication, and configuration
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Provision
   properties:
   - type: OpenAPI
     url: openapi/red5-provision-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-provision-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-proxy-api
   name: Red5 Proxy API
   description: WHIP, WHEP, and WebSocket proxy endpoints
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Proxy
   properties:
   - type: OpenAPI
     url: openapi/red5-proxy-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-proxy-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-rtmp-restreamer-api
   name: Red5 RTMP Restreamer API
   description: Configure RTMP and RTMPS push/pull restreaming
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - RTMP Restreamer
   properties:
   - type: OpenAPI
     url: openapi/red5-rtmp-restreamer-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-rtmp-restreamer-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-servlet-configuration-api
   name: Red5 Servlet Configuration API
   description: Server-level restreamer plugin configuration
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: http://{host}:5080
   tags:
   - Servlet Configuration
   properties:
   - type: OpenAPI
     url: openapi/red5-servlet-configuration-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-servlet-configuration-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
 - aid: red5:red5-streams-api
   name: Red5 Streams API
   description: Live stream enumeration, statistics, and control
-  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/
-  baseURL: http://localhost:5080/api/v1
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/
+  baseURL: https://{streamManagerDomain}/as/v1
   tags:
   - Streams
   properties:
   - type: OpenAPI
     url: openapi/red5-streams-api-openapi.yml
+  - type: Overlay
+    url: overlays/red5-streams-api-overlay.yaml
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-streams-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-admin-api/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-proxy-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
-    url: >-
-      https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
-common:
-  - type: CapabilityMap
-    url: capabilities/red5-capability-edges.yml
-    name: Red5 Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/red5-agentic-access.yml
-  - type: DomainSecurity
-    url: security/red5-domain-security.yml
-  - type: Authentication
-    url: authentication/red5-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/red5pro
-  - type: Website
-    url: https://www.red5.net/
+    url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
+- name: Red5 Pro Server API
+  description: REST/JSON API embedded in the Red5 Pro media server providing server info/ping/statistics, applications, streams, recorded content (VOD), shared objects, client control, and log access. Base URL is instance-specific (http://{host}:5080/api/v1/); authenticated via static access token plus IP allowlist.
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/server/
+  baseURL: http://{host}:5080/api/v1/
+  tags:
+  - Video Streaming
+  - Live Streaming
+  - Real-Time
+  - WebRTC
+  - Low Latency
+  - Media Server
+  - streaming-paas
+  - Video Infrastructure
+  - CDN
+  - Broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - REST API
+  - llms-txt
+  - Open-Source
+  tags_raw:
+  - video-streaming
+  - live-streaming
+  - real-time
+  - webrtc
+  - low-latency
+  - media-server
+  - streaming-paas
+  - video-infrastructure
+  - cdn
+  - broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - rest-api
+  - llms-txt
+  - open-source
+  properties:
   - type: Documentation
-    url: https://www.red5.net/docs/red5-pro/
-  - type: GitHubOrganization
-    url: https://github.com/red5pro
-  - type: GitHubOrganization
-    url: https://github.com/Red5
-  - type: SDKs
-    url: https://www.red5.net/live-streaming-sdks/
-  - type: Pricing
-    url: https://www.red5.net/pricing/
-  - type: Blog
-    url: https://www.red5.net/blog/
-  - type: Contact
-    url: https://www.red5.net/contact/
-  - type: JSONLDContext
-    url: json-ld/red5-context.jsonld
-  - type: JSONSchema
-    url: json-schema/red5-stream-schema.json
-  - type: JSONSchema
-    url: json-schema/red5-restream-provision-schema.json
-  - type: OpenAPI
-    url: openapi/red5-server-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/red5-stream-manager-2-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/red5-brew-mixer-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/red5-restreamer-api-openapi.yml
-  - type: AsyncAPI
-    url: asyncapi/red5-webrtc-streaming-asyncapi.yml
-  - type: JSONStructure
-    url: json-structure/red5-stream-structure.json
-  - type: SpectralRuleset
-    url: rules/red5-rules.yml
-  - type: Vocabulary
-    url: vocabulary/red5-vocabulary.yml
+    url: https://www.red5.net/docs/red5-pro/development/api/server/
+- name: Stream Manager 2.0 API
+  description: REST/JSON API used by both Red5 Pro clusters and Red5 Cloud for Auth, Admin, Proxy, Streams, Streams Provision, Streams Mixer, and Scheduling NodeGroups. Base URL is instance-specific ({streamManagerHost}/as/v1/). Auth via Basic login returning a JWT bearer token. Ships an OpenAPI/Swagger UI per instance at {streamManagerHost}/swagger-ui.html.
+  humanURL: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+  baseURL: https://{streamManagerHost}/as/v1/
+  tags:
+  - Video Streaming
+  - Live Streaming
+  - Real-Time
+  - WebRTC
+  - Low Latency
+  - Media Server
+  - streaming-paas
+  - Video Infrastructure
+  - CDN
+  - Broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - REST API
+  - llms-txt
+  - Open-Source
+  tags_raw:
+  - video-streaming
+  - live-streaming
+  - real-time
+  - webrtc
+  - low-latency
+  - media-server
+  - streaming-paas
+  - video-infrastructure
+  - cdn
+  - broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - rest-api
+  - llms-txt
+  - open-source
+  properties:
+  - type: Documentation
+    url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
+- name: Red5 Agent-Native Surface
+  description: Publicly hosted llms.txt providing a structured index of Red5 products, use cases, and documentation for AI agents.
+  humanURL: https://www.red5.net/developer-zone/
+  baseURL: https://www.red5.net
+  tags:
+  - Video Streaming
+  - Live Streaming
+  - Real-Time
+  - WebRTC
+  - Low Latency
+  - Media Server
+  - streaming-paas
+  - Video Infrastructure
+  - CDN
+  - Broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - REST API
+  - llms-txt
+  - Open-Source
+  tags_raw:
+  - video-streaming
+  - live-streaming
+  - real-time
+  - webrtc
+  - low-latency
+  - media-server
+  - streaming-paas
+  - video-infrastructure
+  - cdn
+  - broadcasting
+  - surveillance-public-safety
+  - gaming-esports
+  - rest-api
+  - llms-txt
+  - open-source
+  properties:
+  - type: LLMsTxt
+    url: https://www.red5.net/llms.txt
+  - type: Documentation
+    url: https://www.red5.net/docs/red5-pro/development/api/
+common:
+- type: CapabilityMap
+  url: capabilities/red5-capability-edges.yml
+  name: Red5 Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/red5-agentic-access.yml
+- type: DomainSecurity
+  url: security/red5-domain-security.yml
+- type: Authentication
+  url: authentication/red5-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/red5pro
+- type: Website
+  url: https://www.red5.net/
+- type: Documentation
+  url: https://www.red5.net/docs/red5-pro/
+- type: GitHubOrganization
+  url: https://github.com/red5pro
+- type: GitHubOrganization
+  url: https://github.com/Red5
+- type: SDKs
+  url: https://www.red5.net/live-streaming-sdks/
+- type: Pricing
+  url: https://www.red5.net/pricing/
+- type: Blog
+  url: https://www.red5.net/blog/
+- type: Contact
+  url: https://www.red5.net/contact/
+- type: JSONLDContext
+  url: json-ld/red5-context.jsonld
+- type: JSONSchema
+  url: json-schema/red5-stream-schema.json
+- type: JSONSchema
+  url: json-schema/red5-restream-provision-schema.json
+- type: OpenAPI
+  url: openapi/_superseded/red5-server-api-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/red5-stream-manager-2-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/red5-brew-mixer-api-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/red5-restreamer-api-openapi.yml
+- type: AsyncAPI
+  url: asyncapi/red5-webrtc-streaming-asyncapi.yml
+- type: JSONStructure
+  url: json-structure/red5-stream-structure.json
+- type: SpectralRuleset
+  url: rules/red5-rules.yml
+- type: Vocabulary
+  url: vocabulary/red5-vocabulary.yml
+- type: LLMsTxt
+  url: llms/red5-llms.txt
+- type: Packages
+  url: packages/red5-packages.yml
+- type: SDKs
+  url: packages/red5-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+  name: Red5 published Agent Skills (red5pro, red5-cloud-pubnub)
+- type: X-MCPServerCandidate
+  url: mcp/red5-mcp.yml
+- type: Conformance
+  url: conformance/red5-conformance.yml
+- type: Compliance
+  url: https://www.red5.net/legal/data-processing-addendum/
+- type: ErrorCatalog
+  url: errors/red5-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/red5-lifecycle.yml
+- type: StatusPage
+  url: https://status.red5.net/
+- type: Conventions
+  url: conventions/red5-conventions.yml
+- type: ChangeLog
+  url: changelog/red5-changelog.yml
+- type: ChangeLog
+  url: https://www.red5.net/docs/red5-pro/resources/release-notes/
+- type: Components
+  url: components/red5-components.yml
+- type: DataModel
+  url: data-model/red5-data-model.yml
+- type: Sandbox
+  url: sandbox/red5-sandbox.yml
+- type: AsyncAPI
+  url: asyncapi/red5-webhooks-asyncapi.yml
+- type: Webhooks
+  url: https://www.red5.net/docs/red5-pro/users-guide/red5-pro-webhooks-overview/
+- type: Plans
+  url: plans/red5-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/red5-rate-limits.yml
+- type: FinOps
+  url: finops/red5-finops.yml
+- type: Examples
+  url: examples/red5-server-api-list-streams-example.json
+- type: Examples
+  url: examples/red5-stream-manager-create-provision-example.json
+- type: DeveloperPortal
+  url: https://www.red5.net/docs/
+- type: APIReference
+  url: https://www.red5.net/docs/red5-pro/development/api/
+- type: GettingStarted
+  url: https://www.red5.net/docs/red5-cloud/getting-started/
+- type: Support
+  url: https://customer.support.red5.net/servicedesk/customer/portals
+- type: TermsOfService
+  url: https://www.red5.net/legal/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.red5.net/legal/privacy-policy/
+- type: SignUp
+  url: https://cloud.red5.net/signup
+- type: Login
+  url: https://account.red5.net/login
+- type: ServiceLevelAgreement
+  url: https://www.red5.net/legal/service-level-agreement/
+x-enrichment:
+  date: '2026-09-04'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v3
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Red5 Pro Brew Mixer Images API
-  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, and producing composite streams for broadcasting. The API provides both v1 and v2 endpoints for mixer lifecycle management and image overlay control, making it useful for virtual events, live production, and multi-participant streaming scenarios.
+  description: The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream.
   version: '2.0'
   contact:
     name: Red5 Support
@@ -90,17 +90,41 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    imageIdParam:
+      name: imageId
+      in: path
+      description: Unique identifier for the image overlay
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
     ImageOverlay:
       type: object
       description: An image overlay applied to a mixer session
@@ -126,40 +150,16 @@ components:
         zOrder:
           type: integer
           description: Z-order layer position
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-    imageIdParam:
-      name: imageId
-      in: path
-      description: Unique identifier for the image overlay
-      required: true
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     accessToken:
       type: apiKey

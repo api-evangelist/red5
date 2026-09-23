@@ -1,0 +1,79 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://www.red5.net/docs/red5-pro/resources/release-notes/,
+  https://www.red5.net/docs/red5-cloud/resources/release-notes/,
+  https://www.red5.net/docs/red5-pro/development/api/archive/,
+  https://www.red5.net/legal/service-level-agreement/,
+  https://status.red5.net/
+versioning:
+  scheme: uri-path
+  note: >-
+    Stream Manager 2.0 is versioned in the path (`/as/v1`, with a V2 Intent API
+    documented alongside it). The Brew Mixer surface carries its own path version
+    (`/brewmixer/2.0/`). Product versions (Red5 Pro Server, Red5 Cloud) are semver and
+    move independently of the API path version.
+  current:
+    red5_pro_server: 16.0.0
+    red5_pro_server_released: '2026-08-27'
+    red5_cloud: 1.14.1
+    stream_manager_api_path: /as/v1
+    brew_mixer_api_path: /brewmixer/2.0
+  docs: https://www.red5.net/docs/red5-pro/resources/release-notes/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    Red5 publishes no deprecation policy, no sunset window and no RFC 8594
+    Deprecation/Sunset header support. What it does publish is an API ARCHIVE —
+    Stream Manager REST API v1.0.0, v2.1.0, v3.1.0 and v4.0.0 plus the legacy Autoscale
+    Client API are kept documented at
+    https://www.red5.net/docs/red5-pro/development/api/archive/ with the instruction
+    "do not use these for new integrations; use Stream Manager 2.0 instead". Superseded
+    SDKs are marked in place: the red5pro/streaming-android, red5pro/streaming-ios and
+    react-native-red5pro repositories each carry "This repository uses a deprecated
+    SDK", and WebRTC SDK 15.0.0 removed RTCPublisher/RTCSubscriber as a documented
+    breaking change. That is retirement by announcement, not a dated policy, so no
+    Deprecation pointer is emitted for this record.
+  archive_url: https://www.red5.net/docs/red5-pro/development/api/archive/
+  breaking_changes_observed:
+    - version: WebRTC SDK 15.0.0
+      change: >-
+        RTCPublisher / RTCSubscriber (WebSocket-signalled clients) removed entirely;
+        WHIPClient / WHEPClient are now the only clients.
+    - version: Red5 Pro Server (webhooks subsystem)
+      change: >-
+        Webhook configuration moved from webapps/live/WEB-INF/red5-web.properties to
+        conf/red5.properties; old syntax still honoured at the new location.
+sla:
+  url: https://www.red5.net/legal/service-level-agreement/
+  uptime_target: 99.9%
+  credits: >-
+    3% of the monthly plan amount for every additional 30 minutes of unavailability
+    below the 99.9% commitment, up to 100% of the monthly fee. Three consecutive months
+    below 99.9% lets the client terminate without penalty and receive a prorated refund.
+  entity: Infrared5, Inc.
+  note: >-
+    Scheduled maintenance does not count against the availability commitment; credits
+    must be requested by ticket and the account must not be delinquent.
+status_page:
+  url: https://status.red5.net/
+  http_status: 200
+  public: false
+  note: >-
+    Red5 operates a status page at status.red5.net and it resolves and serves (HTTP
+    200), but the page itself states "This status page is password protected" — incident
+    history and current service state are not readable without credentials. Email
+    subscription/unsubscribe is public.
+support:
+  url: https://customer.support.red5.net/servicedesk/customer/portals
+  platform: Atlassian Jira Service Management
+security_advisories:
+  url: https://www.red5.net/docs/red5-pro/resources/release-notes/archive/cve/
+  note: >-
+    Red5 publishes CVE advisories with affected versions, fixed versions and mitigation
+    steps (e.g. CVE-2023-22628, fixed in Red5 open source 1.2.29 / Red5 Pro 10.6.0).
+    This is an advisory page, not a vulnerability-reporting policy — see
+    security/red5-vulnerability-disclosure.yml.
+known_issues: https://www.red5.net/docs/red5-pro/resources/release-notes/
+deprecated_operations: []

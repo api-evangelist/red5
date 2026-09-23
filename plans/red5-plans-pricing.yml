@@ -4,65 +4,153 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Red5
 providerId: red5
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-04'
+generated: '2026-09-04'
+method: searched
+source:
+  - https://www.red5.net/pricing/
+  - https://www.red5.net/red5-cloud-pricing/
+reconciled: true
 tags:
   - Streaming
   - Real-Time Video
   - Media Server
-description: Red5 (Red5 Pro) is a real-time streaming server. Public access to the company's
-  pricing page was blocked from automated fetch (403); historically Red5 Pro is licensed via
-  contact-sales tiers (Self-Hosted, Cloud / Stream Manager, Enterprise) sized by node count
-  and concurrent stream volume, with a free Open Source / community edition (Red5 OSS).
-sources:
-  - https://www.red5.net/red5pro/pricing/
-notes: Red5 pricing page returned 403 from automated fetch; concrete license rates are not
-  reconciled. Treat as gated / contact-sales until the page can be re-fetched manually.
+description: >-
+  Red5 publishes public list pricing for both product lines. Red5 Pro (self-hosted
+  server software) has four flat monthly tiers plus a per-project Mobile SDK licence.
+  Red5 Cloud (managed PaaS) has a free-to-start usage tier, a committed Growth tier and
+  a call-for-pricing Enterprise tier, each with published included quotas and published
+  per-unit overage rates. The 2026-05-04 sweep recorded these as unavailable behind a
+  403; refetched successfully 2026-09-04 with a browser User-Agent and replaced with the
+  real published tiers.
+plan_count: 8
+currency: USD
 plans:
-  - id: red5-oss
-    name: Red5 Open Source
-    type: freemium
-    description: Free open-source Red5 media server (Red5 OSS); community-supported, no commercial
-      SLA. Distinct from Red5 Pro.
-    entries:
-      - label: Open source license
-        name: oss
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Community support
-      - name: Open source license
-  - id: red5-pro-contact-sales
-    name: Red5 Pro — Contact Sales
-    type: enterprise
-    description: Red5 Pro commercial editions (Self-Hosted, Stream Manager / Cloud, Enterprise)
-      are quoted by Red5 sales; rates depend on node count, concurrent stream volume, and support
-      level.
-    entries:
-      - label: Custom license
-        name: custom
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: WebRTC and RTMP ingest
-      - name: Sub-second latency streaming
-      - name: Stream Manager autoscaling
-      - name: Commercial support
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - name: Developer Pro
+    product: Red5 Pro
+    price: 29.99
+    currency: USD
+    period: month
+    url: https://www.red5.net/pricing/
+    included:
+      max_connections: 100
+    limits:
+      clustering: false
+      autoscale: false
+    features: [Low Latency Live Streaming, Live Recordings, Video on Demand]
+    protocols: [WebRTC, RTMP, RTSP, HLS, IP Camera]
+    support: [Community, Email]
+  - name: Startup
+    product: Red5 Pro
+    price: 119
+    currency: USD
+    period: month
+    url: https://www.red5.net/pricing/
+    included:
+      max_connections: unlimited
+    limits:
+      autoscale: 'AWS, Google Cloud, Azure or DigitalOcean'
+    features: [Low Latency Live Streaming, Live Recordings, Video on Demand, Adaptive Bit Rate]
+    protocols: [WebRTC, RTMP, RTSP, HLS, Adaptive Bit Rate, IP Camera]
+    support: [Community, Email]
+  - name: Growth Pro
+    product: Red5 Pro
+    price: 299
+    currency: USD
+    period: month
+    url: https://www.red5.net/pricing/
+    included:
+      max_connections: unlimited
+    features: [Low Latency Live Streaming, Live Recordings, Video on Demand, Adaptive Bit Rate, Transcoding]
+    protocols: [WebRTC, RTMP, RTSP, HLS, Adaptive Bit Rate, Transcoding, IP Camera]
+    support: [Community, Email, Private Slack Channel]
+  - name: Enterprise
+    product: Red5 Pro
+    price: 3499
+    price_qualifier: starting at
+    currency: USD
+    period: month
+    url: https://www.red5.net/pricing/
+    included:
+      max_connections: unlimited
+    features: [Everything in other plans, Offline / air-gapped deployments, 24x7 support]
+    support: [Community, Email, Private Slack Channel, Phone]
+  - name: Mobile SDKs
+    product: Red5 Pro
+    price: 419
+    currency: USD
+    period: month
+    unit: per launched project
+    url: https://www.red5.net/pricing/
+  - name: Pay-As-You-Grow (Start Free)
+    product: Red5 Cloud
+    price: 0
+    currency: USD
+    period: month
+    url: https://www.red5.net/red5-cloud-pricing/
+    credit_card_required: false
+    included:
+      streaming_gb_per_month: 50
+      instance_hours: 6000
+      regions: 1
+      region_list: [US Central]
+    overage:
+      per_gb: 0.08
+      per_instance_hour: 0.69
+      per_1000_pubnub_transactions: 0.04
+    support: [Documentation, Email]
+  - name: Growth
+    product: Red5 Cloud
+    price: 999
+    price_annual: 849
+    price_qualifier: plus usage
+    currency: USD
+    period: month
+    url: https://www.red5.net/red5-cloud-pricing/
+    included:
+      streaming_gb_per_month: 10000
+      instance_hours: 10000
+      regions: 10
+      region_list:
+        - Australia East (Sydney)
+        - Brazil East (Sao Paulo)
+        - Canada Southeast (Toronto)
+        - Mexico Central (Queretaro)
+        - US East (Ashburn)
+        - US West (San Jose)
+        - Italy Northwest (Milan)
+        - UK West (Newport)
+        - Saudi Arabia West (Jeddah)
+        - Singapore (Singapore)
+      unlimited_access: [Transcoding, Live Mixer, Stream Manager API]
+      scaling: unlimited
+    overage:
+      per_gb: 0.05
+      per_instance_hour: 0.37
+      per_1000_pubnub_transactions: 0.04
+    support: [Documentation, Email, Private Slack Channel]
+  - name: Enterprise
+    product: Red5 Cloud
+    price: null
+    price_qualifier: call for custom pricing and SLAs
+    currency: USD
+    period: month
+    url: https://www.red5.net/red5-cloud-pricing/
+    included:
+      streaming_gb_per_month: 20000
+      instance_hours: 10000
+      regions: 10
+      unlimited_access: [Transcoding, Live Mixer, Stream Manager API]
+      scaling: unlimited
+    overage:
+      per_gb: discounted
+      per_instance_hour: discounted
+      per_1000_pubnub_transactions: discounted
+    features: [Custom feature development, Guaranteed SLA]
+    support: [Documentation, Email, Private Slack Channel, 24x7 Phone]
+notes: >-
+  Red5 Pro pricing carries a published footnote — "additional fees may apply for
+  services such as Castaway, custom SLAs, and custom developed features". Red5 Cloud
+  bills two metered units (streaming GB and instance hours) plus PubNub transactions for
+  the bundled chat/presence layer. The published SLA (99.9% availability, service
+  credits) is at https://www.red5.net/legal/service-level-agreement/.

@@ -4,40 +4,51 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Red5
 providerId: red5
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-04'
+generated: '2026-09-04'
+method: searched
+source:
+  - https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/
+  - https://www.red5.net/red5-cloud-pricing/
+  - https://www.red5.net/pricing/
+  - openapi/*.yml
+reconciled: true
 tags:
   - Streaming
   - Real-Time Video
   - Rate Limiting
-description: Red5 Pro is a customer-deployed media server (self-hosted or via Stream Manager
-  on the customer's cloud account). Concurrency and throughput are bounded by the customer's
-  deployed node count rather than by a Red5-published rate ceiling. The Red5 site was unavailable
-  for automated fetch.
-sources:
-  - https://www.red5.net/red5pro/pricing/
-notes: Red5 pricing/docs pages returned 403; no platform-wide rate limit is published. Capacity
-  is governed by customer deployment topology and the licensed concurrent-stream count.
+description: >-
+  Red5 publishes no API rate limit of any kind. Re-searched 2026-09-04 across the
+  Stream Manager 2.0 API documentation, both pricing pages and all ten OpenAPI
+  documents: there is no requests-per-window ceiling, no 429 response declared on any of
+  the 26 operations, and no RateLimit-*, X-RateLimit-* or Retry-After header documented
+  or returned in any declared response. The 2026-05-04 record said the site was
+  unreachable (403); it is reachable now, and the honest answer is that the limits are
+  genuinely absent rather than unfetched.
+limit_count: 0
 responseCodes: {}
-limits:
-  - name: License-based concurrency
-    scope: deployment
-    metric: varies
-    limit: 'concurrent streams capped by purchased Red5 Pro license tier'
-  - name: Self-hosted capacity
-    scope: deployment
-    metric: varies
-    limit: 'bounded by node sizing / autoscaling configuration in Stream Manager'
-policies:
-  - name: License-Bound Concurrency
-    description: The number of concurrent streams supported is governed by the customer's Red5
-      Pro license rather than a per-second request limit.
-  - name: Customer-Operated Scaling
-    description: Stream Manager autoscaling and topology are operated by the customer on their
-      own cloud account; Red5 does not enforce a request rate centrally.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+limits: []
+headers: []
+status_on_exhaustion: null
+what_bounds_capacity:
+  model: deployment-and-quota, not request-rate
+  red5_pro: >-
+    Self-hosted. Concurrency is bounded by the customer's own node count and licensed
+    tier — Developer Pro caps at 100 connections with no clustering and no autoscale;
+    Startup, Growth Pro and Enterprise are "unlimited connections" with autoscaling on
+    AWS, Google Cloud, Azure or DigitalOcean.
+  red5_cloud: >-
+    Managed. Bounded by metered plan quotas rather than request rate — 50 GB streaming
+    and 6,000 instance hours per month on the free Pay-As-You-Grow tier, 10,000 GB /
+    10,000 instance hours on Growth, 20,000 GB / 10,000 instance hours on Enterprise,
+    with published per-GB and per-instance-hour overage rates. Exceeding a quota bills
+    an overage; it does not return an error status.
+  cluster_controls: >-
+    Stream Manager 2.0 NodeGroupConfig carries capacity and limit expressions (min() and
+    max() added in server 16.0.0) and a max-publishers/max-subscribers example. Those are
+    operator-configured admission controls on the customer's own cluster, not a
+    provider-imposed API rate limit.
+notes: >-
+  An agent calling a Red5 deployment gets no runtime backpressure signal from the API.
+  There is nothing to read on a response to decide whether to slow down, and no declared
+  429 to catch. See conventions/red5-conventions.yml.

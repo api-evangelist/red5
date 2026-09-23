@@ -1,0 +1,76 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://www.red5.net/red5-cloud-pricing/,
+  https://www.red5.net/docs/red5-cloud/getting-started/quick-start-guide/,
+  https://www.red5.net/demo/,
+  https://cloud.red5.net,
+  https://github.com/red5pro/mock-authentication-backend,
+  https://github.com/red5pro/red5pro-stream-manager-2-examples,
+  https://github.com/red5pro/streaming-html5
+note: >-
+  Red5 has NO test-vs-live key separation, no test-mode credentials, no magic test
+  identifiers and no time-simulation tooling — the concepts do not apply to a media
+  server whose "transactions" are live streams. What it does publish is a free
+  self-serve tier you can exercise for real, a hosted console, a public demo, and
+  first-party mock/fixture repositories for the parts that are hard to test (auth
+  callbacks, cluster topologies). Recorded as those, not as a payments-style sandbox.
+test_live_separation:
+  supported: false
+  key_prefixes: []
+  note: >-
+    One set of credentials per environment. Red5 Cloud issues a master key and master
+    secret per account (used by the Backend SDKs to mint conference and chat tokens);
+    Red5 Pro uses an `accessToken` configured on the server and JWTs issued by the
+    Stream Manager 2.0 Auth API. There is no test-mode variant of any of them.
+console:
+  url: https://cloud.red5.net
+  name: Red5 Cloud console
+  note: >-
+    Node groups, authentication mode (Round Trip / Digest Token), region selection and
+    the analytics dashboard are configured here. Single-page app; every path returns the
+    same shell to an unauthenticated client.
+free_tier:
+  plan: Pay-As-You-Grow (Start Free)
+  credit_card_required: false
+  included:
+    streaming_gb_per_month: 50
+    instance_hours: 6000
+    regions: 1 (US Central)
+  url: https://www.red5.net/red5-cloud-pricing/
+  note: >-
+    The closest thing Red5 has to a sandbox — a real account on real infrastructure with
+    a free monthly allowance, not an isolated test environment.
+playground:
+  url: https://www.red5.net/demo/
+  name: WebRTC vs HLS latency demo
+  note: Public, no signup — a side-by-side latency demonstration rather than an API console.
+test_tooling:
+  - name: Mock Authentication Backend
+    repository: https://github.com/red5pro/mock-authentication-backend
+    description: >-
+      First-party NodeJS mock service implementing the Round Trip Authentication
+      validator contract (validateCredentials / invalidateCredentials), so a Red5
+      deployment's auth path can be exercised without standing up a real identity
+      service.
+  - name: Stream Manager 2.0 examples
+    repository: https://github.com/red5pro/red5pro-stream-manager-2-examples
+    description: >-
+      Published NodeGroupConfig files for every documented topology (origin-edge,
+      origin-relay-edge, transcoder, mixer, multi-region, geo-zones, scheduled node
+      groups, webhooks, round-trip auth, JWT auth). Copy-and-run cluster fixtures.
+  - name: HTML SDK testbed
+    repository: https://github.com/red5pro/streaming-html5
+    description: Worked publish/subscribe examples against Red5 Pro and Red5 Cloud.
+  - name: iOS / Android testbeds
+    repository: https://github.com/red5pro/red5pro-ios-testbed, https://github.com/red5pro/red5pro-android-testbed
+  - name: Load-testing bees
+    repository: https://github.com/Red5/../red5pro/load-testing-bees
+    description: >-
+      rtcbee / rtmpbee / rtspbee client swarms Red5 publishes for load-generating
+      against a deployment.
+test_values:
+  published: false
+  note: >-
+    No test card numbers, magic identifiers, fixture stream names or trigger values are
+    published — and none are invented here.

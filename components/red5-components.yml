@@ -1,0 +1,83 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/,
+  https://www.red5.net/docs/red5-cloud/development/sdks/conference-sdk/,
+  https://github.com/red5pro/red5pro-whep-player,
+  https://github.com/red5pro/red5pro-jwplayer-provider,
+  https://github.com/red5pro/red5pro-vue,
+  https://github.com/red5pro/streaming-html5
+note: >-
+  Client-side and embeddable playback/publish surfaces, distinct from the server-side
+  SDKs catalogued in packages/. Red5's browser layer is a script-loaded JS library plus
+  drop-in player/provider projects rather than a web-component or design-system library.
+loaders:
+  - name: Red5 HTML SDK (script tag)
+    url: https://cdn.jsdelivr.net/npm/red5pro-webrtc-sdk@latest/red5pro-sdk.min.js
+    package: red5pro-webrtc-sdk
+    note: >-
+      The loader Red5 publishes in its own docs is pinned to @latest — unpinned, so the
+      build a page receives can change without the page changing. See
+      packages/red5-packages.yml.
+  - name: WebRTC adapter shim
+    url: https://webrtchacks.github.io/adapter/adapter-latest.js
+    first_party: false
+    note: Recommended by Red5's docs for cross-browser compatibility; third-party.
+families:
+  - family: Publish / subscribe clients
+    components:
+      - name: WHIPClient
+        kind: JavaScript class
+        description: WebRTC publisher negotiated over WHIP. The only publisher class since SDK 15.0.0.
+        library: red5pro-webrtc-sdk
+      - name: WHEPClient
+        kind: JavaScript class
+        description: >-
+          WebRTC subscriber negotiated over WHEP, with ABR variant switching via the
+          `maintainStreamVariant` config property.
+        library: red5pro-webrtc-sdk
+    required_dom:
+      - '<video id="red5pro-publisher">'
+      - '<video id="red5pro-subscriber">'
+  - family: Drop-in players
+    components:
+      - name: Red5 WHEP Player
+        kind: browser player
+        repository: https://github.com/red5pro/red5pro-whep-player
+        description: Standalone WHEP player for the browser.
+      - name: Red5 Pro JWPlayer Provider
+        kind: player plugin
+        repository: https://github.com/red5pro/red5pro-jwplayer-provider
+        description: Custom provider that integrates Red5 Pro live streaming into JW Player.
+  - family: Framework integrations
+    components:
+      - name: red5pro-vue
+        kind: example integration
+        repository: https://github.com/red5pro/red5pro-vue
+        description: Reference examples for integrating the Red5 HTML SDK into Vue applications.
+      - name: streaming-html5
+        kind: testbed
+        repository: https://github.com/red5pro/streaming-html5
+        description: >-
+          The canonical HTML SDK testbed — worked examples for Red5 Pro and Red5 Cloud,
+          modernized and reorganized in server release 16.0.0.
+      - name: react-native-red5pro
+        kind: native component
+        repository: https://github.com/red5pro/react-native-red5pro
+        status: deprecated
+        description: >-
+          React Native publisher/subscriber component. The repository states it uses a
+          deprecated SDK; npm last published 2022-08-22.
+  - family: Prebuilt hosted experiences
+    components:
+      - name: TrueTime Meetings
+        repository: https://github.com/red5pro/red5-truetime-meetings
+        description: Red5's conferencing application built on the Conference SDK.
+      - name: TrueTime MultiView
+        repository: https://github.com/red5pro/truetime-multiview
+      - name: TrueTime WatchParty
+        repository: https://github.com/red5pro/truetime-watchparty
+      - name: TrueTime Studio (Production)
+        repository: https://github.com/red5pro/truetime-studio-production
+      - name: TrueTime DataSync
+        repository: https://github.com/red5pro/truetime-datasync

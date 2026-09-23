@@ -1,0 +1,113 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  openapi/red5-admin-api-openapi.yml, openapi/red5-streams-api-openapi.yml,
+  openapi/red5-provision-api-openapi.yml, openapi/red5-proxy-api-openapi.yml,
+  openapi/red5-mixers-api-openapi.yml, openapi/red5-inputs-api-openapi.yml,
+  openapi/red5-images-api-openapi.yml, openapi/red5-rtmp-restreamer-api-openapi.yml,
+  openapi/red5-file-restreamer-api-openapi.yml,
+  openapi/red5-servlet-configuration-api-openapi.yml,
+  https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-failure-status-codes/
+format: json
+envelope:
+  media_type: application/json
+  shape: '{ "code": <integer HTTP status>, "message": "<human-readable error message>" }'
+  schema: components.schemas.Error
+  note: >-
+    Red5's REST surfaces do NOT use RFC 9457 problem+json. Every 4xx across all ten
+    specs returns the same flat Error object with a numeric `code` echoing the HTTP
+    status and a free-text `message`. There is no machine-readable error type URI, no
+    stable error-code enum, and no per-error remediation field, so an agent cannot
+    branch on anything narrower than the HTTP status itself.
+problems:
+  - status: 400
+    title: Bad Request
+    description: Invalid provision payload or malformed request body.
+    schema: Error
+    source_operations:
+      - openapi/red5-file-restreamer-api-openapi.yml#createFileRestreamProvision
+      - openapi/red5-file-restreamer-api-openapi.yml#deleteFileRestreamProvision
+      - openapi/red5-images-api-openapi.yml#addImageOverlay
+      - openapi/red5-inputs-api-openapi.yml#addMixerInput
+      - openapi/red5-inputs-api-openapi.yml#updateMixerInput
+      - openapi/red5-mixers-api-openapi.yml#createMixer
+      - openapi/red5-provision-api-openapi.yml#createStreamProvision
+      - openapi/red5-proxy-api-openapi.yml#whipPublish
+      - openapi/red5-proxy-api-openapi.yml#whepSubscribe
+      - openapi/red5-rtmp-restreamer-api-openapi.yml#createRtmpProvision
+      - openapi/red5-rtmp-restreamer-api-openapi.yml#createRtmpPullProvision
+      - openapi/red5-rtmp-restreamer-api-openapi.yml#deleteRtmpProvision
+    remediation: >-
+      Re-check the provision body against the type-specific schema; the Restreamer
+      provision body shape varies by restreamer type (File, IP Cam, MPEG-TS, SRT, RTMP,
+      Zixi) and the `action` field must be create, list, kill or (for File/RTMP) update.
+  - status: 401
+    title: Unauthorized
+    description: >-
+      Missing or invalid credentials. Stream Manager 2.0 operations require a JWT
+      bearer token issued by the Auth API; standalone Brew Mixer and Restreamer servlet
+      operations require the `accessToken` query parameter.
+    schema: Error
+    source_operations: [all 26 operations across all ten specs]
+    remediation: >-
+      For Stream Manager 2.0, obtain a JWT from the Auth API and send it as
+      `Authorization: Bearer <jwt>`. For the standalone server plugins, append
+      `?accessToken=<token>` matching the value configured on the server.
+  - status: 404
+    title: Not Found
+    description: >-
+      Named node group, node, mixer, mixer input, image overlay or stream provision does
+      not exist on this deployment.
+    schema: Error
+    source_operations:
+      - openapi/red5-admin-api-openapi.yml#listNodes
+      - openapi/red5-images-api-openapi.yml#removeImageOverlay
+      - openapi/red5-inputs-api-openapi.yml#listMixerInputs
+      - openapi/red5-inputs-api-openapi.yml#addMixerInput
+      - openapi/red5-inputs-api-openapi.yml#updateMixerInput
+      - openapi/red5-inputs-api-openapi.yml#removeMixerInput
+      - openapi/red5-mixers-api-openapi.yml#getMixer
+      - openapi/red5-mixers-api-openapi.yml#deleteMixer
+      - openapi/red5-provision-api-openapi.yml#getStreamProvision
+      - openapi/red5-provision-api-openapi.yml#deleteStreamProvision
+      - openapi/red5-streams-api-openapi.yml#getPublishStreamEndpoint
+      - openapi/red5-streams-api-openapi.yml#getSubscribeStreamEndpoint
+    remediation: >-
+      Stream GUIDs are slash-bearing (`live/stream1`). Red5's own OpenAPI/Swagger UI
+      documentation warns that percent-encoding the slash can be rejected by the
+      deployment route or firewall — send the literal slash-bearing path.
+  - status: 409
+    title: Conflict
+    description: >-
+      Invalid operation requested — an operation that cannot be performed given the
+      current state of the target resource.
+    source: >-
+      Published Failure Status Codes table,
+      https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-failure-status-codes/
+    source_operations: []
+    note: >-
+      Documented by Red5 for the Server API but NOT declared on any operation in the ten
+      OpenAPI documents — a caller reading only the spec will not know to expect it.
+  - status: 500
+    title: Internal Server Error
+    description: Failure due to unknown internal server error.
+    source: >-
+      Published Failure Status Codes table,
+      https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-failure-status-codes/
+    source_operations: []
+    note: Documented in the docs, undeclared in every spec.
+docs_reference:
+  url: https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-failure-status-codes/
+  title: Failure Status Codes
+  codes: [400, 401, 404, 409, 500]
+  note: >-
+    Red5's only published error reference is this five-row HTTP-status table for the
+    Server API. It carries no error identifiers, no remediation and no per-endpoint
+    mapping, and it documents two statuses (409, 500) that appear in no specification.
+gaps:
+  - No RFC 9457 application/problem+json media type anywhere in the contract.
+  - No stable, documented error-code registry — `code` only mirrors the HTTP status.
+  - No 429 response anywhere; there is no rate limit to signal.
+  - >-
+    The published docs and the specifications disagree: 409 and 500 are documented but
+    declared on zero of the 26 operations.

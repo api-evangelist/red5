@@ -1,0 +1,158 @@
+asyncapi: 3.0.0
+info:
+  title: Red5 Pro Webhooks
+  version: '16.0.0'
+  description: >-
+    Red5 Pro's webhook subsystem calls a customer-supplied REST endpoint when streaming
+    events occur. Events are grouped into six categories — CONNECT, PUBLISH, SUBSCRIBE,
+    WEBSOCKET, MEDIA and USER — and are configured through indexed endpoint properties
+    in `conf/red5.properties` (previously `webapps/live/WEB-INF/red5-web.properties`) or,
+    in a Stream Manager 2.0 deployment, through NodeGroupConfig `propertyOverrides`.
+    From a fresh install the default policy is cluster-aware: origin nodes fire only
+    PUBLISH events and edge nodes only SUBSCRIBE events, which suppresses the duplicate
+    events an unfiltered configuration produces. This document is DERIVED verbatim from
+    Red5's published webhook documentation; Red5 does not publish an AsyncAPI of its own
+    for this surface.
+  contact:
+    name: Red5 Support
+    url: https://www.red5.net/contact/
+  externalDocs:
+    description: Red5 Pro Webhooks Overview
+    url: https://www.red5.net/docs/red5-pro/users-guide/red5-pro-webhooks-overview/
+defaultContentType: application/json
+servers:
+  customerEndpoint:
+    host: '{webhookHost}'
+    protocol: https
+    description: >-
+      The customer-operated HTTPS endpoint configured as
+      `webhooks.endpoints.<N>.url`. Red5 POSTs to it; there is no Red5-operated host on
+      this surface.
+    variables:
+      webhookHost:
+        default: your-server.com
+        description: Host of the customer's own webhook receiver.
+channels:
+  webhookReceiver:
+    address: '/'
+    title: Configured webhook endpoint
+    description: >-
+      A single configured endpoint receives every event that passes its category and
+      event filters (`webhooks.endpoints.<N>.filters.categories`,
+      `webhooks.endpoints.<N>.filters.events`, and role filters).
+    messages:
+      webhookEvent:
+        $ref: '#/components/messages/WebhookEvent'
+operations:
+  receiveWebhookEvent:
+    action: receive
+    channel:
+      $ref: '#/channels/webhookReceiver'
+    summary: Red5 POSTs a webhook event to the configured endpoint.
+    messages:
+      - $ref: '#/channels/webhookReceiver/messages/webhookEvent'
+components:
+  messages:
+    WebhookEvent:
+      name: WebhookEvent
+      title: Red5 Pro webhook event
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+  schemas:
+    WebhookPayload:
+      type: object
+      description: >-
+        The documented webhook payload. Field set taken verbatim from the Webhook Data
+        section of the Red5 Pro Webhooks Overview.
+      properties:
+        event:
+          type: string
+          description: The event name.
+          enum:
+            - connection-connect
+            - connection-disconnect
+            - stream-published
+            - stream-unpublished
+            - stream-subscribed
+            - stream-unsubscribed
+            - websocket-connect
+            - websocket-disconnect
+            - video-started
+            - video-saved
+            - thumb-created
+          x-note: >-
+            USER-category events carry a free-string event name chosen by the customer's
+            own code (WebhookUtil.callUserWebhook) and are not part of this enum.
+        guid:
+          type: string
+          description: Slash-bearing stream GUID, e.g. live/stream1.
+          examples: ['live/stream1']
+        username:
+          type: string
+        userAgent:
+          type: string
+        nodeRole:
+          type: string
+          description: Cluster role of the node that fired the event.
+          examples: ['origin']
+        capabilities:
+          type: array
+          items:
+            type: string
+          examples: [['publish']]
+        clusterNodeType:
+          type: string
+          examples: ['TYPE_AUTO']
+        timestamp:
+          type: integer
+          description: Epoch milliseconds.
+        nodePublicIp:
+          type: string
+x-event-catalog:
+  CONNECT:
+    description: Client connects or disconnects.
+    events:
+      - {name: connection-connect, when: on connection}
+      - {name: connection-disconnect, when: on disconnection}
+  PUBLISH:
+    description: A stream is published or unpublished. Fired by origin nodes by default.
+    events:
+      - {name: stream-published, when: on publish}
+      - {name: stream-unpublished, when: on unpublish}
+  SUBSCRIBE:
+    description: A subscriber stream begins or ends. Fired by edge nodes by default.
+    events:
+      - {name: stream-subscribed, when: a new subscriber joins}
+      - {name: stream-unsubscribed, when: a subscriber leaves}
+  WEBSOCKET:
+    description: WebSocket connects or disconnects.
+    events:
+      - {name: websocket-connect, when: on websocket connection}
+      - {name: websocket-disconnect, when: on websocket disconnection}
+  MEDIA:
+    description: Video-related events.
+    events:
+      - {name: video-started, when: the first video packet is transmitted}
+      - {name: video-saved, when: the CloudStoragePlugin completes an upload and reports back}
+      - {name: thumb-created, when: thumbnails are enabled and a new thumbnail is created}
+  USER:
+    description: >-
+      Custom events fired from the customer's own webapp code via
+      WebhookUtil.callUserWebhook. The event name is a free string; there is no enum to
+      extend, and USER events are NOT delivered under the default cluster-aware policy —
+      the receiving endpoint must opt in with an explicit events filter.
+    events: []
+x-provenance:
+  generated: '2026-09-04'
+  method: derived
+  source: >-
+    https://www.red5.net/docs/red5-pro/users-guide/red5-pro-webhooks-overview/,
+    https://www.red5.net/docs/red5-cloud/users-guide/red5-cloud-webhooks/,
+    https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/examples/stream-manager-2-web-hooks/
+  note: >-
+    Red5 publishes no AsyncAPI document. Every channel, event name, payload field and
+    default-policy note above is transcribed from Red5's published webhook
+    documentation; nothing is invented. Delivery semantics Red5 does not publish —
+    retry policy, signing/verification, ordering guarantees — are absent here because
+    they are absent there.

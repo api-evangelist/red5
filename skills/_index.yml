@@ -1,0 +1,55 @@
+generated: '2026-09-04'
+method: searched
+source: https://github.com/red5pro/red5pro-skills
+note: >-
+  These are Red5's OWN published Agent Skills, saved verbatim from the first-party
+  red5pro/red5pro-skills repository (Apache-2.0, npm installer `npx red5pro-skills`,
+  package red5pro-skills@1.0.1 published 2026-09-03). Nothing here is authored by
+  API Evangelist. The full skills — including each skill's references/ tree — live in
+  the provider's repository; only the SKILL.md entry points and the repository AGENTS.md
+  are mirrored here.
+publisher:
+  name: Red5 Pro Inc.
+  repository: https://github.com/red5pro/red5pro-skills
+  license: Apache-2.0
+  install: npx red5pro-skills
+  package: https://www.npmjs.com/package/red5pro-skills
+skills:
+  - file: red5-red5pro.md
+    name: red5pro
+    version: 0.1.0
+    author: red5
+    source: https://github.com/red5pro/red5pro-skills/blob/main/skills/red5pro/SKILL.md
+    description: >-
+      Primary technical reference skill for building live streaming and real-time video
+      with Red5 Pro and Red5 Cloud — WebRTC/WHIP/WHEP publish and subscribe,
+      RTMP/ERTMP/RTSP/HLS, restreaming, transcoding/ABR, Brew Mixer, recording and VOD,
+      stream authentication (Round Trip, JWT, Simple, Digest Token), clustering and
+      autoscaling via Stream Manager 2.0, and the Web/Android/iOS/Conference/Backend/Core
+      SDKs.
+    apis:
+      - openapi/red5-admin-api-openapi.yml
+      - openapi/red5-streams-api-openapi.yml
+      - openapi/red5-provision-api-openapi.yml
+      - openapi/red5-proxy-api-openapi.yml
+      - openapi/red5-mixers-api-openapi.yml
+      - openapi/red5-rtmp-restreamer-api-openapi.yml
+    references_tree: skills/red5pro/references/{server,protocols,authentication,streaming-features,stream-manager,cloud,sdks,api}
+  - file: red5-red5-cloud-pubnub.md
+    name: red5-cloud-pubnub
+    version: 0.2.0
+    author: red5
+    source: https://github.com/red5pro/red5pro-skills/blob/main/skills/red5-cloud-pubnub/SKILL.md
+    description: >-
+      Setting up Red5 Cloud's built-in PubNub integration — chat, presence and
+      image/file sharing alongside live video, with HTML5 / iOS / Android code — plus a
+      conceptual Agora-to-Red5-Cloud migration mapping the skill itself flags as
+      unverified against Agora's own docs.
+  - file: red5-AGENTS.md
+    name: AGENTS.md (repository operating instructions)
+    author: red5
+    source: https://github.com/red5pro/red5pro-skills/blob/main/AGENTS.md
+    description: >-
+      Repository-level agent instructions: structure, the 4-layer progressive-disclosure
+      model, the source-of-truth / freeze-forever rule (every claim must trace to a page
+      on red5.net/docs), and the process for adding a topic or a whole new skill.

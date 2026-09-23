@@ -1,0 +1,70 @@
+# Red5
+
+> Red5 is a US-based company specializing in real-time video streaming solutions for developers, startups, and enterprises.Its core products include the open-source live streaming solutions including Red5 open-source media server, Red5 Pro, server software designed for ultra-low latency streaming at scale, Red5 Cloud, a fully managed, globally distributed streaming PaaS solution, and Red5 SDKs, developer tools for building interactive streaming applications. Red5 live streaming solutions serves industries such as Media & Entertainment, Government & Public Safety, Video Surveillance, Interactive Live Shopping, eSports and Gaming, Video Conferencing & Webinar, E-learning, Telemedicine, Online Auction & Bidding, Metaverse AR/VR/XR, enabling interactive real-time video, audio, and data streaming at scale across platforms. 
+
+## Products
+
+[Red5’s live streaming products](https://www.red5.net/products/) 
+[Red5’s TrueTime solutions](https://www.red5.net/truetime/)
+[Red5 Cloud](https://www.red5.net/red5-cloud-low-latency-live-streaming-platform/)
+[Red5 Cloud pricing](https://www.red5.net/red5-cloud-pricing/) 
+[Red5 Pro](https://www.red5.net/red5-pro/low-latency-streaming-software/)
+[Red5 Pro pricing](https://www.red5.net/pricing/) 
+[Red5 open-source live streaming solutions](https://www.red5.net/open-source-live-streaming/) 
+[Red5 open-source media server](https://www.red5.net/red5-media-server/)
+[Red5 live video streaming SDKs](https://www.red5.net/live-streaming-sdks/)
+[Red5 professional services](https://www.red5.net/professional-services/)
+[Red5 production comparison](https://www.red5.net/red5-product-comparison/)
+[Red5 demo](https://red5.net/demo/) 
+
+## Use cases
+
+[Industries Red5’s solutions power](https://www.red5.net/solutions/) 
+[Red5 Video Surveillance Solutions](https://www.red5.net/solutions/streaming-for-video-surveillance-and-public-safety/)
+[Red5 Video Streaming Solutions for Traffic Monitoring](https://www.red5.net/solutions/video-streaming-for-traffic-monitoring/) 
+[Red5 Off-the-internet Livestreaming Solutions for Airgapped Streaming](https://www.red5.net/solutions/air-gapped-live-streaming/) 
+[Red5 Live streaming solutions for Public safety](https://www.red5.net/solutions/drone-public-safety/)  
+[Red5 live streaming solutions for Smart Cities](https://www.red5.net/solutions/smart-city-streaming/) 
+[Red5 live streaming solutions for Professional Broadcasting production](https://www.red5.net/solutions/video-streaming-for-broadcast-production/) 
+[Red5 real-time streaming solution with media players](https://www.red5.net/case-studies/red5-amino-transform-real-time-streaming-with-media-players/) 
+[Red5 live streaming solutions for News Broadcasting](https://www.red5.net/solutions/broadcast-news/)  
+[Red5 live streaming solutions for Sports Broadcasting](https://www.red5.net/solutions/sports-live-streaming/)   
+[Red5 live streaming solutions for Sports Production](https://www.red5.net/solutions/live-sports-production/)  
+[Red5 live streaming solutions for Fan Engagement](https://www.red5.net/solutions/video-streaming-for-fan-engagement/)   
+[Red5 live streaming solutions for Online Auctions](https://www.red5.net/solutions/auction-live-streaming/)    
+[Red5 live streaming solutions for Live Event Production](https://www.red5.net/case-studies/red5-cloud-zixi-real-time-monitoring-and-streaming-solution-for-live-event-production/)   
+[Red5 live streaming solutions for Online casino](https://www.red5.net/solutions/video-streaming-for-casino-igaming/)   
+[Red5 live streaming solutions for Sports Betting](https://www.red5.net/solutions/sports-betting/)   
+
+## About Company
+
+[About Red5](https://www.red5.net/company/)    
+[Red5 Careers](https://www.red5.net/company/#open-positions)   
+[Contact Red5](https://www.red5.net/contact/)    
+[Red5 Legal Documents](https://www.red5.net/legal/)     
+[Red5 Partners](https://www.red5.net/partners/) 
+[Red5 Patents](https://www.red5.net/patents/) 
+
+## Resources
+
+[Red5 Blog](https://www.red5.net/blog/)     
+[Red5 Whitepapers](https://www.red5.net/whitepapers/)    
+[Red5 Case studies](https://www.red5.net/case-studies/)
+[Red5 Webinars](https://www.red5.net/webinars/) 
+[Red5 Support](https://customer.support.red5.net/servicedesk/customer/portals) 
+[Video Streaming Technology](https://www.red5.net/video-streaming-technology/) 
+
+## Documentation
+
+[Red5 Documentation Home](https://www.red5.net/docs/red5-pro-basics/)   
+[Red5 Cloud](https://www.red5.net/docs/red5-cloud/) 
+[Introduction to Red5 Cloud](https://www.red5.net/docs/red5-cloud/introduction/)      
+[Getting started with Red5 Cloud](https://www.red5.net/docs/red5-cloud/getting-started/)  
+[Red5 Cloud User’s Guide](https://www.red5.net/docs/red5-cloud/users-guide/)  
+[Red5 Cloud Development](https://www.red5.net/docs/red5-cloud/development/)  
+[Red5 Cloud Troubleshooting](https://www.red5.net/docs/red5-cloud/troubleshooting/) 
+[Red5 Cloud Resources](https://www.red5.net/docs/red5-cloud/resources/)   
+[Red5 Pro](https://www.red5.net/docs/red5-pro/)  
+[Red5 Pro User’s Guide](https://www.red5.net/docs/red5-pro/users-guide/)   
+[Red5 Pro Development](https://www.red5.net/docs/red5-pro/development/)   
+[Red5 Pro Resources](https://www.red5.net/docs/red5-pro/resources/)    

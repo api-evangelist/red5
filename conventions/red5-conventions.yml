@@ -1,0 +1,164 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  openapi/*.yml,
+  https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/,
+  https://www.red5.net/docs/red5-pro/development/api/stream-manager-2.0/stream-manager-2-openapi-api/,
+  https://www.red5.net/docs/red5-pro/users-guide/authentication/,
+  https://www.red5.net/docs/red5-cloud/users-guide/authentication/,
+  https://www.red5.net/docs/red5-pro/users-guide/red5-pro-webhooks-overview/
+authentication:
+  styles:
+    - surface: Stream Manager 2.0 (/as/v1)
+      scheme: http bearer
+      format: JWT
+      header: 'Authorization: Bearer <jwt>'
+      issued_by: Stream Manager 2.0 Auth API
+    - surface: Standalone Brew Mixer and Restreamer servlets (:5080)
+      scheme: apiKey
+      location: query
+      parameter: accessToken
+    - surface: Media plane (RTMP / RTSP / WebRTC / WHIP / WHEP clients)
+      scheme: connectionParams
+      note: >-
+        Publish/subscribe credentials travel in the SDK's `connectionParams` init
+        property as username / password / token, not as an HTTP header. Red5 Pro
+        supports Round Trip Authentication (remote validator), JWT (local validation)
+        and Simple Auth (connection-level credentials); Red5 Cloud supports Round Trip
+        and a Cloud-only Digest Token scheme
+        (stream:user:role:key=value:app:expiration:digest, digest =
+        sha256(payload + ":" + secret) as 64-char lowercase hex).
+  docs: https://www.red5.net/docs/red5-pro/users-guide/authentication/
+  artifact: authentication/red5-authentication.yml
+idempotency:
+  supported: false
+  coverage: none
+  header: null
+  scope: []
+  retention: null
+  evidence: >-
+    No Idempotency-Key header, no client-supplied request key and no dedupe parameter
+    appears in any of the 26 operations across the ten OpenAPI documents, and none is
+    documented on red5.net/docs. The mutating surface (createStreamProvision,
+    createMixer, addMixerInput, addImageOverlay, createRtmpProvision,
+    createRtmpPullProvision, createFileRestreamProvision, whipPublish, whepSubscribe)
+    has no replay protection.
+  mitigating_shape: >-
+    Several writes are naturally idempotent by addressing rather than by contract:
+    createStreamProvision PUTs to a caller-chosen {nodeGroupName}/{streamGuid} path, and
+    the standalone Restreamer provision body carries an `action` field (create / list /
+    kill, plus update on File and RTMP types) keyed on the provision the caller names.
+    A retry therefore usually converges, but nothing in the contract guarantees it and
+    no replay token is honoured.
+reversibility:
+  grade: documented
+  applicable: true
+  note: >-
+    Every create in the contract has a matching delete, and the reversal operations are
+    real and named. What is NOT published anywhere is a WINDOW — no doc states how long
+    a provision, mixer or overlay remains reversible, what happens to in-flight
+    subscribers on delete, or whether a killed restream can be restored. Graded
+    `documented` rather than `verified` for exactly that reason; no window is asserted
+    here because Red5 states none.
+  operations:
+    - write: createStreamProvision
+      reverse: deleteStreamProvision
+      spec: openapi/red5-provision-api-openapi.yml
+      window: null
+    - write: createMixer
+      reverse: deleteMixer
+      spec: openapi/red5-mixers-api-openapi.yml
+      window: null
+    - write: addMixerInput
+      reverse: removeMixerInput
+      spec: openapi/red5-inputs-api-openapi.yml
+      window: null
+    - write: addImageOverlay
+      reverse: removeImageOverlay
+      spec: openapi/red5-images-api-openapi.yml
+      window: null
+    - write: createRtmpProvision
+      reverse: deleteRtmpProvision
+      spec: openapi/red5-rtmp-restreamer-api-openapi.yml
+      window: null
+      note: >-
+        The standalone Restreamer servlet's `kill` action stops a restream, but Red5's
+        own docs state it reappears on server restart unless `persist=true` was set at
+        create time — a reversal that is not durable unless the caller opted in.
+    - write: createRtmpPullProvision
+      reverse: deleteRtmpProvision
+      spec: openapi/red5-rtmp-restreamer-api-openapi.yml
+      window: null
+    - write: createFileRestreamProvision
+      reverse: deleteFileRestreamProvision
+      spec: openapi/red5-file-restreamer-api-openapi.yml
+      window: null
+    - write: whipPublish
+      reverse: null
+      window: null
+      note: >-
+        WHIP/WHEP sessions are torn down at the transport layer (DELETE on the returned
+        resource per RFC 9725) rather than through a declared REST reversal operation in
+        this contract.
+dry_run_mode:
+  supported: false
+  evidence: No preview, validate-only or simulate parameter appears in any operation.
+pagination:
+  supported: false
+  style: none
+  evidence: >-
+    listNodeGroups, listNodes, listMixers and listMixerInputs declare no limit, offset,
+    cursor or page parameter and return an unbounded `{data: [...]}` array. Collection
+    sizes are bounded by the customer's own deployment (node count, mixer count) rather
+    than by paging.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    No free-form metadata bag on any resource. Caller-controlled identity is carried in
+    the path instead — streamGuid, nodeGroupName, mixerId, inputId, imageId.
+request_tracing:
+  request_id_header: null
+  evidence: No request-id / correlation-id header is documented or declared.
+versioning:
+  style: uri-path
+  current: /as/v1 (Stream Manager 2.0), /brewmixer/2.0 (Brew Mixer)
+  artifact: lifecycle/red5-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{ "code": <int>, "message": "<string>" }'
+  rfc9457: false
+  artifact: errors/red5-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  evidence: >-
+    No rate-limit headers, no 429 response and no published request ceiling. Capacity is
+    governed by the customer's deployment topology and plan quotas instead. See
+    rate-limits/red5-rate-limits.yml.
+success_envelope:
+  collections: '{ "data": [ ... ] }'
+  singletons: bare resource object
+path_conventions:
+  slash_bearing_ids: >-
+    Stream GUIDs contain a slash (`live/stream1`) and appear as path values. Red5's own
+    Swagger UI documentation warns that percent-encoding that slash can be rejected by
+    the deployment route or security firewall, and tells callers to use curl with the
+    literal slash-bearing path instead.
+  node_group_scoping: >-
+    Every Stream Manager 2.0 stream operation is scoped by {nodeGroupName} — a client
+    must know which node group it is publishing or subscribing against before it can
+    build a URL.
+events:
+  webhooks: asyncapi/red5-webhooks-asyncapi.yml
+  signaling: asyncapi/red5-webrtc-streaming-asyncapi.yml
+deployment_shape:
+  note: >-
+    Red5 Pro is customer-deployed software, so there is no single vendor-operated API
+    host. Every base URL is templated on the customer's own Stream Manager domain
+    (https://{streamManagerDomain}/as/v1) or Red5 Pro server (http://{host}:5080). Red5
+    Cloud is the managed variant and, per Red5's own docs, "uses the same APIs as Red5
+    Pro". The live OpenAPI document is generated by the running instance and served at
+    <stream-manager-host>/swagger-ui.html behind that instance's own login — it is not
+    published at any Red5-operated URL.

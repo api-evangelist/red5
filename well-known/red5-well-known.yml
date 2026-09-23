@@ -1,0 +1,143 @@
+generated: '2026-09-04'
+method: probed
+source: live GET of the named /.well-known/ path list on every host this record knows
+hit_count: 0
+path_echo_control: mixed
+note: >-
+  No Red5-owned host serves any of the probed discovery documents. Two hosts are
+  single-page-app catch-alls that answer 200 with the same HTML shell for every path
+  including the negative control, so every 200 on them is discarded (cloud.red5.net
+  1,985 bytes identical for all 15 paths; account.red5.net 6,619 bytes identical for
+  all 15 paths). The one genuine non-HTML 200 in the whole sweep is
+  customer.support.red5.net/.well-known/security.txt — but that host is a CNAME to
+  Atlassian Jira Service Management
+  (customer-support-red5-net-....saas.atlassian.com) and the document self-identifies
+  as Atlassian's: Contact security@atlassian.com, Canonical
+  https://www.atlassian.com/.well-known/security.txt. It is Atlassian's security.txt
+  served under a Red5 vanity hostname, not a Red5 document, so it is recorded here and
+  NOT saved as a Red5 artifact, and no SecurityTxt / WellKnown pointer is emitted.
+hosts:
+  - host: https://www.red5.net
+    path_echo_control: passed
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/red5-negative-control-7f3ab91c.json, status: 404}
+  - host: https://red5.net
+    path_echo_control: passed
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/red5-negative-control-7f3ab91c.json, status: 404}
+  - host: https://cloud.red5.net
+    path_echo_control: failed
+    soft_404_control:
+      path: /.well-known/red5-negative-control-7f3ab91c.json
+      status: 200
+      bytes: 1985
+      body: SPA shell, byte-identical to every other 200 on this host
+    documents:
+      - {path: /.well-known/security.txt, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/openid-configuration, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/oauth-protected-resource, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/api-catalog, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/ai-plugin.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/ucp.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/acp.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/aauth-resource.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/apis.json, status: 200, note: SPA shell - discarded}
+      - {path: /apis.json, status: 200, note: SPA shell - discarded}
+      - {path: /apis.yml, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/agent-card.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/agent.json, status: 200, note: SPA shell - discarded}
+  - host: https://account.red5.net
+    path_echo_control: failed
+    soft_404_control:
+      path: /.well-known/red5-negative-control-7f3ab91c.json
+      status: 200
+      bytes: 6619
+      body: Red5 Pro login SPA shell, byte-identical to every other 200 on this host
+    documents:
+      - {path: /.well-known/security.txt, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/openid-configuration, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/oauth-protected-resource, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/api-catalog, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/ai-plugin.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/ucp.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/acp.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/aauth-resource.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/apis.json, status: 200, note: SPA shell - discarded}
+      - {path: /apis.json, status: 200, note: SPA shell - discarded}
+      - {path: /apis.yml, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/agent-card.json, status: 200, note: SPA shell - discarded}
+      - {path: /.well-known/agent.json, status: 200, note: SPA shell - discarded}
+  - host: https://status.red5.net
+    path_echo_control: passed
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/red5-negative-control-7f3ab91c.json, status: 404}
+  - host: https://customer.support.red5.net
+    path_echo_control: passed
+    third_party: >-
+      CNAME to customer-support-red5-net-69138e02-0b9b-4585-8ba4-91a8b16d85b4.saas.atlassian.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          Atlassian's own RFC 9116 document, not Red5's — Contact
+          security@atlassian.com, Canonical
+          https://www.atlassian.com/.well-known/security.txt. Not saved, not credited
+          to Red5.
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/ucp.json, status: 404}
+      - {path: /.well-known/acp.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/red5-negative-control-7f3ab91c.json, status: 404}

@@ -84,17 +84,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
     StreamProvision:
       type: object
       description: Provisioning configuration for a stream
@@ -138,14 +147,17 @@ components:
         audioBitrate:
           type: integer
           description: Output audio bitrate in bits per second
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
   parameters:
-    nodeGroupNameParam:
-      name: nodeGroupName
-      in: path
-      description: Name of the node group (cluster) to target
-      required: true
-      schema:
-        type: string
     streamGuidParam:
       name: streamGuid
       in: path
@@ -153,25 +165,13 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

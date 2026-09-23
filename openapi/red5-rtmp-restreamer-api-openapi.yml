@@ -99,37 +99,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-    RtmpProvision:
-      type: object
-      description: Configuration for an RTMP push restreaming provision
-      required:
-      - streamName
-      - destinations
-      properties:
-        streamName:
-          type: string
-          description: Name of the source live stream to retransmit
-        appName:
-          type: string
-          description: Red5 Pro application scope containing the source stream
-          default: live
-        destinations:
-          type: array
-          description: List of RTMP destination endpoints
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/RtmpDestination'
     ProvisionResponse:
       type: object
       description: Response from a provision create or delete operation
@@ -143,6 +134,29 @@ components:
         streamName:
           type: string
           description: Name of the stream affected by the operation
+    ProvisionDelete:
+      type: object
+      description: Parameters to identify the provision to delete
+      required:
+      - streamName
+      properties:
+        streamName:
+          type: string
+          description: Name of the stream whose provision should be removed
+        appName:
+          type: string
+          description: Red5 Pro application scope containing the stream
+          default: live
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     RtmpPullProvision:
       type: object
       description: Configuration for pulling a stream from an external RTMP source
@@ -183,40 +197,26 @@ components:
           - rtmps
           description: Transport protocol to use for this destination
           default: rtmp
-    ProvisionDelete:
+    RtmpProvision:
       type: object
-      description: Parameters to identify the provision to delete
+      description: Configuration for an RTMP push restreaming provision
       required:
       - streamName
+      - destinations
       properties:
         streamName:
           type: string
-          description: Name of the stream whose provision should be removed
+          description: Name of the source live stream to retransmit
         appName:
           type: string
-          description: Red5 Pro application scope containing the stream
+          description: Red5 Pro application scope containing the source stream
           default: live
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        destinations:
+          type: array
+          description: List of RTMP destination endpoints
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/RtmpDestination'
   securitySchemes:
     accessToken:
       type: apiKey

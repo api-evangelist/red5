@@ -73,38 +73,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-    FileRestreamProvision:
-      type: object
-      description: Configuration for restreaming a pre-recorded file as a live stream
-      required:
-      - filePath
-      - streamName
-      properties:
-        filePath:
-          type: string
-          description: Server filesystem path to the FLV or MP4 file to restream
-        streamName:
-          type: string
-          description: Name to use for the pseudo-live output stream
-        appName:
-          type: string
-          description: Red5 Pro application scope to publish the stream into
-          default: live
-        loop:
-          type: boolean
-          description: Whether to loop the file continuously when playback ends
-          default: false
     ProvisionResponse:
       type: object
       description: Response from a provision create or delete operation
@@ -131,27 +121,37 @@ components:
           type: string
           description: Red5 Pro application scope containing the stream
           default: live
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    FileRestreamProvision:
+      type: object
+      description: Configuration for restreaming a pre-recorded file as a live stream
+      required:
+      - filePath
+      - streamName
+      properties:
+        filePath:
+          type: string
+          description: Server filesystem path to the FLV or MP4 file to restream
+        streamName:
+          type: string
+          description: Name to use for the pseudo-live output stream
+        appName:
+          type: string
+          description: Red5 Pro application scope to publish the stream into
+          default: live
+        loop:
+          type: boolean
+          description: Whether to loop the file continuously when playback ends
+          default: false
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     accessToken:
       type: apiKey

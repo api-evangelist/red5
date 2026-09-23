@@ -1,0 +1,54 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Red5 Pro Stream Manager 2.0 Streams API
+  version: 1.0.0
+extends: openapi/red5-streams-api-openapi.yml
+x-provenance:
+  generated: '2026-09-04'
+  method: generated
+  source: openapi/red5-streams-api-openapi.yml plus the artifacts in this repository
+  note: >-
+    Non-destructive OpenAPI Overlay 1.0.0 capturing API Evangelist's enrichment of this
+    Red5 contract. It adds cross-references to the derived artifacts and records the
+    runtime-semantics gaps found in the original (no idempotency key, no pagination, no
+    rate-limit signal, no RFC 9457 errors, no declared 429/5xx). Nothing in the harvested
+    specification is mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: red5
+      x-apievangelist-artifacts:
+        authentication: authentication/red5-authentication.yml
+        conventions: conventions/red5-conventions.yml
+        errors: errors/red5-problem-types.yml
+        lifecycle: lifecycle/red5-lifecycle.yml
+        data_model: data-model/red5-data-model.yml
+        conformance: conformance/red5-conformance.yml
+        rate_limits: rate-limits/red5-rate-limits.yml
+        plans: plans/red5-plans-pricing.yml
+        packages: packages/red5-packages.yml
+        skills: skills/_index.yml
+      x-apievangelist-runtime-gaps:
+        idempotency: none
+        pagination: none
+        rate_limit_signal: none
+        problem_details_rfc9457: false
+        declared_429_or_5xx: false
+  - target: $.info
+    update:
+      x-apievangelist-deployment: >-
+        Red5 Pro is customer-deployed software. The server block is templated on purpose:
+        the host is the customer's own Stream Manager domain or Red5 Pro server, and the
+        live generated OpenAPI is served by the running instance at /swagger-ui.html behind
+        that instance's own login. Red5 Cloud, per Red5's own documentation, uses the same
+        APIs as Red5 Pro.
+  - target: $.paths['/streams/stream/{nodeGroupName}/publish/{streamGuid}'].get
+    update:
+      x-apievangelist-operation: getPublishStreamEndpoint
+      x-apievangelist-error-catalog: errors/red5-problem-types.yml
+      x-apievangelist-agentic-access: agentic-access/red5-agentic-access.yml
+  - target: $.paths['/streams/stream/{nodeGroupName}/subscribe/{streamGuid}'].get
+    update:
+      x-apievangelist-operation: getSubscribeStreamEndpoint
+      x-apievangelist-error-catalog: errors/red5-problem-types.yml
+      x-apievangelist-agentic-access: agentic-access/red5-agentic-access.yml

@@ -1,0 +1,241 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  registry.npmjs.org, repo1.maven.org/maven2/org/red5/, registry.terraform.io,
+  https://www.red5.net/live-streaming-sdks/,
+  https://www.red5.net/docs/red5-cloud/development/sdks/backend-sdk/,
+  https://github.com/red5pro
+note: >-
+  Red5 ships client SDKs, an open-source Java media server, first-party Terraform
+  modules and an AI-skills installer across npm, Maven Central and the Terraform
+  Registry. The iOS and Android SDKs are distributed as binary artifacts through
+  GitHub / direct download rather than CocoaPods, Swift Package Index or Maven —
+  probed and absent from those registries, recorded as version: null below.
+packages:
+  - language: javascript
+    registry: npm
+    name: red5pro-webrtc-sdk
+    url: https://www.npmjs.com/package/red5pro-webrtc-sdk
+    install: npm install red5pro-webrtc-sdk
+    repository: https://github.com/red5pro/red5pro-webrtc-sdk
+    official: true
+    version: 15.6.1
+    published: '2026-07-30'
+    note: >-
+      Red5 HTML SDK (WHIPClient / WHEPClient). As of 15.0.0 the WebSocket-based
+      RTCPublisher/RTCSubscriber classes were removed as a breaking change.
+  - language: javascript
+    registry: cdn
+    name: red5pro-webrtc-sdk (jsDelivr build)
+    url: https://cdn.jsdelivr.net/npm/red5pro-webrtc-sdk@latest/red5pro-sdk.min.js
+    install: '<script src="https://cdn.jsdelivr.net/npm/red5pro-webrtc-sdk@latest/red5pro-sdk.min.js"></script>'
+    official: true
+    version: null
+    published: null
+    note: >-
+      The script tag Red5 publishes in its own SDK docs is pinned to @latest, so the
+      distribution floats — a consumer cannot tell which build they are loading.
+      Version and date recorded as null deliberately: there is nothing pinned to read.
+  - language: javascript
+    registry: npm
+    name: red5-bcs-node
+    url: https://www.npmjs.com/package/red5-bcs-node
+    install: npm install red5-bcs-node
+    repository: https://github.com/red5pro/red5-bcs-node
+    official: true
+    version: 1.0.1
+    published: '2025-12-08'
+    note: >-
+      Backend Conference Service SDK — server-side conference and chat token
+      generation for Red5 Cloud. Red5's own docs still say "the SDK package is not
+      published yet ... reach out to our support team", but the package IS live on
+      npm as of 1.0.1; the docs are stale on this point.
+  - language: javascript
+    registry: npm
+    name: red5pro-skills
+    url: https://www.npmjs.com/package/red5pro-skills
+    install: npx red5pro-skills
+    repository: https://github.com/red5pro/red5pro-skills
+    official: true
+    version: 1.0.1
+    published: '2026-09-03'
+    note: >-
+      Installer for Red5's own published Agent Skills (red5pro, red5-cloud-pubnub)
+      into Claude Code / Codex. See skills/ in this repository.
+  - language: java
+    registry: maven
+    name: org.red5:red5-server
+    url: https://repo1.maven.org/maven2/org/red5/red5-server/
+    install: '<dependency><groupId>org.red5</groupId><artifactId>red5-server</artifactId><version>2.0.41</version></dependency>'
+    repository: https://github.com/Red5/red5-server
+    official: true
+    version: 2.0.41
+    published: '2026-09-04'
+    note: Open-source Red5 media server core.
+  - language: java
+    registry: maven
+    name: org.red5:red5-server-common
+    url: https://repo1.maven.org/maven2/org/red5/red5-server-common/
+    install: '<dependency><groupId>org.red5</groupId><artifactId>red5-server-common</artifactId><version>2.0.41</version></dependency>'
+    repository: https://github.com/Red5/red5-server-common
+    official: true
+    version: 2.0.41
+    published: '2026-09-04'
+  - language: java
+    registry: maven
+    name: org.red5:red5-client
+    url: https://repo1.maven.org/maven2/org/red5/red5-client/
+    install: '<dependency><groupId>org.red5</groupId><artifactId>red5-client</artifactId><version>2.0.41</version></dependency>'
+    repository: https://github.com/Red5/red5-client
+    official: true
+    version: 2.0.41
+    published: '2026-09-04'
+  - language: java
+    registry: maven
+    name: org.red5:red5-io
+    url: https://repo1.maven.org/maven2/org/red5/red5-io/
+    install: '<dependency><groupId>org.red5</groupId><artifactId>red5-io</artifactId><version>2.0.41</version></dependency>'
+    repository: https://github.com/Red5/red5-io
+    official: true
+    version: 2.0.41
+    published: '2026-09-04'
+  - language: java
+    registry: maven
+    name: org.red5:red5-moq-pkgr
+    url: https://repo1.maven.org/maven2/org/red5/red5-moq-pkgr/
+    install: '<dependency><groupId>org.red5</groupId><artifactId>red5-moq-pkgr</artifactId><version>1.3.11</version></dependency>'
+    repository: https://github.com/Red5/red5-moq-pkgr
+    official: true
+    version: 1.3.11
+    published: '2026-05-30'
+    note: Media over QUIC (MoQ) packager.
+  - language: java
+    registry: maven
+    name: org.red5:moq-cmaf
+    url: https://repo1.maven.org/maven2/org/red5/moq-cmaf/
+    official: true
+    version: 1.1.2
+    published: '2025-11-09'
+  - language: java
+    registry: maven
+    name: net.red5:red5-bcs-java
+    url: https://www.red5.net/docs/red5-cloud/development/sdks/backend-sdk/java/
+    official: true
+    version: null
+    published: null
+    note: >-
+      Documented Java Backend SDK coordinate. Probed repo1.maven.org/maven2/net/red5/
+      on 2026-09-04 -> HTTP 404; the group does not exist on Maven Central. Red5's own
+      docs say the package is not published yet and to contact support for it.
+  - language: go
+    registry: proxy.golang.org
+    name: github.com/red5pro/red5-bcs-go
+    url: https://www.red5.net/docs/red5-cloud/development/sdks/backend-sdk/go-golang/
+    official: true
+    version: null
+    published: null
+    note: >-
+      Documented Go Backend SDK import path. proxy.golang.org/@latest on 2026-09-04
+      returned "not found: module github.com/red5pro/red5-bcs-go" — the repository is
+      not public. Red5's docs say to contact support for the package.
+  - language: swift
+    registry: none
+    name: Red5 Pro iOS SDK
+    url: https://github.com/red5pro/red5pro-ios-sdk
+    official: true
+    version: null
+    published: null
+    note: >-
+      Distributed as a binary framework from the red5pro-ios-sdk GitHub distribution
+      repo. Probed CocoaPods trunk for R5Streaming and Red5Pro on 2026-09-04 -> both
+      404; not on CocoaPods or Maven.
+  - language: java
+    registry: none
+    name: Red5 Pro Android SDK
+    url: https://github.com/red5pro/red5pro-android-testbed
+    official: true
+    version: null
+    published: null
+    note: >-
+      Distributed as an AAR through Red5's account portal / GitHub testbed rather than
+      Maven Central. No net.red5 or com.red5pro group exists on repo1.maven.org.
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/aws
+    url: https://registry.terraform.io/modules/red5pro/red5pro/aws
+    install: 'module "red5pro" { source = "red5pro/red5pro/aws" version = "2.5.0" }'
+    repository: https://github.com/red5pro/terraform-aws-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/azure
+    url: https://registry.terraform.io/modules/red5pro/red5pro/azure
+    repository: https://github.com/red5pro/terraform-azure-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/gcp
+    url: https://registry.terraform.io/modules/red5pro/red5pro/gcp
+    repository: https://github.com/red5pro/terraform-gcp-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/oci
+    url: https://registry.terraform.io/modules/red5pro/red5pro/oci
+    repository: https://github.com/red5pro/terraform-oci-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/linode
+    url: https://registry.terraform.io/modules/red5pro/red5pro/linode
+    repository: https://github.com/red5pro/terraform-linode-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: hcl
+    registry: terraform
+    name: red5pro/red5pro/digitalocean
+    url: https://registry.terraform.io/modules/red5pro/red5pro/digitalocean
+    repository: https://github.com/red5pro/terraform-digitalocean-red5pro
+    official: true
+    version: 2.5.0
+    published: '2026-08-14'
+  - language: javascript
+    registry: npm
+    name: red5pro-conference-sdk
+    url: https://www.npmjs.com/package/red5pro-conference-sdk
+    install: npm install red5pro-conference-sdk
+    repository: https://github.com/red5pro/red5pro-conference-sdk
+    official: true
+    version: 1.0.7
+    published: '2026-06-25'
+    note: Browser conferencing SDK for Red5 Cloud TrueTime Meetings.
+  - language: javascript
+    registry: npm
+    name: react-native-red5pro
+    url: https://www.npmjs.com/package/react-native-red5pro
+    install: npm install react-native-red5pro
+    repository: https://github.com/red5pro/react-native-red5pro
+    official: true
+    version: 10.0.1
+    published: '2022-08-22'
+    note: >-
+      React Native publisher/subscriber. ABANDONED — last release 2022-08-22, four years
+      behind the 15.6.1 HTML SDK, and the GitHub repository itself now says "This
+      repository uses a deprecated SDK. See README for more". Recorded as a decay signal,
+      not a recommendation.
+summary:
+  total: 22
+  official: 22
+  abandoned: [react-native-red5pro]
+  registries_with_a_published_release: [npm, maven, terraform]
+  documented_but_unpublished: [net.red5:red5-bcs-java, github.com/red5pro/red5-bcs-go]
+  unpinned_distributions: [jsDelivr red5pro-webrtc-sdk@latest]

@@ -1,0 +1,99 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://www.red5.net/docs/red5-pro/resources/release-notes/,
+  https://www.red5.net/docs/red5-cloud/resources/release-notes/
+scheme: semver
+note: >-
+  Red5 keeps two dated changelogs — one for the Red5 Pro Server (self-hosted software)
+  and one for Red5 Cloud (the managed PaaS). Both are per-release pages with dates,
+  grouped into New Features / Improvements / Bug Fixes. Neither marks breaking changes
+  as such; the 15.0.0 SDK client removal and the 16.0.0 server release are only
+  identifiable as breaking by reading the entries. Full history back to 13.0.0 is kept
+  online, plus a separate known-issues page and a CVE archive.
+changelogs:
+  - name: Red5 Pro Server
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/
+    current_version: 16.0.0
+    current_released: '2026-08-27'
+  - name: Red5 Cloud
+    url: https://www.red5.net/docs/red5-cloud/resources/release-notes/
+    current_version: 1.14.1
+    current_released: '2026-05-21'
+  - name: Red5 HTML (WebRTC) SDK
+    url: https://www.npmjs.com/package/red5pro-webrtc-sdk
+    current_version: 15.6.1
+    current_released: '2026-07-30'
+  - name: Red5 open-source media server (Maven)
+    url: https://repo1.maven.org/maven2/org/red5/red5-server/
+    current_version: 2.0.41
+    current_released: '2026-09-04'
+entries:
+  - version: 16.0.0
+    product: Red5 Pro Server
+    date: '2026-08-27'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-16.0.0/
+    breaking: unmarked
+    additions:
+      - Stream Manager automatically selects the closest region based on client IP address.
+      - Stream Manager capacity expressions min() and max().
+      - Stream Manager AI node type supporting Speech-To-Text.
+      - Plugin for ad insertion into active streams.
+    highlights:
+      - Mixer stream puller consumes the onFI wall-clock beacon from the pulled stream.
+      - VOD manifest recording segment log persists and resumes across disconnect/reconnect.
+      - Fixes to DASH ABR manifest bandwidth, Brew Mixer drag-and-drop z-order and volume UI, an SRT origin memory leak, and Video Packager pixelation.
+  - version: 15.6.0
+    product: Red5 Pro Server
+    date: '2026-07-07'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-15.6.0/
+    additions:
+      - AV1 codec supported for ingest and egress across all supported protocols.
+  - version: 15.5.3
+    product: Red5 Pro Server
+    date: '2026-05-29'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-15.5.3/
+    additions:
+      - Video Packager status queries for live streams.
+      - Stream Manager Proxy added to Video Packager nodes.
+      - Video Packager recording with environment-variable output configuration.
+  - version: 15.5.1
+    product: Red5 Pro Server
+    date: '2026-05-19'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-15.5.1/
+    additions:
+      - WHIP plugin supports RTX (RFC 4588 RTP Retransmission) for WHIP and WHEP video.
+      - as-terraform accepts a list of instance types.
+  - version: 15.5.0
+    product: Red5 Pro Server
+    date: '2026-04-28'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-15.5.0/
+    additions:
+      - Red5 Analytics and Metrics for Growth customers.
+      - HLS streaming available in Red5 Cloud.
+      - CORS configuration.
+  - version: 15.4.0
+    product: Red5 Pro Server
+    date: '2026-04-17'
+    url: https://www.red5.net/docs/red5-pro/resources/release-notes/red5-pro-release-notes-15.4.0/
+    additions:
+      - MoQ (Media over QUIC) protocol support.
+      - Video packaging for specific streams.
+      - Scaling-expectations scheduling API.
+  - version: 1.14.1
+    product: Red5 Cloud
+    date: '2026-05-21'
+    url: https://www.red5.net/docs/red5-cloud/resources/release-notes/red5-cloud-1.14.1/
+    additions:
+      - Analytics dashboard available to Growth and Enterprise customers.
+  - version: 15.0.0
+    product: Red5 HTML (WebRTC) SDK
+    date: null
+    breaking: true
+    url: https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/
+    highlights:
+      - >-
+        Full TypeScript rewrite. RTCPublisher and RTCSubscriber (the WebSocket-signalled
+        clients) were REMOVED; WHIPClient and WHEPClient are now the only clients.
+        Migration is a drop-in class swap with the same init()/publish()/subscribe()
+        calls, but code referencing the removed classes will not run.

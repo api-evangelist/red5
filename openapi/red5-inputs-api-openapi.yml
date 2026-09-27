@@ -122,6 +122,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     accessTokenParam:
       name: accessToken
@@ -144,26 +163,32 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    MixerInput:
+      type: object
+      description: An input stream source within a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique input identifier within the mixer
+        streamName:
+          type: string
+          description: Name of the input stream
+        x:
+          type: integer
+          description: Horizontal position in pixels from left of output frame
+        y:
+          type: integer
+          description: Vertical position in pixels from top of output frame
+        width:
+          type: integer
+          description: Display width in pixels within output frame
+        height:
+          type: integer
+          description: Display height in pixels within output frame
+        zOrder:
+          type: integer
+          description: Z-order layer (higher values appear on top)
     MixerInputCreate:
       type: object
       description: Parameters for adding or updating a mixer input
@@ -201,31 +226,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-    MixerInput:
-      type: object
-      description: An input stream source within a mixer session
-      properties:
-        id:
-          type: string
-          description: Unique input identifier within the mixer
-        streamName:
-          type: string
-          description: Name of the input stream
-        x:
-          type: integer
-          description: Horizontal position in pixels from left of output frame
-        y:
-          type: integer
-          description: Vertical position in pixels from top of output frame
-        width:
-          type: integer
-          description: Display width in pixels within output frame
-        height:
-          type: integer
-          description: Display height in pixels within output frame
-        zOrder:
-          type: integer
-          description: Z-order layer (higher values appear on top)
   securitySchemes:
     accessToken:
       type: apiKey

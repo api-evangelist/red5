@@ -73,6 +73,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     accessTokenParam:
       name: accessToken
@@ -81,33 +94,7 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ProvisionResponse:
-      type: object
-      description: Response from a provision create or delete operation
-      properties:
-        result:
-          type: boolean
-          description: True if the operation completed successfully
-        message:
-          type: string
-          description: Human-readable result message
-        streamName:
-          type: string
-          description: Name of the stream affected by the operation
     ProvisionDelete:
       type: object
       description: Parameters to identify the provision to delete
@@ -121,6 +108,29 @@ components:
           type: string
           description: Red5 Pro application scope containing the stream
           default: live
+    ProvisionResponse:
+      type: object
+      description: Response from a provision create or delete operation
+      properties:
+        result:
+          type: boolean
+          description: True if the operation completed successfully
+        message:
+          type: string
+          description: Human-readable result message
+        streamName:
+          type: string
+          description: Name of the stream affected by the operation
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     FileRestreamProvision:
       type: object
       description: Configuration for restreaming a pre-recorded file as a live stream
@@ -142,16 +152,6 @@ components:
           type: boolean
           description: Whether to loop the file continuously when playback ends
           default: false
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
   securitySchemes:
     accessToken:
       type: apiKey

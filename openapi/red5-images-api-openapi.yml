@@ -90,30 +90,15 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    imageIdParam:
-      name: imageId
-      in: path
-      description: Unique identifier for the image overlay
-      required: true
-      schema:
-        type: string
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
   responses:
-    BadRequest:
-      description: Request body or parameters are invalid
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
+    BadRequest:
+      description: Request body or parameters are invalid
       content:
         application/json:
           schema:
@@ -160,6 +145,21 @@ components:
         message:
           type: string
           description: Human-readable error message
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    imageIdParam:
+      name: imageId
+      in: path
+      description: Unique identifier for the image overlay
+      required: true
+      schema:
+        type: string
   securitySchemes:
     accessToken:
       type: apiKey

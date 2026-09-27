@@ -106,6 +106,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     accessTokenParam:
       name: accessToken
@@ -121,26 +140,35 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Mixer:
+      type: object
+      description: A mixer session combining multiple input streams into a composite output
+      properties:
+        id:
+          type: string
+          description: Unique mixer session identifier
+        outputStreamName:
+          type: string
+          description: Name of the composite output stream
+        outputWidth:
+          type: integer
+          description: Output frame width in pixels
+        outputHeight:
+          type: integer
+          description: Output frame height in pixels
+        outputFrameRate:
+          type: number
+          description: Output frame rate in frames per second
+        outputBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        inputCount:
+          type: integer
+          description: Number of currently connected input streams
+        status:
+          type: string
+          description: Mixer operational status (active, idle, error)
     MixerCreate:
       type: object
       description: Parameters for creating a new mixer session
@@ -179,34 +207,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-    Mixer:
-      type: object
-      description: A mixer session combining multiple input streams into a composite output
-      properties:
-        id:
-          type: string
-          description: Unique mixer session identifier
-        outputStreamName:
-          type: string
-          description: Name of the composite output stream
-        outputWidth:
-          type: integer
-          description: Output frame width in pixels
-        outputHeight:
-          type: integer
-          description: Output frame height in pixels
-        outputFrameRate:
-          type: number
-          description: Output frame rate in frames per second
-        outputBitrate:
-          type: integer
-          description: Output video bitrate in bits per second
-        inputCount:
-          type: integer
-          description: Number of currently connected input streams
-        status:
-          type: string
-          description: Mixer operational status (active, idle, error)
   securitySchemes:
     accessToken:
       type: apiKey

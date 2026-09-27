@@ -83,32 +83,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Node:
-      type: object
-      description: A single Red5 Pro streaming node
-      properties:
-        id:
-          type: string
-          description: Node identifier
-        host:
-          type: string
-          description: Node hostname or IP address
-        status:
-          type: string
-          description: Operational status of the node
-        activeStreams:
-          type: integer
-          description: Number of currently active streams on this node
-        connectedClients:
-          type: integer
-          description: Number of currently connected clients
-        cpuLoad:
-          type: number
-          description: Current CPU utilization percentage
-        memoryUsed:
-          type: integer
-          description: Memory currently in use in bytes
     NodeGroup:
       type: object
       description: A group of Red5 Pro streaming nodes managed by Stream Manager
@@ -134,16 +122,6 @@ components:
         status:
           type: string
           description: Operational status of the node group
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
     SystemInfo:
       type: object
       description: Stream Manager system information
@@ -163,6 +141,41 @@ components:
         freeMemory:
           type: integer
           description: Free JVM memory in bytes
+    Node:
+      type: object
+      description: A single Red5 Pro streaming node
+      properties:
+        id:
+          type: string
+          description: Node identifier
+        host:
+          type: string
+          description: Node hostname or IP address
+        status:
+          type: string
+          description: Operational status of the node
+        activeStreams:
+          type: integer
+          description: Number of currently active streams on this node
+        connectedClients:
+          type: integer
+          description: Number of currently connected clients
+        cpuLoad:
+          type: number
+          description: Current CPU utilization percentage
+        memoryUsed:
+          type: integer
+          description: Memory currently in use in bytes
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
   parameters:
     nodeGroupNameParam:
       name: nodeGroupName
@@ -171,19 +184,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

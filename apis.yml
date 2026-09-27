@@ -4,15 +4,21 @@ description: Red5 provides real-time streaming infrastructure for live video and
 type: Index
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - red5pro/red5pro-webrtc-sdk
+    - red5pro/streaming-android
+    - red5pro/streaming-ios
+  open_source: unknown
   commercial: true
   callable_host: false
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: low
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -400,7 +406,7 @@ apis:
   - gaming-esports
   - REST API
   - llms-txt
-  - Open-Source
+  - Open Source
   tags_raw:
   - video-streaming
   - live-streaming
@@ -417,6 +423,7 @@ apis:
   - rest-api
   - llms-txt
   - open-source
+  - Open-Source
   properties:
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/server/
@@ -439,7 +446,7 @@ apis:
   - gaming-esports
   - REST API
   - llms-txt
-  - Open-Source
+  - Open Source
   tags_raw:
   - video-streaming
   - live-streaming
@@ -456,13 +463,13 @@ apis:
   - rest-api
   - llms-txt
   - open-source
+  - Open-Source
   properties:
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
 - name: Red5 Agent-Native Surface
   description: Publicly hosted llms.txt providing a structured index of Red5 products, use cases, and documentation for AI agents.
   humanURL: https://www.red5.net/developer-zone/
-  baseURL: https://www.red5.net
   tags:
   - Video Streaming
   - Live Streaming
@@ -478,7 +485,7 @@ apis:
   - gaming-esports
   - REST API
   - llms-txt
-  - Open-Source
+  - Open Source
   tags_raw:
   - video-streaming
   - live-streaming
@@ -495,6 +502,7 @@ apis:
   - rest-api
   - llms-txt
   - open-source
+  - Open-Source
   properties:
   - type: LLMsTxt
     url: https://www.red5.net/llms.txt

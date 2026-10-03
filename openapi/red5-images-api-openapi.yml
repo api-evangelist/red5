@@ -91,6 +91,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or access token is missing or invalid
       content:
@@ -103,13 +109,32 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    imageIdParam:
+      name: imageId
+      in: path
+      description: Unique identifier for the image overlay
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     ImageOverlay:
       type: object
       description: An image overlay applied to a mixer session
@@ -135,31 +160,6 @@ components:
         zOrder:
           type: integer
           description: Z-order layer position
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-    imageIdParam:
-      name: imageId
-      in: path
-      description: Unique identifier for the image overlay
-      required: true
-      schema:
-        type: string
   securitySchemes:
     accessToken:
       type: apiKey

@@ -73,41 +73,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
   schemas:
-    ProvisionDelete:
-      type: object
-      description: Parameters to identify the provision to delete
-      required:
-      - streamName
-      properties:
-        streamName:
-          type: string
-          description: Name of the stream whose provision should be removed
-        appName:
-          type: string
-          description: Red5 Pro application scope containing the stream
-          default: live
     ProvisionResponse:
       type: object
       description: Response from a provision create or delete operation
@@ -131,6 +97,19 @@ components:
         message:
           type: string
           description: Human-readable error message
+    ProvisionDelete:
+      type: object
+      description: Parameters to identify the provision to delete
+      required:
+      - streamName
+      properties:
+        streamName:
+          type: string
+          description: Name of the stream whose provision should be removed
+        appName:
+          type: string
+          description: Red5 Pro application scope containing the stream
+          default: live
     FileRestreamProvision:
       type: object
       description: Configuration for restreaming a pre-recorded file as a live stream
@@ -152,6 +131,27 @@ components:
           type: boolean
           description: Whether to loop the file continuously when playback ends
           default: false
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey

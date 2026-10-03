@@ -106,40 +106,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-    mixerIdParam:
-      name: mixerId
-      in: path
-      description: Unique identifier for the mixer session
-      required: true
-      schema:
-        type: string
   schemas:
     Mixer:
       type: object
@@ -169,6 +135,16 @@ components:
         status:
           type: string
           description: Mixer operational status (active, idle, error)
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     MixerCreate:
       type: object
       description: Parameters for creating a new mixer session
@@ -197,16 +173,40 @@ components:
         backgroundColor:
           type: string
           description: Background fill color in hex format (e.g.,
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
   securitySchemes:
     accessToken:
       type: apiKey

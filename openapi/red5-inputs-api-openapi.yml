@@ -123,6 +123,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or access token is missing or invalid
       content:
@@ -135,24 +141,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
     inputIdParam:
       name: inputId
       in: path
       description: Unique identifier for the mixer input
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
       required: true
       schema:
         type: string
@@ -164,6 +164,16 @@ components:
       schema:
         type: string
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     MixerInput:
       type: object
       description: An input stream source within a mixer session
@@ -216,16 +226,6 @@ components:
           type: integer
           description: Z-order layer position
           default: 0
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
   securitySchemes:
     accessToken:
       type: apiKey

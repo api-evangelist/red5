@@ -84,19 +84,37 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     NodeGroup:
       type: object
       description: A group of Red5 Pro streaming nodes managed by Stream Manager
@@ -122,25 +140,6 @@ components:
         status:
           type: string
           description: Operational status of the node group
-    SystemInfo:
-      type: object
-      description: Stream Manager system information
-      properties:
-        version:
-          type: string
-          description: Stream Manager version string
-        javaVersion:
-          type: string
-          description: Java runtime version
-        uptime:
-          type: integer
-          description: Process uptime in milliseconds
-        totalMemory:
-          type: integer
-          description: Total JVM memory in bytes
-        freeMemory:
-          type: integer
-          description: Free JVM memory in bytes
     Node:
       type: object
       description: A single Red5 Pro streaming node
@@ -166,24 +165,25 @@ components:
         memoryUsed:
           type: integer
           description: Memory currently in use in bytes
-    Error:
+    SystemInfo:
       type: object
-      description: Error response
+      description: Stream Manager system information
       properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
+        version:
           type: string
-          description: Human-readable error message
-  parameters:
-    nodeGroupNameParam:
-      name: nodeGroupName
-      in: path
-      description: Name of the node group (cluster) to target
-      required: true
-      schema:
-        type: string
+          description: Stream Manager version string
+        javaVersion:
+          type: string
+          description: Java runtime version
+        uptime:
+          type: integer
+          description: Process uptime in milliseconds
+        totalMemory:
+          type: integer
+          description: Total JVM memory in bytes
+        freeMemory:
+          type: integer
+          description: Free JVM memory in bytes
   securitySchemes:
     bearerAuth:
       type: http

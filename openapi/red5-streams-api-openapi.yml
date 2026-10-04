@@ -64,13 +64,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    streamGuidParam:
-      name: streamGuid
-      in: path
-      description: Unique identifier (GUID) for the stream
-      required: true
-      schema:
-        type: string
     nodeGroupNameParam:
       name: nodeGroupName
       in: path
@@ -78,19 +71,13 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
   schemas:
     Error:
       type: object
@@ -121,6 +108,19 @@ components:
         app:
           type: string
           description: Application scope name on the target node
+  responses:
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

@@ -40,6 +40,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
     RestreamerConfig:
       type: object
       description: Server-level restreamer plugin configuration
@@ -56,16 +66,6 @@ components:
         reconnectDelay:
           type: integer
           description: Delay between reconnect attempts in milliseconds
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
   responses:
     Unauthorized:
       description: Authentication failed or access token is missing or invalid

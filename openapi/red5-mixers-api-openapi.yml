@@ -106,35 +106,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
   schemas:
-    Mixer:
-      type: object
-      description: A mixer session combining multiple input streams into a composite output
-      properties:
-        id:
-          type: string
-          description: Unique mixer session identifier
-        outputStreamName:
-          type: string
-          description: Name of the composite output stream
-        outputWidth:
-          type: integer
-          description: Output frame width in pixels
-        outputHeight:
-          type: integer
-          description: Output frame height in pixels
-        outputFrameRate:
-          type: number
-          description: Output frame rate in frames per second
-        outputBitrate:
-          type: integer
-          description: Output video bitrate in bits per second
-        inputCount:
-          type: integer
-          description: Number of currently connected input streams
-        status:
-          type: string
-          description: Mixer operational status (active, idle, error)
     Error:
       type: object
       description: Error response
@@ -173,9 +160,37 @@ components:
         backgroundColor:
           type: string
           description: Background fill color in hex format (e.g.,
+    Mixer:
+      type: object
+      description: A mixer session combining multiple input streams into a composite output
+      properties:
+        id:
+          type: string
+          description: Unique mixer session identifier
+        outputStreamName:
+          type: string
+          description: Name of the composite output stream
+        outputWidth:
+          type: integer
+          description: Output frame width in pixels
+        outputHeight:
+          type: integer
+          description: Output frame height in pixels
+        outputFrameRate:
+          type: number
+          description: Output frame rate in frames per second
+        outputBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        inputCount:
+          type: integer
+          description: Number of currently connected input streams
+        status:
+          type: string
+          description: Mixer operational status (active, idle, error)
   responses:
-    NotFound:
-      description: The requested resource was not found
+    BadRequest:
+      description: Request body or parameters are invalid
       content:
         application/json:
           schema:
@@ -186,27 +201,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
+    NotFound:
+      description: The requested resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
-    mixerIdParam:
-      name: mixerId
-      in: path
-      description: Unique identifier for the mixer session
-      required: true
-      schema:
-        type: string
   securitySchemes:
     accessToken:
       type: apiKey

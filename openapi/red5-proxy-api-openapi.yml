@@ -80,13 +80,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    streamGuidParam:
-      name: streamGuid
-      in: path
-      description: Unique identifier (GUID) for the stream
-      required: true
-      schema:
-        type: string
     nodeGroupNameParam:
       name: nodeGroupName
       in: path
@@ -94,6 +87,26 @@ components:
       required: true
       schema:
         type: string
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -105,19 +118,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-  responses:
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

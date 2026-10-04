@@ -122,30 +122,11 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    inputIdParam:
-      name: inputId
+    mixerIdParam:
+      name: mixerId
       in: path
-      description: Unique identifier for the mixer input
+      description: Unique identifier for the mixer session
       required: true
       schema:
         type: string
@@ -156,10 +137,10 @@ components:
       required: true
       schema:
         type: string
-    mixerIdParam:
-      name: mixerId
+    inputIdParam:
+      name: inputId
       in: path
-      description: Unique identifier for the mixer session
+      description: Unique identifier for the mixer input
       required: true
       schema:
         type: string
@@ -226,6 +207,25 @@ components:
           type: integer
           description: Z-order layer position
           default: 0
+  responses:
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessToken:
       type: apiKey

@@ -123,10 +123,10 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    mixerIdParam:
-      name: mixerId
+    inputIdParam:
+      name: inputId
       in: path
-      description: Unique identifier for the mixer session
+      description: Unique identifier for the mixer input
       required: true
       schema:
         type: string
@@ -137,49 +137,33 @@ components:
       required: true
       schema:
         type: string
-    inputIdParam:
-      name: inputId
+    mixerIdParam:
+      name: mixerId
       in: path
-      description: Unique identifier for the mixer input
+      description: Unique identifier for the mixer session
       required: true
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-    MixerInput:
-      type: object
-      description: An input stream source within a mixer session
-      properties:
-        id:
-          type: string
-          description: Unique input identifier within the mixer
-        streamName:
-          type: string
-          description: Name of the input stream
-        x:
-          type: integer
-          description: Horizontal position in pixels from left of output frame
-        y:
-          type: integer
-          description: Vertical position in pixels from top of output frame
-        width:
-          type: integer
-          description: Display width in pixels within output frame
-        height:
-          type: integer
-          description: Display height in pixels within output frame
-        zOrder:
-          type: integer
-          description: Z-order layer (higher values appear on top)
     MixerInputCreate:
       type: object
       description: Parameters for adding or updating a mixer input
@@ -207,25 +191,41 @@ components:
           type: integer
           description: Z-order layer position
           default: 0
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    MixerInput:
+      type: object
+      description: An input stream source within a mixer session
+      properties:
+        id:
+          type: string
+          description: Unique input identifier within the mixer
+        streamName:
+          type: string
+          description: Name of the input stream
+        x:
+          type: integer
+          description: Horizontal position in pixels from left of output frame
+        y:
+          type: integer
+          description: Vertical position in pixels from top of output frame
+        width:
+          type: integer
+          description: Display width in pixels within output frame
+        height:
+          type: integer
+          description: Display height in pixels within output frame
+        zOrder:
+          type: integer
+          description: Z-order layer (higher values appear on top)
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     accessToken:
       type: apiKey

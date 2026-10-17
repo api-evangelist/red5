@@ -106,60 +106,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    mixerIdParam:
-      name: mixerId
-      in: path
-      description: Unique identifier for the mixer session
-      required: true
-      schema:
-        type: string
-    accessTokenParam:
-      name: accessToken
-      in: query
-      description: API access token for authentication
-      required: true
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
-          type: string
-          description: Human-readable error message
-    MixerCreate:
-      type: object
-      description: Parameters for creating a new mixer session
-      required:
-      - outputStreamName
-      - outputWidth
-      - outputHeight
-      properties:
-        outputStreamName:
-          type: string
-          description: Name for the composite output stream
-        outputWidth:
-          type: integer
-          description: Output frame width in pixels
-        outputHeight:
-          type: integer
-          description: Output frame height in pixels
-        outputFrameRate:
-          type: number
-          description: Output frame rate in frames per second
-          default: 30
-        outputBitrate:
-          type: integer
-          description: Output video bitrate in bits per second
-          default: 2000000
-        backgroundColor:
-          type: string
-          description: Background fill color in hex format (e.g.,
     Mixer:
       type: object
       description: A mixer session combining multiple input streams into a composite output
@@ -188,25 +154,59 @@ components:
         status:
           type: string
           description: Mixer operational status (active, idle, error)
-  responses:
-    BadRequest:
-      description: Request body or parameters are invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or access token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    MixerCreate:
+      type: object
+      description: Parameters for creating a new mixer session
+      required:
+      - outputStreamName
+      - outputWidth
+      - outputHeight
+      properties:
+        outputStreamName:
+          type: string
+          description: Name for the composite output stream
+        outputWidth:
+          type: integer
+          description: Output frame width in pixels
+        outputHeight:
+          type: integer
+          description: Output frame height in pixels
+        outputFrameRate:
+          type: number
+          description: Output frame rate in frames per second
+          default: 30
+        outputBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+          default: 2000000
+        backgroundColor:
+          type: string
+          description: Background fill color in hex format (e.g.,
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    accessTokenParam:
+      name: accessToken
+      in: query
+      description: API access token for authentication
+      required: true
+      schema:
+        type: string
+    mixerIdParam:
+      name: mixerId
+      in: path
+      description: Unique identifier for the mixer session
+      required: true
+      schema:
+        type: string
   securitySchemes:
     accessToken:
       type: apiKey

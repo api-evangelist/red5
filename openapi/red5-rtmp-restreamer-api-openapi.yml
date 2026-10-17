@@ -100,39 +100,26 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ProvisionResponse:
+    RtmpProvision:
       type: object
-      description: Response from a provision create or delete operation
+      description: Configuration for an RTMP push restreaming provision
+      required:
+      - streamName
+      - destinations
       properties:
-        result:
-          type: boolean
-          description: True if the operation completed successfully
-        message:
-          type: string
-          description: Human-readable result message
         streamName:
           type: string
-          description: Name of the stream affected by the operation
-    RtmpDestination:
-      type: object
-      description: An external RTMP destination for stream retransmission
-      required:
-      - url
-      - streamKey
-      properties:
-        url:
+          description: Name of the source live stream to retransmit
+        appName:
           type: string
-          description: RTMP or RTMPS ingest URL of the destination (e.g., rtmp://a.rtmp.youtube.com/live2)
-        streamKey:
-          type: string
-          description: Stream key for the destination platform
-        protocol:
-          type: string
-          enum:
-          - rtmp
-          - rtmps
-          description: Transport protocol to use for this destination
-          default: rtmp
+          description: Red5 Pro application scope containing the source stream
+          default: live
+        destinations:
+          type: array
+          description: List of RTMP destination endpoints
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/RtmpDestination'
     ProvisionDelete:
       type: object
       description: Parameters to identify the provision to delete
@@ -146,6 +133,19 @@ components:
           type: string
           description: Red5 Pro application scope containing the stream
           default: live
+    ProvisionResponse:
+      type: object
+      description: Response from a provision create or delete operation
+      properties:
+        result:
+          type: boolean
+          description: True if the operation completed successfully
+        message:
+          type: string
+          description: Human-readable result message
+        streamName:
+          type: string
+          description: Name of the stream affected by the operation
     Error:
       type: object
       description: Error response
@@ -176,26 +176,26 @@ components:
           type: string
           description: Red5 Pro application scope to publish the pulled stream into
           default: live
-    RtmpProvision:
+    RtmpDestination:
       type: object
-      description: Configuration for an RTMP push restreaming provision
+      description: An external RTMP destination for stream retransmission
       required:
-      - streamName
-      - destinations
+      - url
+      - streamKey
       properties:
-        streamName:
+        url:
           type: string
-          description: Name of the source live stream to retransmit
-        appName:
+          description: RTMP or RTMPS ingest URL of the destination (e.g., rtmp://a.rtmp.youtube.com/live2)
+        streamKey:
           type: string
-          description: Red5 Pro application scope containing the source stream
-          default: live
-        destinations:
-          type: array
-          description: List of RTMP destination endpoints
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/RtmpDestination'
+          description: Stream key for the destination platform
+        protocol:
+          type: string
+          enum:
+          - rtmp
+          - rtmps
+          description: Transport protocol to use for this destination
+          default: rtmp
   responses:
     BadRequest:
       description: Request body or parameters are invalid

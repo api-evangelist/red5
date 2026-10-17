@@ -74,19 +74,16 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ProvisionResponse:
+    Error:
       type: object
-      description: Response from a provision create or delete operation
+      description: Error response
       properties:
-        result:
-          type: boolean
-          description: True if the operation completed successfully
+        code:
+          type: integer
+          description: HTTP status code
         message:
           type: string
-          description: Human-readable result message
-        streamName:
-          type: string
-          description: Name of the stream affected by the operation
+          description: Human-readable error message
     ProvisionDelete:
       type: object
       description: Parameters to identify the provision to delete
@@ -100,16 +97,19 @@ components:
           type: string
           description: Red5 Pro application scope containing the stream
           default: live
-    Error:
+    ProvisionResponse:
       type: object
-      description: Error response
+      description: Response from a provision create or delete operation
       properties:
-        code:
-          type: integer
-          description: HTTP status code
+        result:
+          type: boolean
+          description: True if the operation completed successfully
         message:
           type: string
-          description: Human-readable error message
+          description: Human-readable result message
+        streamName:
+          type: string
+          description: Name of the stream affected by the operation
     FileRestreamProvision:
       type: object
       description: Configuration for restreaming a pre-recorded file as a live stream

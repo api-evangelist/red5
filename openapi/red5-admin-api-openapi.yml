@@ -83,14 +83,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    nodeGroupNameParam:
-      name: nodeGroupName
-      in: path
-      description: Name of the node group (cluster) to target
-      required: true
-      schema:
-        type: string
   schemas:
     Error:
       type: object
@@ -172,18 +164,26 @@ components:
           type: string
           description: Operational status of the node group
   responses:
-    Unauthorized:
-      description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or bearer token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

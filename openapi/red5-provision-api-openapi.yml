@@ -84,32 +84,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    nodeGroupNameParam:
-      name: nodeGroupName
-      in: path
-      description: Name of the node group (cluster) to target
-      required: true
-      schema:
-        type: string
-    streamGuidParam:
-      name: streamGuid
-      in: path
-      description: Unique identifier (GUID) for the stream
-      required: true
-      schema:
-        type: string
   schemas:
-    Error:
+    TranscodeVariant:
       type: object
-      description: Error response
+      description: A single output variant in the transcoding ladder
       properties:
-        code:
-          type: integer
-          description: HTTP status code
-        message:
+        level:
           type: string
-          description: Human-readable error message
+          description: Variant level name (e.g., low, mid, high)
+        videoWidth:
+          type: integer
+          description: Output video width in pixels
+        videoHeight:
+          type: integer
+          description: Output video height in pixels
+        videoBitrate:
+          type: integer
+          description: Output video bitrate in bits per second
+        audioBitrate:
+          type: integer
+          description: Output audio bitrate in bits per second
     StreamProvision:
       type: object
       description: Provisioning configuration for a stream
@@ -134,26 +128,38 @@ components:
           description: List of transcode output variants
           items:
             $ref: '#/components/schemas/TranscodeVariant'
-    TranscodeVariant:
+    Error:
       type: object
-      description: A single output variant in the transcoding ladder
+      description: Error response
       properties:
-        level:
+        code:
+          type: integer
+          description: HTTP status code
+        message:
           type: string
-          description: Variant level name (e.g., low, mid, high)
-        videoWidth:
-          type: integer
-          description: Output video width in pixels
-        videoHeight:
-          type: integer
-          description: Output video height in pixels
-        videoBitrate:
-          type: integer
-          description: Output video bitrate in bits per second
-        audioBitrate:
-          type: integer
-          description: Output audio bitrate in bits per second
+          description: Human-readable error message
+  parameters:
+    streamGuidParam:
+      name: streamGuid
+      in: path
+      description: Unique identifier (GUID) for the stream
+      required: true
+      schema:
+        type: string
+    nodeGroupNameParam:
+      name: nodeGroupName
+      in: path
+      description: Name of the node group (cluster) to target
+      required: true
+      schema:
+        type: string
   responses:
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Request body or parameters are invalid
       content:
@@ -162,12 +168,6 @@ components:
             $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or bearer token is missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found
       content:
         application/json:
           schema:

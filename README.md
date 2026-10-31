@@ -1,4 +1,4 @@
-# Red5 (red5)
+# Red5
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,275 +66,234 @@
 
 Red5 provides real-time streaming infrastructure for live video and audio delivery at scale. The Red5 Pro platform includes a media server, Stream Manager 2.0 for autoscaling cloud deployments, the Brew Mixer for composite stream production, a Restreamer for pushing live streams to social media and RTMP destinations, and WebRTC and native SDKs for browser and mobile integration. Red5 APIs enable programmatic management of streams, mixers, restreaming, cluster orchestration, and node monitoring. Use cases include live events, sports broadcasting, interactive video, gaming, surveillance, and enterprise communications requiring ultra-low latency streaming.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/red5/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/red5/refs/heads/main/apis.yml)
+**Areas:** Live Streaming · Media · Real-Time · RTMP · Streaming · Video · WebRTC
 
-## Scope
+## Red5 on APIs.io
 
-- **Type:** Index
+Everything profiled for Red5 is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/red5/](https://apis.io/providers/red5/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (17)
 
-- Live Streaming
-- Media
-- Real-Time
-- RTMP
-- Streaming
-- Video
-- WebRTC
+- [Red5 Pro WebRTC SDK](https://apis.io/apis/red5/webrtc-sdk/) — The Red5 Pro WebRTC SDK is a JavaScript library for integrating low-latency live streaming publish and subscribe capabilities into web applications. It…
+- [Red5 Core SDK](https://apis.io/apis/red5/core-sdk/) — The Red5 Core SDK is a native client library for building real-time streaming applications on Linux, Windows, and macOS desktop platforms. It offers…
+- [Red5 Pro iOS Streaming SDK](https://apis.io/apis/red5/ios-sdk/) — The Red5 Pro iOS Streaming SDK is a native iOS library for integrating real-time live streaming publish and subscribe capabilities into iOS applications. It…
+- [Red5 Pro Android Streaming SDK](https://apis.io/apis/red5/android-sdk/) — The Red5 Pro Android Streaming SDK is a native Android library for integrating real-time live streaming publish and subscribe capabilities into Android…
+- [Red5 Admin API](https://apis.io/apis/red5/red5-admin-api/) — Node metrics, system info, and autoscaling management
+- [Red5 File Restreamer API](https://apis.io/apis/red5/red5-file-restreamer-api/) — Restream recorded FLV or MP4 files as pseudo-live streams
+- [Red5 Images API](https://apis.io/apis/red5/red5-images-api/) — Image overlay management for mixer sessions
+- [Red5 Inputs API](https://apis.io/apis/red5/red5-inputs-api/) — Input stream management for mixer sessions
+- [Red5 Mixers API](https://apis.io/apis/red5/red5-mixers-api/) — Mixer session lifecycle management
+- [Red5 Provision API](https://apis.io/apis/red5/red5-provision-api/) — Stream provisioning, authentication, and configuration
+- [Red5 Proxy API](https://apis.io/apis/red5/red5-proxy-api/) — WHIP, WHEP, and WebSocket proxy endpoints
+- [Red5 RTMP Restreamer API](https://apis.io/apis/red5/red5-rtmp-restreamer-api/) — Configure RTMP and RTMPS push/pull restreaming
+- [Red5 Servlet Configuration API](https://apis.io/apis/red5/red5-servlet-configuration-api/) — Server-level restreamer plugin configuration
+- [Red5 Streams API](https://apis.io/apis/red5/red5-streams-api/) — Live stream enumeration, statistics, and control
+- [Red5 Pro Server API](https://apis.io/apis/red5/red5-pro-server-api/) — REST/JSON API embedded in the Red5 Pro media server providing server info/ping/statistics, applications, streams, recorded content (VOD), shared objects,…
+- [Stream Manager 2.0 API](https://apis.io/apis/red5/stream-manager-20-api/) — REST/JSON API used by both Red5 Pro clusters and Red5 Cloud for Auth, Admin, Proxy, Streams, Streams Provision, Streams Mixer, and Scheduling NodeGroups.…
+- [Red5 Agent-Native Surface](https://apis.io/apis/red5/red5-agent-native-surface/) — Publicly hosted llms.txt providing a structured index of Red5 products, use cases, and documentation for AI agents.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (2)
 
-### Red5 Pro Server API
+Event-driven and webhook contracts.
 
-The Red5 Pro Server API is an HTTP-based REST API for gathering server, application, client, and stream statistics from a running Red5 Pro instance. It exposes endpoints for server health checks, application scope statistics, active stream enumeration and control, connection management, and log access. The API uses token-based authentication via the accessToken parameter and is accessible at port 5080 on any Red5 Pro server deployment. Developers can use it to monitor and manage live streaming infrastructure programmatically.
+- [Red5 Pro Webhooks](https://apis.io/asyncapis/red5/red5-webhooks-asyncapi/)
+- [Red5 Pro WebRTC Streaming Events](https://apis.io/asyncapis/red5/red5-webrtc-streaming-asyncapi/)
 
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/](https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/)
-- **Base URL:** `http://localhost:5080/api/v1`
+#### Event channels (3)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Media
-- Real-Time
-- REST
-- Server Management
-- Streaming
+- [/publish](https://apis.io/channels/red5/publish/)
+- [/subscribe](https://apis.io/channels/red5/subscribe/)
+- [/](https://apis.io/channels/red5/webhookreceiver/)
 
-#### Properties
+#### MCP servers (1)
 
-- [Documentation](https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api-overview/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-api/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-applications-api/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/server/red5-pro-server-streams-api/)
-- [OpenAPI](openapi/red5-server-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/red5-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Model Context Protocol servers that expose the API to agents.
 
-### Red5 Pro Stream Manager 2.0 API
+- [red5](https://apis.io/servers/red5/red5/)
 
-The Red5 Pro Stream Manager 2.0 API orchestrates autoscaling clusters of Red5 Pro streaming nodes across cloud infrastructure. It provides REST endpoints for managing live stream publishing and playback sessions, provisioning stream configurations, monitoring node metrics, managing cluster node lifecycles, and proxying WHIP and WHEP WebRTC connections. The API supports dynamic scaling of streaming capacity and is documented with an interactive Swagger UI available on each Stream Manager deployment.
+#### Agentic access (1)
 
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/](https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/)
-- **Base URL:** `https://streammanager.example.com/as/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Red5 Agentic Access](https://apis.io/agentic-access/red5/red5-agentic-access/)
 
-- Autoscaling
-- Cluster Management
-- Media
-- REST
-- Streaming
-- WebRTC
-- WHEP
-- WHIP
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-streams-api/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-admin-api/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/stream-manager-2-proxy-api/)
-- [OpenAPI](openapi/red5-stream-manager-2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/red5-stream-manager-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-stream-manager-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Red5 Pro Restream Provision](https://apis.io/schemas/red5/red5-restream-provision/)
+- [Red5 Pro Stream](https://apis.io/schemas/red5/red5-stream/)
 
-### Red5 Pro Brew Mixer API
+#### JSON Structure (1)
 
-The Red5 Pro Brew Mixer API is a REST interface for the Cauldron Media Engine that enables dynamic composition of multiple live video and audio streams into a single mixed output stream. It supports creating and managing mixers, controlling input sources and layout, configuring composite output parameters, and producing mixed streams suitable for broadcasting. The Brew Mixer is used for multi-presenter live events and production-quality stream composition.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/](https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/)
-- **Base URL:** `https://api.example.com/brewmixer/2.0`
+- [Red5 Stream Structure](https://apis.io/json-structure/red5/red5-stream-structure/)
 
-#### Tags
+#### JSON-LD (1)
 
-- Audio
-- Composition
-- Media
-- Mixing
-- REST
-- Streaming
-- Video
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Red5 Context](https://apis.io/jsonld/red5/red5-context/)
 
-- [Documentation](https://www.red5.net/docs/red5-pro/development/api/mixer/brew-mixer-api/)
-- [OpenAPI](openapi/red5-brew-mixer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/red5-brew-mixer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-brew-mixer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Vocabulary (1)
 
-### Red5 Pro Restreamer API
-
-The Red5 Pro Restreamer API controls live stream retransmission to external RTMP, RTMPS, SRT, and Zixi destinations including social media platforms like Facebook, YouTube, and Twitch. It accepts JSON-based provisions via POST requests to configure push and pull restreaming sessions from a Red5 Pro server. The API supports file-based pseudo-live restreaming of FLV and MP4 files as well as real-time forwarding of live ingest streams.
+The provider's domain terms, defined.
 
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/api/restreamer/](https://www.red5.net/docs/red5-pro/development/api/restreamer/)
-- **Base URL:** `https://api.example.com`
+- [Red5 Pro Streaming Platform Vocabulary](https://apis.io/vocabularies/red5/red5-vocabulary/)
 
-#### Tags
+#### Examples (2)
 
-- Media
-- REST
-- Restreaming
-- RTMP
-- Social Media
-- Streaming
-
-#### Properties
-
-- [Documentation](https://www.red5.net/docs/red5-pro/development/api/restreamer/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/)
-- [OpenAPI](openapi/red5-restreamer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/red5-restreamer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-restreamer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-### Red5 Pro WebRTC SDK
+- [Red5 Server Api List Streams Example](https://apis.io/examples/red5/red5-server-api-list-streams-example/)
+- [Red5 Stream Manager Create Provision Example](https://apis.io/examples/red5/red5-stream-manager-create-provision-example/)
 
-The Red5 Pro WebRTC SDK is a JavaScript library for integrating low-latency live streaming publish and subscribe capabilities into web applications. It supports WHIP for WebRTC publishing and WHEP for WebRTC playback, enabling sub-second latency streaming directly in the browser without plugins. The SDK provides APIs for managing stream sessions, configuring media constraints, handling connection lifecycle events, and interacting with Stream Manager for scalable deployments.
+#### Collections (16)
 
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/](https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/)
-- **Base URL:** `https://api.example.com`
-
-#### Tags
+Postman and Open Collection request collections.
 
-- JavaScript
-- Media
-- SDK
-- Streaming
-- WebRTC
-- WHEP
-- WHIP
-
-#### Properties
-
-- [Documentation](https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/)
-- [API Reference](https://www.red5.net/docs/red5-pro/development/sdks/red5-webrtc-sdk/red5-webrtc-sdk-api-documentation/)
-- [Git Hub](https://github.com/red5pro/red5pro-webrtc-sdk)
-- [N P M](https://www.npmjs.com/package/red5pro-webrtc-sdk)
-- [AsyncAPI](asyncapi/red5-webrtc-streaming-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/red5-brew-mixer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-brew-mixer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-restreamer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-restreamer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-stream-manager-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-stream-manager-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Red5 Core SDK
-
-The Red5 Core SDK is a native client library for building real-time streaming applications on Linux, Windows, and macOS desktop platforms. It offers interfaces for server connection management, media capture and processing, audio and video source configuration, renderer control, and integration with Stream Manager for autoscaled deployments. Bindings are available for C++, Python, and other native environments.
-
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/sdks/red5-core-sdk/](https://www.red5.net/docs/red5-pro/development/sdks/red5-core-sdk/)
-- **Base URL:** `https://api.example.com`
-
-#### Tags
-
-- Desktop
-- Linux
-- Media
-- Native
-- SDK
-- Streaming
-- Windows
-
-#### Properties
-
-- [Documentation](https://www.red5.net/docs/red5-pro/development/sdks/red5-core-sdk/)
-- [S D Ks](https://www.red5.net/live-streaming-sdks/)
-- [Postman Collection](collections/red5-brew-mixer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-brew-mixer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-restreamer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-restreamer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-stream-manager-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-stream-manager-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Red5 Pro iOS Streaming SDK
-
-The Red5 Pro iOS Streaming SDK is a native iOS library for integrating real-time live streaming publish and subscribe capabilities into iOS applications. It supports H.264 video and AAC/Opus audio encoding, WebRTC-based streaming with WHIP/WHEP, and integration with Stream Manager for cluster-aware streaming deployments. Example code and testbeds are available on GitHub.
-
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/sdks/](https://www.red5.net/docs/red5-pro/development/sdks/)
-- **Base URL:** `https://api.example.com`
-
-#### Tags
-
-- iOS
-- Media
-- Mobile
-- SDK
-- Streaming
-- Swift
-
-#### Properties
-
-- [Documentation](https://www.red5.net/docs/red5-pro/development/sdks/)
-- [Git Hub](https://github.com/red5pro/streaming-ios)
-- [Postman Collection](collections/red5-brew-mixer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-brew-mixer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-restreamer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-restreamer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-stream-manager-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-stream-manager-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Red5 Pro Android Streaming SDK
-
-The Red5 Pro Android Streaming SDK is a native Android library for integrating real-time live streaming publish and subscribe capabilities into Android applications. It supports H.264/H.265 video encoding, AAC audio, WebRTC-based streaming, and adaptive bitrate control. SDK examples and testbeds are available on GitHub for common streaming use cases.
-
-- **Human URL:** [https://www.red5.net/docs/red5-pro/development/sdks/](https://www.red5.net/docs/red5-pro/development/sdks/)
-- **Base URL:** `https://api.example.com`
-
-#### Tags
-
-- Android
-- Java
-- Media
-- Mobile
-- SDK
-- Streaming
-
-#### Properties
-
-- [Documentation](https://www.red5.net/docs/red5-pro/development/sdks/)
-- [Git Hub](https://github.com/red5pro/streaming-android)
-- [Postman Collection](collections/red5-brew-mixer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-brew-mixer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-restreamer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-restreamer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-server-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-server-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/red5-stream-manager-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/red5-stream-manager-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/red5pro)
+- [Red5 Pro Brew Mixer Admin API](https://apis.io/collections/red5/open-red5-admin-api/)
+- [Red5 Pro Brew Mixer Admin Applications API](https://apis.io/collections/red5/open-red5-applications-api/)
+- [Red5 Pro Brew Mixer API](https://apis.io/collections/red5/open-red5-brew-mixer-api/)
+- [Red5 Pro Brew Mixer Admin File Restreamer API](https://apis.io/collections/red5/open-red5-file-restreamer-api/)
+- [Red5 Pro Brew Mixer Admin Images API](https://apis.io/collections/red5/open-red5-images-api/)
+- [Red5 Pro Brew Mixer Admin Inputs API](https://apis.io/collections/red5/open-red5-inputs-api/)
+- [Red5 Pro Brew Mixer Admin Logs API](https://apis.io/collections/red5/open-red5-logs-api/)
+- [Red5 Pro Brew Mixer Admin Mixers API](https://apis.io/collections/red5/open-red5-mixers-api/)
+- [Red5 Pro Brew Mixer Admin Provision API](https://apis.io/collections/red5/open-red5-provision-api/)
+- [Red5 Pro Brew Mixer Admin Proxy API](https://apis.io/collections/red5/open-red5-proxy-api/)
+- [Red5 Pro Restreamer API](https://apis.io/collections/red5/open-red5-restreamer-api/)
+- [Red5 Pro Brew Mixer Admin RTMP Restreamer API](https://apis.io/collections/red5/open-red5-rtmp-restreamer-api/)
+- [Red5 Pro Brew Mixer Admin Server API](https://apis.io/collections/red5/open-red5-server-api/)
+- [Red5 Pro Brew Mixer Admin Servlet Configuration API](https://apis.io/collections/red5/open-red5-servlet-configuration-api/)
+- [Red5 Pro Stream Manager 2.0 API](https://apis.io/collections/red5/open-red5-stream-manager-2/)
+- [Red5 Pro Brew Mixer Admin Streams API](https://apis.io/collections/red5/open-red5-streams-api/)
+
+#### Overlays (10)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Red5 Admin Api Overlay](https://apis.io/overlays/red5/red5-admin-api-overlay/)
+- [Red5 File Restreamer Api Overlay](https://apis.io/overlays/red5/red5-file-restreamer-api-overlay/)
+- [Red5 Images Api Overlay](https://apis.io/overlays/red5/red5-images-api-overlay/)
+- [Red5 Inputs Api Overlay](https://apis.io/overlays/red5/red5-inputs-api-overlay/)
+- [Red5 Mixers Api Overlay](https://apis.io/overlays/red5/red5-mixers-api-overlay/)
+- [Red5 Provision Api Overlay](https://apis.io/overlays/red5/red5-provision-api-overlay/)
+- [Red5 Proxy Api Overlay](https://apis.io/overlays/red5/red5-proxy-api-overlay/)
+- [Red5 Rtmp Restreamer Api Overlay](https://apis.io/overlays/red5/red5-rtmp-restreamer-api-overlay/)
+- [Red5 Servlet Configuration Api Overlay](https://apis.io/overlays/red5/red5-servlet-configuration-api-overlay/)
+- [Red5 Streams Api Overlay](https://apis.io/overlays/red5/red5-streams-api-overlay/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Red5 — asyncapi rules](https://apis.io/rules/red5/red5-asyncapi-spectral-rules/)
+- [Red5 — jsonschema rules](https://apis.io/rules/red5/red5-jsonschema-spectral-rules/)
+- [Red5 API Rules](https://apis.io/rules/red5/red5-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Red5 Authentication](https://apis.io/security/red5/red5-authentication/)
+- [Red5 Domain Security](https://apis.io/security/red5/red5-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Red5 Plans Pricing](https://apis.io/plans/red5/red5-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Red5 Rate Limits](https://apis.io/rate-limits/red5/red5-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Red5 Finops](https://apis.io/finops/red5/red5-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.red5.net/)
 - [Documentation](https://www.red5.net/docs/red5-pro/)
-- [GitHub Organization](https://github.com/red5pro)
-- [GitHub Organization](https://github.com/Red5)
-- [S D Ks](https://www.red5.net/live-streaming-sdks/)
+- [Getting started](https://www.red5.net/docs/red5-cloud/getting-started/)
+- [API reference](https://www.red5.net/docs/red5-pro/development/api/)
 - [Pricing](https://www.red5.net/pricing/)
+- [Sign up](https://cloud.red5.net/signup)
+- [Support](https://customer.support.red5.net/servicedesk/customer/portals)
+- [Changelog](https://www.red5.net/docs/red5-pro/resources/release-notes/)
 - [Blog](https://www.red5.net/blog/)
-- [Contact](https://www.red5.net/contact/)
-- [J S O N L D Context](json-ld/red5-context.jsonld)
-- [JSON Schema](json-schema/red5-stream-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/red5-restream-provision-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [OpenAPI](openapi/red5-server-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/red5-stream-manager-2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/red5-brew-mixer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/red5-restreamer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/red5-webrtc-streaming-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [JSON Structure](json-structure/red5-stream-structure.json)
-- [Spectral Ruleset](rules/red5-rules.yml)
-- [Vocabulary](vocabulary/red5-vocabulary.yml)
+- [Compliance](https://www.red5.net/legal/data-processing-addendum/)
+- [Terms of service](https://www.red5.net/legal/terms-of-service/)
+- [Privacy policy](https://www.red5.net/legal/privacy-policy/)
+- [GitHub](https://github.com/red5pro)
+- [Status](https://status.red5.net/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 63.6** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 58.7 |
+| Contract governance | 31.8 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 78.6 |
+| Access clarity | 77.6 |
+
+**Agent readiness 29.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/red5/](https://apis.io/providers/red5/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Red5: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/red5/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).

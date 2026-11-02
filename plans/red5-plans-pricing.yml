@@ -1,0 +1,155 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.red5.net/pricing/
+sources:
+- https://www.red5.net/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-28'
+  evidence: A license gives you access to run Red5 Pro streaming capabilities on your servers.
+published: true
+note: 'Red5 Pro self-hosted license pricing with monthly and annual toggles; billing based on license
+  tier and highest concurrent instance count, not usage. Hosting paid separately to cloud provider. Footnote:
+  additional fees may apply for services such as Castaway, custom SLAs, and custom developed features.'
+plan_count: 8
+currency: USD
+plans:
+- name: Developer Pro (monthly)
+  price_text: $29.99 per month
+  price: 29.99
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Max 100 connections; WebRTC, RTMP, RTSP, HLS, IP Camera; no clustering, no autoscale
+- name: Startup (monthly)
+  price_text: $119 per month
+  price: 119
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Unlimited connections; autoscaling; Adaptive Bit Rate
+- name: Growth Pro (monthly)
+  price_text: $299 per month
+  price: 299
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Unlimited connections; Transcoding; Private Slack Channel
+- name: Enterprise
+  price_text: Starting At $3,499 per month
+  price: 3499
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Everything in other plans, plus Unlimited connections, Offline Deployments, 24/7 Support
+- name: Mobile SDKs (monthly)
+  price_text: $419 per month
+  price: 419
+  currency: USD
+  period: month
+  unit: per launched project
+  included_quota: All required SDKs for one launched project
+- name: Startup (annual)
+  price_text: $109 per month
+  price: 109
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Unlimited connections; autoscaling
+- name: Growth Pro (annual)
+  price_text: $279 per month
+  price: 279
+  currency: USD
+  period: month
+  unit: license
+  included_quota: Unlimited connections; Transcoding
+- name: Mobile SDKs (annual)
+  price_text: $349 per month
+  price: 349
+  currency: USD
+  period: month
+  unit: per launched project
+  included_quota: All required SDKs for one launched project
+rate_limit_statements:
+- Max 100 connections
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - seat
+  - subscription
+  units:
+  - seat
+  plans:
+  - name: Developer Pro (monthly)
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Startup (monthly)
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Growth Pro (monthly)
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Mobile SDKs (monthly)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Startup (annual)
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Growth Pro (annual)
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Mobile SDKs (annual)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month

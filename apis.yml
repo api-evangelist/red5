@@ -37,7 +37,7 @@ accessModel:
   - rate-limits
   - security
   - sandbox
-  generated: '2026-11-06'
+  generated: '2026-11-13'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red5.png
 tags:
@@ -627,6 +627,16 @@ common:
   url: https://account.red5.net/login
 - type: ServiceLevelAgreement
   url: https://www.red5.net/legal/service-level-agreement/
+- type: UsageTerms
+  url: terms/red5-terms-of-service.yml
+- type: DataProcessing
+  url: privacy/red5-privacy-policy.yml
+- type: Attestations
+  url: compliance/red5-compliance.yml
+- type: Eligibility
+  url: eligibility/red5-eligibility.yml
+- type: DataLicense
+  url: data-license/red5-data-license.yml
 x-enrichment:
   date: '2026-09-04'
   status: enriched

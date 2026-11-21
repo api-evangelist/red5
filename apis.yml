@@ -37,7 +37,7 @@ accessModel:
   - rate-limits
   - security
   - sandbox
-  generated: '2026-11-13'
+  generated: '2026-11-20'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/red5.png
 tags:
@@ -391,7 +391,8 @@ apis:
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/
   - type: APIReference
     url: https://www.red5.net/docs/red5-pro/development/api/restreamer/red5-pro-restreamer-api-rtmp/
-- name: Red5 Pro Server API
+- aid: red5:red5-pro-server-api
+  name: Red5 Pro Server API
   description: REST/JSON API embedded in the Red5 Pro media server providing server info/ping/statistics, applications, streams, recorded content (VOD), shared objects, client control, and log access. Base URL is instance-specific (http://{host}:5080/api/v1/); authenticated via static access token plus IP allowlist.
   humanURL: https://www.red5.net/docs/red5-pro/development/api/server/
   baseURL: http://{host}:5080/api/v1/
@@ -431,7 +432,8 @@ apis:
   properties:
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/server/
-- name: Stream Manager 2.0 API
+- aid: red5:stream-manager-20-api
+  name: Stream Manager 2.0 API
   description: REST/JSON API used by both Red5 Pro clusters and Red5 Cloud for Auth, Admin, Proxy, Streams, Streams Provision, Streams Mixer, and Scheduling NodeGroups. Base URL is instance-specific ({streamManagerHost}/as/v1/). Auth via Basic login returning a JWT bearer token. Ships an OpenAPI/Swagger UI per instance at {streamManagerHost}/swagger-ui.html.
   humanURL: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
   baseURL: https://{streamManagerHost}/as/v1/
@@ -471,7 +473,8 @@ apis:
   properties:
   - type: Documentation
     url: https://www.red5.net/docs/red5-pro/development/api/stream-manager-2-0/
-- name: Red5 Agent-Native Surface
+- aid: red5:red5-agent-native-surface
+  name: Red5 Agent-Native Surface
   description: Publicly hosted llms.txt providing a structured index of Red5 products, use cases, and documentation for AI agents.
   humanURL: https://www.red5.net/developer-zone/
   tags:
